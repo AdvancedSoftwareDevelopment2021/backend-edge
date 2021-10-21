@@ -9,13 +9,15 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.edu.sjtu.ist</groupId>
-    <artifactId>Edge-Computing-Software-System</artifactId>
+    <artifactId>ECSS-Backend-Edge</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>backend-edge</name>
     <description>backend-edge</description>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

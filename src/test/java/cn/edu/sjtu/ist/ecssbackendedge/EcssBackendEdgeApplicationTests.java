@@ -1,10 +1,10 @@
-package cn.edu.sjtu.ist.edgecomputingsoftwaresystem;
+package cn.edu.sjtu.ist.ecssbackendedge;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendEdgeApplicationTests {
+class EcssBackendEdgeApplicationTests {
 
     @Test
     void contextLoads() {
