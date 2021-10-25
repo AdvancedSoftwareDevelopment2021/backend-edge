@@ -23,13 +23,13 @@ public class DeviceServiceImpl implements DeviceService {
         deviceModel.setName(device.getName());
         deviceModel.setModel(device.getModel());
         deviceDao.createDevice(deviceModel);
-        return new Response(200L, "OK", "insert ok!");
+        return new Response(200, "OK", "insert ok!");
     }
 
     @Override
     public Response deleteDevice(Long id) {
         deviceDao.removeDevice(id);
-        return new Response(200L, "OK", "delete ok!");
+        return new Response(200, "OK", "delete ok!");
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DeviceServiceImpl implements DeviceService {
         deviceModel.setName(device.getName());
         deviceModel.setModel(device.getModel());
         deviceDao.modifyDevice(deviceModel);
-        return new Response(200L, "OK", "update ok!");
+        return new Response(200, "OK", "update ok!");
     }
 
     @Override
@@ -49,6 +49,6 @@ public class DeviceServiceImpl implements DeviceService {
         device.setId(deviceModel.getId());
         device.setName(deviceModel.getName());
         device.setModel(deviceModel.getModel());
-        return new Response(200L, "OK", device);
+        return new Response(200, "OK", device);
     }
 }

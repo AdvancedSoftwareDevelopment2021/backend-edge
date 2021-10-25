@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class DeviceData {
+public class DeviceProducedData {
 
     /**
      * 设备数据id
