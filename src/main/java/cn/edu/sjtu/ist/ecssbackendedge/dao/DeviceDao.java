@@ -12,7 +12,7 @@ public interface DeviceDao {
 
     void modifyDevice(DeviceModel device);
 
-    DeviceModel findDevice(Long id);
+    DeviceModel findDeviceById(Long id);
 
-    List<DeviceModel> findDevice(String name);
+    List<DeviceModel> findDeviceByName(String name);
 }

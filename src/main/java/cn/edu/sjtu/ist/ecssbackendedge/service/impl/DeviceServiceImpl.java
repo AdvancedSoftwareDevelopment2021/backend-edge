@@ -5,9 +5,12 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceModel;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class DeviceServiceImpl implements DeviceService {
 
@@ -41,7 +44,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Response getDevice(Long id) {
-        DeviceModel deviceModel = deviceDao.findDevice(id);
+        DeviceModel deviceModel = deviceDao.findDeviceById(id);
         Device device = new Device();
         device.setId(deviceModel.getId());
         device.setName(deviceModel.getName());

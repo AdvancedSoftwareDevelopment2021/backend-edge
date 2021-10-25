@@ -13,4 +13,9 @@ public class Response {
         this.message = message;
         this.object = object;
     }
+
+    @Override
+    public String toString() {
+        return "code=" + code + ", message=" + message + ", response=" + object.toString();
+    }
 }

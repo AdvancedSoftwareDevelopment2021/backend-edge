@@ -5,12 +5,13 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceModel;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Component
 public class DeviceDaoImpl implements DeviceDao {
 
@@ -39,7 +40,7 @@ public class DeviceDaoImpl implements DeviceDao {
     }
 
     @Override
-    public DeviceModel findDevice(Long id) {
+    public DeviceModel findDeviceById(Long id) {
         Device device = deviceRepository.findDeviceById(id);
         DeviceModel deviceModel = new DeviceModel();
         deviceModel.setId(device.getId());
@@ -49,7 +50,7 @@ public class DeviceDaoImpl implements DeviceDao {
     }
 
     @Override
-    public List<DeviceModel> findDevice(String name){
+    public List<DeviceModel> findDeviceByName(String name){
         List<Device> devices = deviceRepository.findDevicesByName(name);
         List<DeviceModel> deviceModels = new ArrayList<>();
         for (Device device: devices) {
