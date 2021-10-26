@@ -69,7 +69,7 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
         DeviceData deviceData = deviceDataRepository.findDeviceDataById(id);
         DeviceProducedData deviceProducedData = new DeviceProducedData();
         deviceProducedData.setId(deviceData.getId());
-        deviceProducedData.setDeviceId(deviceData.getId());
+        deviceProducedData.setDeviceId(deviceData.getDevice().getId());
         deviceProducedData.setTimestamp(deviceData.getTimestamp());
         deviceProducedData.setData(deviceData.getData());
         return deviceProducedData;

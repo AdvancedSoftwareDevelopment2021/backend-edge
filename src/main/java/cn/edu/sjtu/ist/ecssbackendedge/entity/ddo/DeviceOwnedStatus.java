@@ -8,7 +8,7 @@ import java.util.Date;
  * 设备的实时状态数据
  */
 @Data
-public class DeviceStatus {
+public class DeviceOwnedStatus {
 
     /**
      * 状态数据id
