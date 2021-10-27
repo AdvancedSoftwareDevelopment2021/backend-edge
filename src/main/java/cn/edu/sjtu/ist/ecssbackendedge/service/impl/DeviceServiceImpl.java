@@ -1,14 +1,17 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceModel;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -22,6 +25,8 @@ public class DeviceServiceImpl implements DeviceService {
         DeviceModel deviceModel = new DeviceModel();
         deviceModel.setName(device.getName());
         deviceModel.setModel(device.getModel());
+        log.info(Objects.requireNonNull(MessageProtocol.fromString(device.getMessageProtocol())).getProtocol());
+        deviceModel.setMessageProtocol(MessageProtocol.fromString(device.getMessageProtocol()));
         deviceDao.createDevice(deviceModel);
         return new Response(200, "OK", "insert ok!");
     }
@@ -38,6 +43,7 @@ public class DeviceServiceImpl implements DeviceService {
         deviceModel.setId(id);
         deviceModel.setName(device.getName());
         deviceModel.setModel(device.getModel());
+        deviceModel.setMessageProtocol(MessageProtocol.fromString(device.getMessageProtocol()));
         deviceDao.modifyDevice(deviceModel);
         return new Response(200, "OK", "update ok!");
     }
@@ -49,6 +55,7 @@ public class DeviceServiceImpl implements DeviceService {
         device.setId(deviceModel.getId());
         device.setName(deviceModel.getName());
         device.setModel(deviceModel.getModel());
+        device.setMessageProtocol(deviceModel.getMessageProtocol().getProtocol());
         return new Response(200, "OK", device);
     }
 }
