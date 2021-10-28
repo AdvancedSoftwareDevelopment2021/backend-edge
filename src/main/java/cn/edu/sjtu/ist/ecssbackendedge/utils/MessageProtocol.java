@@ -8,9 +8,29 @@ public enum MessageProtocol {
     HTTP("http协议"),
 
     /**
+     * websocket
+     */
+    WEBSOCKET("websocket协议"),
+
+    /**
+     * canbus
+     */
+    CANBUS("canbus协议"),
+
+    /**
+     * zigbee
+     */
+    ZIGBEE("zigbee协议"),
+
+    /**
      * modbus
      */
-    MODBUS("modbus协议");
+    MODBUS("modbus协议"),
+
+    /**
+     * self-defined protocol
+     */
+    SELF_DEFINED_PROTOCOL("自定义协议");
 
     /**
      * 类型
