@@ -51,12 +51,20 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-        <!--引入modbus4j依赖包-->
+        <!--modbus4j依赖包-->
         <dependency>
             <groupId>com.infiniteautomation</groupId>
             <artifactId>modbus4j</artifactId>
             <version>3.0.3</version>
         </dependency>
+
+        <!--quartz依赖包-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
     </dependencies>
 
     <repositories>

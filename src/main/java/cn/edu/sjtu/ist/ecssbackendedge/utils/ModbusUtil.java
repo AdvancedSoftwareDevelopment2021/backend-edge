@@ -6,8 +6,9 @@ import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;
 import com.serotonin.modbus4j.exception.ModbusTransportException;
 import com.serotonin.modbus4j.msg.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -19,7 +20,7 @@ public class ModbusUtil {
     //从机默认值
     private Integer slaveId = 1;
 
-    @Autowired
+    @Resource
     private ModbusConfig modbusConfig;
 
     /**

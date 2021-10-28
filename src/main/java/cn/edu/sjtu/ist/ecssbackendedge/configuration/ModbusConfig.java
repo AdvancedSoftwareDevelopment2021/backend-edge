@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.configuration;
 
-import cn.edu.sjtu.ist.ecssbackendedge.repository.modbus.ModbusCollectorRepository;
+import cn.edu.sjtu.ist.ecssbackendedge.repository.dataCollector.modbus.ModbusCollectorRepository;
 import com.serotonin.modbus4j.ModbusFactory;
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;
