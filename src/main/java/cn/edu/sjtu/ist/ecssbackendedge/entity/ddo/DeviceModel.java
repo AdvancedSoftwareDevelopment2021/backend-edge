@@ -1,5 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.ddo;
 
+import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
+
 import lombok.Data;
 
 @Data
@@ -20,4 +22,8 @@ public class DeviceModel {
      */
     private String model;
 
+    /**
+     * 通信协议
+     */
+    private MessageProtocol messageProtocol;
 }

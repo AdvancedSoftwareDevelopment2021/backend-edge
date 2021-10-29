@@ -28,4 +28,8 @@ public class Device {
      */
     private String model;
 
+    /**
+     * 通信协议
+     */
+    private String messageProtocol;
 }

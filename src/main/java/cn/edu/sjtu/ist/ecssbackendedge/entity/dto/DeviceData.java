@@ -2,8 +2,10 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
-public class Device {
+public class DeviceData {
 
     /**
      * 设备数据id
@@ -11,17 +13,18 @@ public class Device {
     private Long id;
 
     /**
-     * 产品名称
+     * 对应设备id
      */
-    private String name;
+    private Long deviceId;
 
     /**
-     * 产品型号
+     * 数据的时间
      */
-    private String model;
+    private Date timestamp;
 
     /**
-     * 通信协议
+     * 数据
      */
-    private String messageProtocol;
+    private String data;
+
 }
