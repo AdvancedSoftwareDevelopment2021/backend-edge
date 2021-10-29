@@ -1,6 +1,5 @@
 package cn.edu.sjtu.ist.ecssbackendedge.configuration;
 
-import cn.edu.sjtu.ist.ecssbackendedge.repository.dataCollector.modbus.ModbusCollectorRepository;
 import com.serotonin.modbus4j.ModbusFactory;
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;
@@ -22,31 +21,29 @@ import java.util.HashMap;
 public class ModbusConfig {
 
     @Autowired
-    ModbusCollectorRepository modbusCollectorRepository;
-    @Autowired
     private ModbusFactory modbusFactory;
+
     @Autowired
     @Qualifier("modbusMasterHashMap")
     private HashMap<String, ModbusMaster> masterMap;
 
     @Bean
     public HashMap<String, ModbusMaster> modbusMasterHashMap() {
-
         return new HashMap<>();
     }
 
     /**
      * @Title getMaster
-     * @Description: 通过ip获取对应的modbus连接器
-     * @params: [ip]
+     * @Description: 通过id获取对应的modbus连接器
+     * @params: [id]
      * @return: com.serotonin.modbus4j.ModbusMaster
      */
-    public ModbusMaster getMaster(String ip) {
+    public ModbusMaster getMaster(String id, String ip, Integer port) {
 
-        ModbusMaster modbusMaster = masterMap.get(ip);
+        ModbusMaster modbusMaster = masterMap.get(id);
         if(modbusMaster == null) {
-            setMaster(ip, modbusCollectorRepository.findModbusCollectorsByIp(ip).get(0).getPort());
-            modbusMaster = masterMap.get(ip);
+            setMaster(id, ip, port);
+            modbusMaster = masterMap.get(id);
         }
         return modbusMaster;
 
@@ -55,10 +52,10 @@ public class ModbusConfig {
     /**
      * @Title setMaster
      * @Description: 设置ip对应的modbus连接器
-     * @params: [ip, port]
+     * @params: [id, ip, port]
      * @return: void
      */
-    private void setMaster(String ip, Integer port) {
+    private void setMaster(String id, String ip, Integer port) {
 
         ModbusMaster master;
         IpParameters params = new IpParameters();
@@ -77,7 +74,7 @@ public class ModbusConfig {
         } catch (ModbusInitException e) {
             e.printStackTrace();
         }
-        masterMap.put(ip, master);
+        masterMap.put(id, master);
     }
 
 }

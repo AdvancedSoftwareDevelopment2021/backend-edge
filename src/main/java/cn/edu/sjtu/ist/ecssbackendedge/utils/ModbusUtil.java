@@ -30,9 +30,9 @@ public class ModbusUtil {
      * @return: boolean[]
      * @throws:
      */
-    public boolean[] readCoilStatus(String ip, int offset, int numberOfRegister) throws ModbusTransportException {
+    public boolean[] readCoilStatus(String id, String ip, Integer port, int offset, int numberOfRegister) throws ModbusTransportException {
 
-        ModbusMaster master = modbusConfig.getMaster(ip);
+        ModbusMaster master = modbusConfig.getMaster(id, ip, port);
         ReadCoilsRequest request = new ReadCoilsRequest(slaveId, offset, numberOfRegister);
         ReadCoilsResponse response = (ReadCoilsResponse) master.send(request);
         boolean[] booleans = response.getBooleanData();
@@ -47,9 +47,9 @@ public class ModbusUtil {
      * @return: boolean[]
      * @throws:
      */
-    public boolean[] readInputStatus(String ip, int offset, int numberOfRegister) throws ModbusTransportException {
+    public boolean[] readInputStatus(String id, String ip, Integer port, int offset, int numberOfRegister) throws ModbusTransportException {
 
-        ModbusMaster master = modbusConfig.getMaster(ip);
+        ModbusMaster master = modbusConfig.getMaster(id, ip, port);
         ReadDiscreteInputsRequest request = new ReadDiscreteInputsRequest(slaveId,offset, numberOfRegister);
         ReadDiscreteInputsResponse response = (ReadDiscreteInputsResponse) master.send(request);
         boolean[] booleans = response.getBooleanData();
@@ -64,9 +64,9 @@ public class ModbusUtil {
      * @return: short[]
      * @throws:
      */
-    public short[] readHoldingRegister(String ip, int offset, int numberOfRegister) throws ModbusTransportException {
+    public short[] readHoldingRegister(String id, String ip, Integer port, int offset, int numberOfRegister) throws ModbusTransportException {
 
-        ModbusMaster master = modbusConfig.getMaster(ip);
+        ModbusMaster master = modbusConfig.getMaster(id, ip, port);
         ReadHoldingRegistersRequest request = new ReadHoldingRegistersRequest(slaveId, offset, numberOfRegister);
         ReadHoldingRegistersResponse response = (ReadHoldingRegistersResponse) master.send(request);
         return response.getShortData();
@@ -79,9 +79,9 @@ public class ModbusUtil {
      * @return: short[]
      * @throws:
      */
-    public short[] readInputRegisters(String ip, int offset, int numberOfRegister) throws ModbusTransportException {
+    public short[] readInputRegisters(String id, String ip, Integer port, int offset, int numberOfRegister) throws ModbusTransportException {
 
-        ModbusMaster master = modbusConfig.getMaster(ip);
+        ModbusMaster master = modbusConfig.getMaster(id, ip, port);
         ReadInputRegistersRequest request = new ReadInputRegistersRequest(slaveId, offset, numberOfRegister);
         ReadInputRegistersResponse response = (ReadInputRegistersResponse) master.send(request);
         return response.getShortData();
@@ -94,9 +94,9 @@ public class ModbusUtil {
      * @return: boolean
      * @throws:
      */
-    public boolean writeCoil(String ip, int writeOffset, boolean writeValue) throws ModbusTransportException {
+    public boolean writeCoil(String id, String ip, Integer port, int writeOffset, boolean writeValue) throws ModbusTransportException {
 
-        ModbusMaster tcpMaster = modbusConfig.getMaster(ip);
+        ModbusMaster tcpMaster = modbusConfig.getMaster(id, ip, port);
         WriteCoilRequest request = new WriteCoilRequest(slaveId, writeOffset, writeValue);
         WriteCoilResponse response = (WriteCoilResponse) tcpMaster.send(request);
         return !response.isException();
@@ -109,9 +109,9 @@ public class ModbusUtil {
      * @return: boolean
      * @throws:
      */
-    public boolean writeCoils(String ip, int startOffset, boolean[] data) throws ModbusTransportException {
+    public boolean writeCoils(String id, String ip, Integer port, int startOffset, boolean[] data) throws ModbusTransportException {
 
-        ModbusMaster tcpMaster = modbusConfig.getMaster(ip);
+        ModbusMaster tcpMaster = modbusConfig.getMaster(id, ip, port);
         WriteCoilsRequest request = new WriteCoilsRequest(slaveId, startOffset, data);
         WriteCoilsResponse response = (WriteCoilsResponse) tcpMaster.send(request);
         return !response.isException();
@@ -125,9 +125,9 @@ public class ModbusUtil {
      * @return: boolean
      * @throws:
      */
-    public boolean writeHoldingRegister(String ip, int writeOffset, short writeValue) throws ModbusTransportException, ModbusInitException {
+    public boolean writeHoldingRegister(String id, String ip, Integer port, int writeOffset, short writeValue) throws ModbusTransportException, ModbusInitException {
 
-        ModbusMaster tcpMaster = modbusConfig.getMaster(ip);
+        ModbusMaster tcpMaster = modbusConfig.getMaster(id, ip, port);
         WriteRegisterRequest request = new WriteRegisterRequest(slaveId, writeOffset, writeValue);
         WriteRegisterResponse response = (WriteRegisterResponse) tcpMaster.send(request);
         return !response.isException();
@@ -141,9 +141,9 @@ public class ModbusUtil {
      * @return: boolean
      * @throws:
      */
-    public boolean writeHoldingRegisters(String ip, int startOffset, short[] data) throws ModbusTransportException, ModbusInitException {
+    public boolean writeHoldingRegisters(String id, String ip, Integer port, int startOffset, short[] data) throws ModbusTransportException, ModbusInitException {
 
-        ModbusMaster tcpMaster = modbusConfig.getMaster(ip);
+        ModbusMaster tcpMaster = modbusConfig.getMaster(id, ip, port);
         WriteRegistersRequest request = new WriteRegistersRequest(slaveId, startOffset, data);
         WriteRegistersResponse response = (WriteRegistersResponse) tcpMaster.send(request);
         return !response.isException();

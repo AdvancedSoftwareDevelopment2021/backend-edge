@@ -1,32 +1,46 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.dataCollector;
 
-import cn.edu.sjtu.ist.ecssbackendedge.componect.DataCollectorFactory;
-import com.serotonin.modbus4j.exception.ModbusTransportException;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.dataCollector.DataCollectorDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.model.dataCollector.modbus.ModbusCollector;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 import org.quartz.core.QuartzScheduler;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  * @author dyanjun
  * @date 2021/10/28 10:24
  */
-
 @Data
+@NoArgsConstructor
+@Document(collection = "dataCollector")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXTERNAL_PROPERTY, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = ModbusCollector.class, name = "Modbus")
+})
+@Slf4j
 public abstract class DataCollector {
-    private String id;
+    @Id
+    protected String id;
 
-    private String name;
+    protected String name;
 
-    private CollectScheduler collectorScheduler;
+    protected CollectScheduler collectorScheduler;
 
-    private Status status = Status.SLEEP;
+    protected Status status = Status.SLEEP;
 
-    private QuartzScheduler quartzScheduler;
+    protected QuartzScheduler quartzScheduler;
 
-    private DataCollectorFactory factory;
+    abstract public DataCollectorDTO convert2DTO();
 
     protected abstract void execute() throws Exception;
 
