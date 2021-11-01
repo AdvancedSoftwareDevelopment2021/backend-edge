@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.componect;
+package cn.edu.sjtu.ist.ecssbackendedge.component;
 
 import org.quartz.Scheduler;
 import org.quartz.impl.StdSchedulerFactory;

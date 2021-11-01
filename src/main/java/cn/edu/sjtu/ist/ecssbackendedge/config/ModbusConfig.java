@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.configuration;
+package cn.edu.sjtu.ist.ecssbackendedge.config;
 
 import com.serotonin.modbus4j.ModbusFactory;
 import com.serotonin.modbus4j.ModbusMaster;

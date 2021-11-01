@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.scheduler;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.scheduler.CollectSchedulerPO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,6 @@ import org.quartz.CalendarIntervalScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 
-import javax.persistence.Entity;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -24,6 +24,14 @@ public class CollectScheduler {
     private TimeUnit unit;
 
     private Date startTime;
+
+    public CollectSchedulerPO convert2PO() {
+        CollectSchedulerPO res = new CollectSchedulerPO();
+        res.setInterval(this.interval);
+        res.setUnit(this.unit);
+        res.setStartTime(startTime);
+        return res;
+    }
 
     public Trigger generateTrigger() {
         CalendarIntervalScheduleBuilder scheduleBuilder = CalendarIntervalScheduleBuilder.calendarIntervalSchedule();
