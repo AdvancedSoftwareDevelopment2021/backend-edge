@@ -3,12 +3,11 @@ package cn.edu.sjtu.ist.ecssbackendedge.controller;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
 
 /**
  * @brief 设备 Controller
@@ -16,6 +15,7 @@ import javax.websocket.server.PathParam;
  * @version 0.1
  * @date 2021-10-23
  */
+@Slf4j
 @RestController
 @RequestMapping(value = "/device")
 public class DeviceController {
@@ -26,11 +26,11 @@ public class DeviceController {
     // test
     @GetMapping(value = "/hello")
     public ResponseEntity<?> getDevice() {
-        return new ResponseEntity<>("hello, world!", HttpStatus.OK);
+        return new ResponseEntity<>("hello, device!", HttpStatus.OK);
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> insertDevice(Device device) {
+    public ResponseEntity<?> insertDevice(@RequestBody Device device) {
         return new ResponseEntity<>(deviceService.insertDevice(device), HttpStatus.OK);
     }
 

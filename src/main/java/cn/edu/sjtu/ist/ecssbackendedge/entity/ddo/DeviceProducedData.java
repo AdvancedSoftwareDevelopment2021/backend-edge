@@ -4,29 +4,27 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * 设备的实时状态数据
- */
 @Data
-public class DeviceStatus {
+public class DeviceProducedData {
 
     /**
-     * 状态数据id
+     * 设备数据id
      */
     private Long id;
 
     /**
-     * 对应的设备id
+     * 对应设备id
      */
     private Long deviceId;
 
     /**
-     * 对应时刻
+     * 数据的时间
      */
     private Date timestamp;
 
     /**
-     * 状态信息
+     * 数据
      */
-    private String status;
+    private String data;
+
 }
