@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceModel;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.model.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
@@ -20,12 +20,12 @@ public class DeviceDaoImpl implements DeviceDao {
     private DeviceRepository deviceRepository;
 
     @Override
-    public void createDevice(DeviceModel device) {
-        Device device1 = new Device();
-        device1.setName(device.getName());
-        device1.setModel(device.getModel());
-        device1.setMessageProtocol(device.getMessageProtocol().getProtocol());
-        deviceRepository.save(device1);
+    public void createDevice(Device device) {
+        DevicePO devicePO = new DevicePO();
+        devicePO.setName(device.getName());
+        devicePO.setModel(device.getModel());
+        devicePO.setMessageProtocol(device.getMessageProtocol().getProtocol());
+        deviceRepository.save(devicePO);
     }
 
     @Override
@@ -34,38 +34,38 @@ public class DeviceDaoImpl implements DeviceDao {
     }
 
     @Override
-    public void modifyDevice(DeviceModel device){
-        Device device1 = deviceRepository.findDeviceById(device.getId());
-        device1.setName(device.getName());
-        device1.setModel(device.getModel());
-        device1.setMessageProtocol(device.getMessageProtocol().getProtocol());
-        deviceRepository.save(device1);
+    public void modifyDevice(Device device){
+        DevicePO devicePO = deviceRepository.findDeviceById(device.getId());
+        devicePO.setName(device.getName());
+        devicePO.setModel(device.getModel());
+        devicePO.setMessageProtocol(device.getMessageProtocol().getProtocol());
+        deviceRepository.save(devicePO);
     }
 
     @Override
-    public DeviceModel findDeviceById(Long id) {
-        Device device = deviceRepository.findDeviceById(id);
-        DeviceModel deviceModel = new DeviceModel();
-        deviceModel.setId(device.getId());
-        deviceModel.setName(device.getName());
-        deviceModel.setModel(device.getModel());
-        deviceModel.setMessageProtocol(MessageProtocol.fromString(device.getMessageProtocol()));
-        return deviceModel;
+    public Device findDeviceById(Long id) {
+        DevicePO devicePO = deviceRepository.findDeviceById(id);
+        Device device = new Device();
+        device.setId(devicePO.getId());
+        device.setName(devicePO.getName());
+        device.setModel(devicePO.getModel());
+        device.setMessageProtocol(MessageProtocol.fromString(devicePO.getMessageProtocol()));
+        return device;
     }
 
     @Override
-    public List<DeviceModel> findDeviceByName(String name){
-        List<Device> devices = deviceRepository.findDevicesByName(name);
-        List<DeviceModel> deviceModels = new ArrayList<>();
-        for (Device device: devices) {
-            DeviceModel dm = new DeviceModel();
-            dm.setId(device.getId());
-            dm.setName(device.getName());
-            dm.setModel(device.getModel());
-            dm.setMessageProtocol(MessageProtocol.fromString(device.getMessageProtocol()));
-            deviceModels.add(dm);
+    public List<Device> findDeviceByName(String name){
+        List<DevicePO> devicePOs = deviceRepository.findDevicesByName(name);
+        List<Device> devices = new ArrayList<>();
+        for (DevicePO devicePO: devicePOs) {
+            Device dm = new Device();
+            dm.setId(devicePO.getId());
+            dm.setName(devicePO.getName());
+            dm.setModel(devicePO.getModel());
+            dm.setMessageProtocol(MessageProtocol.fromString(devicePO.getMessageProtocol()));
+            devices.add(dm);
         }
-        return deviceModels;
+        return devices;
     }
 
 }

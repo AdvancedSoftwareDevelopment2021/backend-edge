@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.repository;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DeviceRepository extends JpaRepository<Device, Long> {
+public interface DeviceRepository extends JpaRepository<DevicePO, Long> {
 
-    Device findDeviceById(Long id);
+    DevicePO findDeviceById(Long id);
 
     void deleteById(Long id);
 
-    List<Device> findDevicesByName(String name);
+    List<DevicePO> findDevicesByName(String name);
 }

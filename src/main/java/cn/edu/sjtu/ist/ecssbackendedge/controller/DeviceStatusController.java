@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceStatusDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceStatusService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +24,8 @@ public class DeviceStatusController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> insertDevice(@RequestBody DeviceStatus deviceStatus) {
-        return new ResponseEntity<>(deviceStatusService.insertDeviceStatus(deviceStatus), HttpStatus.OK);
+    public ResponseEntity<?> insertDevice(@RequestBody DeviceStatusDTO deviceStatusDTO) {
+        return new ResponseEntity<>(deviceStatusService.insertDeviceStatus(deviceStatusDTO), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "")
@@ -34,8 +34,8 @@ public class DeviceStatusController {
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") Long id, @RequestBody DeviceStatus deviceStatus) {
-        return new ResponseEntity<>(deviceStatusService.updateDeviceStatus(id, deviceStatus), HttpStatus.OK);
+    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") Long id, @RequestBody DeviceStatusDTO deviceStatusDTO) {
+        return new ResponseEntity<>(deviceStatusService.updateDeviceStatus(id, deviceStatusDTO), HttpStatus.OK);
     }
 
     @GetMapping(value = "")

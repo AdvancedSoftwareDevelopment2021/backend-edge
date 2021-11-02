@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 @Entity
-public class DeviceData {
+public class DeviceDataPO {
 
     /**
      * 设备数据id
@@ -20,7 +20,7 @@ public class DeviceData {
      * 对应设备id
      */
     @ManyToOne
-    private Device device;
+    private DevicePO device;
 
     /**
      * 数据的时间

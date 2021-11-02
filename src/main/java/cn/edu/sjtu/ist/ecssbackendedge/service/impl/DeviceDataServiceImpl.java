@@ -1,8 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceProducedData;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.model.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceDataService;
 
@@ -16,17 +16,17 @@ public class DeviceDataServiceImpl implements DeviceDataService {
     private DeviceDataDao deviceDataDao;
 
     @Override
-    public Response insertDeviceData(DeviceData deviceData) {
-        DeviceProducedData deviceProducedData = new DeviceProducedData();
-        deviceProducedData.setDeviceId(deviceData.getDeviceId());
-        deviceProducedData.setTimestamp(deviceData.getTimestamp());
-        deviceProducedData.setData(deviceData.getData());
+    public Response insertDeviceData(DeviceDataDTO deviceDataDTO) {
+        DeviceData deviceData = new DeviceData();
+        deviceData.setDeviceId(deviceDataDTO.getDeviceId());
+        deviceData.setTimestamp(deviceDataDTO.getTimestamp());
+        deviceData.setData(deviceDataDTO.getData());
 
-        boolean ret = deviceDataDao.createDeviceData(deviceProducedData);
+        boolean ret = deviceDataDao.createDeviceData(deviceData);
         if (ret) {
             return new Response(200, "OK", "insert device data ok!");
         } else {
-            return new Response(400, "ERROR", "insert device data error! device id=" + deviceProducedData.getDeviceId() + " not exists!");
+            return new Response(400, "ERROR", "insert device data error! device id=" + deviceData.getDeviceId() + " not exists!");
         }
     }
 
@@ -37,27 +37,27 @@ public class DeviceDataServiceImpl implements DeviceDataService {
     }
 
     @Override
-    public Response updateDeviceData(Long id, DeviceData deviceData) {
-        DeviceProducedData deviceProducedData = new DeviceProducedData();
-        deviceProducedData.setId(id);
-        deviceProducedData.setDeviceId(deviceData.getDeviceId());
-        deviceProducedData.setTimestamp(deviceData.getTimestamp());
-        deviceProducedData.setData(deviceData.getData());
-        if (deviceDataDao.modifyDeviceData(deviceProducedData)) {
+    public Response updateDeviceData(Long id, DeviceDataDTO deviceDataDTO) {
+        DeviceData deviceData = new DeviceData();
+        deviceData.setId(id);
+        deviceData.setDeviceId(deviceDataDTO.getDeviceId());
+        deviceData.setTimestamp(deviceDataDTO.getTimestamp());
+        deviceData.setData(deviceDataDTO.getData());
+        if (deviceDataDao.modifyDeviceData(deviceData)) {
             return new Response(200, "OK", "update device data ok!");
         } else {
-            return new Response(400, "ERROR", "update device data error! device id=" + deviceProducedData.getDeviceId() + " not exists!");
+            return new Response(400, "ERROR", "update device data error! device id=" + deviceData.getDeviceId() + " not exists!");
         }
     }
 
     @Override
     public Response getDeviceData(Long id) {
-        DeviceProducedData deviceProducedData = deviceDataDao.findDeviceDataById(id);
-        DeviceData deviceData = new DeviceData();
-        deviceData.setId(deviceProducedData.getId());
-        deviceData.setDeviceId(deviceProducedData.getDeviceId());
-        deviceData.setTimestamp(deviceProducedData.getTimestamp());
-        deviceData.setData(deviceProducedData.getData());
-        return new Response(200, "OK", deviceData);
+        DeviceData deviceData = deviceDataDao.findDeviceDataById(id);
+        DeviceDataDTO deviceDataDTO = new DeviceDataDTO();
+        deviceDataDTO.setId(deviceData.getId());
+        deviceDataDTO.setDeviceId(deviceData.getDeviceId());
+        deviceDataDTO.setTimestamp(deviceData.getTimestamp());
+        deviceDataDTO.setData(deviceData.getData());
+        return new Response(200, "OK", deviceDataDTO);
     }
 }

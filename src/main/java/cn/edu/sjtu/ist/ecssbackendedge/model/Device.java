@@ -1,16 +1,16 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.ddo;
+package cn.edu.sjtu.ist.ecssbackendedge.model;
 
 import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
 
 import lombok.Data;
 
 @Data
-public class DeviceModel {
+public class Device {
 
     /**
      * 产品id
      */
-    private Long id;
+    private long id;
 
     /**
      * 产品名称

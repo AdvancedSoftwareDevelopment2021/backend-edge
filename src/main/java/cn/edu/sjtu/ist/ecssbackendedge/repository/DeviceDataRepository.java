@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.repository;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceDataPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,13 +9,13 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface DeviceDataRepository extends JpaRepository<DeviceData, Long> {
+public interface DeviceDataRepository extends JpaRepository<DeviceDataPO, Long> {
 
-    DeviceData findDeviceDataById(Long id);
+    DeviceDataPO findDeviceDataById(Long id);
 
-    List<DeviceData> findDeviceDataByTimestampBeforeAndTimestampAfter(Date before, Date after);
+    List<DeviceDataPO> findDeviceDataByTimestampBeforeAndTimestampAfter(Date before, Date after);
 
-    List<DeviceData> findDeviceDataByDevice_Id(Long deviceId);
+    List<DeviceDataPO> findDeviceDataByDevice_Id(Long deviceId);
 
     void deleteDeviceDataByDevice_Id(Long deviceId);
 

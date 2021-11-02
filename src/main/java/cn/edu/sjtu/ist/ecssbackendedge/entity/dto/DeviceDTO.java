@@ -3,12 +3,12 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
 import lombok.Data;
 
 @Data
-public class Device {
+public class DeviceDTO {
 
     /**
      * 设备数据id
      */
-    private Long id;
+    private long id;
 
     /**
      * 产品名称

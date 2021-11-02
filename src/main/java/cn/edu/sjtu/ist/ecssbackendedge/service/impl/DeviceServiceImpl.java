@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceModel;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.model.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
@@ -21,13 +21,13 @@ public class DeviceServiceImpl implements DeviceService {
     private DeviceDao deviceDao;
 
     @Override
-    public Response insertDevice(Device device) {
-        DeviceModel deviceModel = new DeviceModel();
-        deviceModel.setName(device.getName());
-        deviceModel.setModel(device.getModel());
-        log.info(Objects.requireNonNull(MessageProtocol.fromString(device.getMessageProtocol())).getProtocol());
-        deviceModel.setMessageProtocol(MessageProtocol.fromString(device.getMessageProtocol()));
-        deviceDao.createDevice(deviceModel);
+    public Response insertDevice(DeviceDTO deviceDTO) {
+        Device device = new Device();
+        device.setName(deviceDTO.getName());
+        device.setModel(deviceDTO.getModel());
+        log.info(Objects.requireNonNull(MessageProtocol.fromString(deviceDTO.getMessageProtocol())).getProtocol());
+        device.setMessageProtocol(MessageProtocol.fromString(deviceDTO.getMessageProtocol()));
+        deviceDao.createDevice(device);
         return new Response(200, "OK", "insert ok!");
     }
 
@@ -38,24 +38,24 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Response updateDevice(Long id, Device device) {
-        DeviceModel deviceModel = new DeviceModel();
-        deviceModel.setId(id);
-        deviceModel.setName(device.getName());
-        deviceModel.setModel(device.getModel());
-        deviceModel.setMessageProtocol(MessageProtocol.fromString(device.getMessageProtocol()));
-        deviceDao.modifyDevice(deviceModel);
+    public Response updateDevice(Long id, DeviceDTO deviceDTO) {
+        Device device = new Device();
+        device.setId(id);
+        device.setName(deviceDTO.getName());
+        device.setModel(deviceDTO.getModel());
+        device.setMessageProtocol(MessageProtocol.fromString(deviceDTO.getMessageProtocol()));
+        deviceDao.modifyDevice(device);
         return new Response(200, "OK", "update ok!");
     }
 
     @Override
     public Response getDevice(Long id) {
-        DeviceModel deviceModel = deviceDao.findDeviceById(id);
-        Device device = new Device();
-        device.setId(deviceModel.getId());
-        device.setName(deviceModel.getName());
-        device.setModel(deviceModel.getModel());
-        device.setMessageProtocol(deviceModel.getMessageProtocol().getProtocol());
+        Device device = deviceDao.findDeviceById(id);
+        DeviceDTO deviceDTO = new DeviceDTO();
+        deviceDTO.setId(device.getId());
+        deviceDTO.setName(device.getName());
+        deviceDTO.setModel(device.getModel());
+        deviceDTO.setMessageProtocol(device.getMessageProtocol().getProtocol());
         return new Response(200, "OK", device);
     }
 }

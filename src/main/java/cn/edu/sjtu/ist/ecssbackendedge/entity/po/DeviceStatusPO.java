@@ -1,24 +1,29 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.ddo;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * 设备的实时状态数据
  */
 @Data
-public class DeviceOwnedStatus {
+@Entity
+public class DeviceStatusPO {
 
     /**
      * 状态数据id
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
      * 对应的设备id
      */
-    private Long deviceId;
+    @ManyToOne
+    private DevicePO device;
 
     /**
      * 对应时刻

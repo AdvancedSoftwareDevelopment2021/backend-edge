@@ -5,17 +5,17 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class DeviceData {
+public class DeviceDataDTO {
 
     /**
      * 设备数据id
      */
-    private Long id;
+    private long id;
 
     /**
      * 对应设备id
      */
-    private Long deviceId;
+    private long deviceId;
 
     /**
      * 数据的时间

@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 
 @Data
 @Entity
-public class Device {
+public class DevicePO {
 
     /**
      * 产品id
