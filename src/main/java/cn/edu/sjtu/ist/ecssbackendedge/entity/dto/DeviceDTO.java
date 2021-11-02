@@ -8,7 +8,7 @@ public class DeviceDTO {
     /**
      * 设备数据id
      */
-    private long id;
+    private String id;
 
     /**
      * 产品名称

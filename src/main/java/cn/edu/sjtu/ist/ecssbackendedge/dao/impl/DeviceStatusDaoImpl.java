@@ -38,7 +38,7 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
     }
 
     @Override
-    public void removeDeviceStatusById(Long id) {
+    public void removeDeviceStatusById(String id) {
         deviceStatusRepository.deleteDeviceStatusById(id);
     }
 
@@ -46,24 +46,24 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
     public boolean modifyDeviceStatus(DeviceStatus deviceStatus) {
         DeviceStatusPO deviceStatusPO = deviceStatusRepository.findDeviceStatusById(deviceStatus.getId());
         if (deviceStatusPO == null) {
-            log.info("device data id=" + deviceStatus.getId() + " not exists!");
+            log.info("device status id=" + deviceStatus.getId() + " not exists!");
             return true;
         }
         DevicePO devicePO = deviceRepository.findDeviceById(deviceStatus.getDeviceId());
         if (devicePO == null) {
-            log.info("device data id=" + deviceStatus.getId() + ", device id=" + deviceStatus.getDeviceId() +" not exists!");
+            log.info("device status id=" + deviceStatus.getId() + ", device id=" + deviceStatus.getDeviceId() +" not exists!");
             return false;
         }
 
         deviceStatusPO.setDevice(devicePO);
         deviceStatusPO.setTimestamp(deviceStatus.getTimestamp());
         deviceStatusPO.setStatus(deviceStatus.getStatus());
-        deviceStatusRepository.save(deviceStatusPO);
+        deviceStatusRepository.modifyDeviceStatus(deviceStatusPO);
         return true;
     }
 
     @Override
-    public DeviceStatus findDeviceStatusById(Long id) {
+    public DeviceStatus findDeviceStatusById(String id) {
         DeviceStatusPO deviceStatusPO = deviceStatusRepository.findDeviceStatusById(id);
         DeviceStatus deviceStatus = new DeviceStatus();
         deviceStatus.setId(deviceStatusPO.getId());

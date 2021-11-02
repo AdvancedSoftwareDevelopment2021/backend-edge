@@ -6,10 +6,10 @@ public interface DeviceStatusDao {
 
     boolean createDeviceStatus(DeviceStatus deviceStatus);
 
-    void removeDeviceStatusById(Long id);
+    void removeDeviceStatusById(String id);
 
     boolean modifyDeviceStatus(DeviceStatus deviceStatus);
 
-    DeviceStatus findDeviceStatusById(Long id);
+    DeviceStatus findDeviceStatusById(String id);
 
 }

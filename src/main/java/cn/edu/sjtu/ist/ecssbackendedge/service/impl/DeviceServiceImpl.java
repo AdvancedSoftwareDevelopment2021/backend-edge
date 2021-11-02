@@ -32,13 +32,13 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Response deleteDevice(Long id) {
+    public Response deleteDevice(String id) {
         deviceDao.removeDevice(id);
         return new Response(200, "OK", "delete ok!");
     }
 
     @Override
-    public Response updateDevice(Long id, DeviceDTO deviceDTO) {
+    public Response updateDevice(String id, DeviceDTO deviceDTO) {
         Device device = new Device();
         device.setId(id);
         device.setName(deviceDTO.getName());
@@ -49,7 +49,7 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Response getDevice(Long id) {
+    public Response getDevice(String id) {
         Device device = deviceDao.findDeviceById(id);
         DeviceDTO deviceDTO = new DeviceDTO();
         deviceDTO.setId(device.getId());

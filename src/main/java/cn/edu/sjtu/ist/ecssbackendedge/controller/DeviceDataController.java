@@ -33,17 +33,17 @@ public class DeviceDataController {
     }
 
     @DeleteMapping(value = "")
-    public ResponseEntity<?> deleteDeviceData(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<?> deleteDeviceData(@RequestParam(value = "id") String id) {
         return new ResponseEntity<>(deviceDataService.deleteDeviceData(id), HttpStatus.OK);
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<?> updateDeviceData(@RequestParam(value = "id") Long id, @RequestBody DeviceDataDTO deviceDataDTO) {
+    public ResponseEntity<?> updateDeviceData(@RequestParam(value = "id") String id, @RequestBody DeviceDataDTO deviceDataDTO) {
         return new ResponseEntity<>(deviceDataService.updateDeviceData(id, deviceDataDTO), HttpStatus.OK);
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<?> getDeviceData(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<?> getDeviceData(@RequestParam(value = "id") String id) {
         return new ResponseEntity<>(deviceDataService.getDeviceData(id), HttpStatus.OK);
     }
 }

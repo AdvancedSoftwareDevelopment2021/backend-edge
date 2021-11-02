@@ -10,12 +10,12 @@ public class DeviceData {
     /**
      * 设备数据id
      */
-    private long id;
+    private String id;
 
     /**
      * 对应设备id
      */
-    private long deviceId;
+    private String deviceId;
 
     /**
      * 数据的时间

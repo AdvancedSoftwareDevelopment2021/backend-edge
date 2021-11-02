@@ -7,10 +7,10 @@ public interface DeviceStatusService {
 
     Response insertDeviceStatus(DeviceStatusDTO deviceStatusDTO);
 
-    Response deleteDeviceStatus(Long id);
+    Response deleteDeviceStatus(String id);
 
-    Response updateDeviceStatus(Long id, DeviceStatusDTO deviceStatusDTO);
+    Response updateDeviceStatus(String id, DeviceStatusDTO deviceStatusDTO);
 
-    Response getDeviceStatus(Long id);
+    Response getDeviceStatus(String id);
 
 }

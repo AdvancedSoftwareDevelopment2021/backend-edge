@@ -29,7 +29,7 @@ public class DeviceDaoImpl implements DeviceDao {
     }
 
     @Override
-    public void removeDevice(Long id) {
+    public void removeDevice(String id) {
         deviceRepository.deleteById(id);
     }
 
@@ -39,17 +39,18 @@ public class DeviceDaoImpl implements DeviceDao {
         devicePO.setName(device.getName());
         devicePO.setModel(device.getModel());
         devicePO.setMessageProtocol(device.getMessageProtocol().getProtocol());
-        deviceRepository.save(devicePO);
+        deviceRepository.modifyDevice(devicePO);
     }
 
     @Override
-    public Device findDeviceById(Long id) {
+    public Device findDeviceById(String id) {
         DevicePO devicePO = deviceRepository.findDeviceById(id);
         Device device = new Device();
         device.setId(devicePO.getId());
         device.setName(devicePO.getName());
         device.setModel(devicePO.getModel());
         device.setMessageProtocol(MessageProtocol.fromString(devicePO.getMessageProtocol()));
+        log.info(String.valueOf(device));
         return device;
     }
 

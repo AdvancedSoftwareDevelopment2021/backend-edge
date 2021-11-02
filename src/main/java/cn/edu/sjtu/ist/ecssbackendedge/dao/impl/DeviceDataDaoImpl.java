@@ -26,6 +26,7 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     public boolean createDeviceData(DeviceData deviceData) {
         DeviceDataPO deviceDataPO = new DeviceDataPO();
 
+        log.info(deviceData.getDeviceId());
         DevicePO devicePO = deviceRepository.findDeviceById(deviceData.getDeviceId());
         if(devicePO == null) {
             log.error("设备数据对应的设备不存在，数据无法保存");
@@ -39,7 +40,7 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     }
 
     @Override
-    public void removeDeviceDataById(Long id) {
+    public void removeDeviceDataById(String id) {
         log.info("id: " + id);
         deviceDataRepository.deleteDeviceDataById(id);
     }
@@ -60,12 +61,12 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
         deviceDataPO.setDevice(devicePO);
         deviceDataPO.setTimestamp(deviceData.getTimestamp());
         deviceDataPO.setData(deviceData.getData());
-        deviceDataRepository.save(deviceDataPO);
+        deviceDataRepository.modifyDeviceData(deviceDataPO);
         return true;
     }
 
     @Override
-    public DeviceData findDeviceDataById(Long id) {
+    public DeviceData findDeviceDataById(String id) {
         DeviceDataPO deviceDataPO = deviceDataRepository.findDeviceDataById(id);
         DeviceData deviceData = new DeviceData();
         deviceData.setId(deviceDataPO.getId());

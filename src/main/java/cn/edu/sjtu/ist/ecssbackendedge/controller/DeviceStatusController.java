@@ -29,17 +29,17 @@ public class DeviceStatusController {
     }
 
     @DeleteMapping(value = "")
-    public ResponseEntity<?> deleteDevice(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<?> deleteDevice(@RequestParam(value = "id") String id) {
         return new ResponseEntity<>(deviceStatusService.deleteDeviceStatus(id), HttpStatus.OK);
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") Long id, @RequestBody DeviceStatusDTO deviceStatusDTO) {
+    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") String id, @RequestBody DeviceStatusDTO deviceStatusDTO) {
         return new ResponseEntity<>(deviceStatusService.updateDeviceStatus(id, deviceStatusDTO), HttpStatus.OK);
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<?> getDevice(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<?> getDevice(@RequestParam(value = "id") String id) {
         return new ResponseEntity<>(deviceStatusService.getDeviceStatus(id), HttpStatus.OK);
     }
 }

@@ -6,9 +6,9 @@ public interface DeviceDataDao {
 
     boolean createDeviceData(DeviceData deviceData);
 
-    void removeDeviceDataById(Long id);
+    void removeDeviceDataById(String id);
 
     boolean modifyDeviceData(DeviceData deviceData);
 
-    DeviceData findDeviceDataById(Long id);
+    DeviceData findDeviceDataById(String id);
 }

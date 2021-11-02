@@ -10,7 +10,7 @@ public class Device {
     /**
      * 产品id
      */
-    private long id;
+    private String id;
 
     /**
      * 产品名称

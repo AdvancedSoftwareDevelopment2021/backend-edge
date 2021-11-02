@@ -12,9 +12,9 @@ public interface DeviceService {
      */
     Response insertDevice(DeviceDTO deviceDTO);
 
-    Response deleteDevice(Long id);
+    Response deleteDevice(String id);
 
-    Response updateDevice(Long id, DeviceDTO deviceDTO);
+    Response updateDevice(String id, DeviceDTO deviceDTO);
 
-    Response getDevice(Long id);
+    Response getDevice(String id);
 }

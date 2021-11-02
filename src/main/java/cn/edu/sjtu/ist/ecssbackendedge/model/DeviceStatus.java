@@ -13,12 +13,12 @@ public class DeviceStatus {
     /**
      * 状态数据id
      */
-    private long id;
+    private String id;
 
     /**
      * 对应的设备id
      */
-    private long deviceId;
+    private String deviceId;
 
     /**
      * 对应时刻

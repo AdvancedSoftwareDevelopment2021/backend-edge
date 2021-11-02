@@ -7,9 +7,9 @@ public interface DeviceDataService {
 
     Response insertDeviceData(DeviceDataDTO deviceDataDTO);
 
-    Response deleteDeviceData(Long id);
+    Response deleteDeviceData(String id);
 
-    Response updateDeviceData(Long id, DeviceDataDTO deviceDataDTO);
+    Response updateDeviceData(String id, DeviceDataDTO deviceDataDTO);
 
-    Response getDeviceData(Long id);
+    Response getDeviceData(String id);
 }

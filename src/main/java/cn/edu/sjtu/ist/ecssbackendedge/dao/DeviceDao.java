@@ -8,11 +8,11 @@ public interface DeviceDao {
 
     void createDevice(Device device);
 
-    void removeDevice(Long id);
+    void removeDevice(String id);
 
     void modifyDevice(Device device);
 
-    Device findDeviceById(Long id);
+    Device findDeviceById(String id);
 
     List<Device> findDeviceByName(String name);
 }

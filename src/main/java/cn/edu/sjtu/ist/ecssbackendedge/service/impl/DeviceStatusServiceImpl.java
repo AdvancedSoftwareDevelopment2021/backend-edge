@@ -33,13 +33,13 @@ public class DeviceStatusServiceImpl implements DeviceStatusService {
     }
 
     @Override
-    public Response deleteDeviceStatus(Long id) {
+    public Response deleteDeviceStatus(String id) {
         deviceStatusDao.removeDeviceStatusById(id);
         return new Response(200, "OK", "delete device status ok!");
     }
 
     @Override
-    public Response updateDeviceStatus(Long id, DeviceStatusDTO deviceStatusDTO) {
+    public Response updateDeviceStatus(String id, DeviceStatusDTO deviceStatusDTO) {
         DeviceStatus deviceStatus = new DeviceStatus();
         deviceStatus.setId(id);
         deviceStatus.setDeviceId(deviceStatusDTO.getDeviceId());
@@ -55,7 +55,7 @@ public class DeviceStatusServiceImpl implements DeviceStatusService {
     }
 
     @Override
-    public Response getDeviceStatus(Long id) {
+    public Response getDeviceStatus(String id) {
         DeviceStatus deviceStatus = deviceStatusDao.findDeviceStatusById(id);
         DeviceStatusDTO deviceStatusDTO = new DeviceStatusDTO();
         deviceStatusDTO.setId(deviceStatus.getId());
