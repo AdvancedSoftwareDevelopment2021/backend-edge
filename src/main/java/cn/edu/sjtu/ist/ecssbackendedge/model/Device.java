@@ -1,4 +1,6 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
+package cn.edu.sjtu.ist.ecssbackendedge.model;
+
+import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
 
 import lombok.Data;
 
@@ -6,9 +8,9 @@ import lombok.Data;
 public class Device {
 
     /**
-     * 设备数据id
+     * 产品id
      */
-    private Long id;
+    private String id;
 
     /**
      * 产品名称
@@ -23,5 +25,5 @@ public class Device {
     /**
      * 通信协议
      */
-    private String messageProtocol;
+    private MessageProtocol messageProtocol;
 }

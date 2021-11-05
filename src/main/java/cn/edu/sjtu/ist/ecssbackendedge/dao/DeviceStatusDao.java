@@ -1,15 +1,15 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceOwnedStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.model.DeviceStatus;
 
 public interface DeviceStatusDao {
 
-    boolean createDeviceStatus(DeviceOwnedStatus deviceOwnedStatus);
+    boolean createDeviceStatus(DeviceStatus deviceStatus);
 
-    void removeDeviceStatusById(Long id);
+    void removeDeviceStatusById(String id);
 
-    boolean modifyDeviceStatus(DeviceOwnedStatus deviceOwnedStatus);
+    boolean modifyDeviceStatus(DeviceStatus deviceStatus);
 
-    DeviceOwnedStatus findDeviceStatusById(Long id);
+    DeviceStatus findDeviceStatusById(String id);
 
 }

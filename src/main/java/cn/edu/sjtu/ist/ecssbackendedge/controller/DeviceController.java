@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,22 +30,22 @@ public class DeviceController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> insertDevice(@RequestBody Device device) {
-        return new ResponseEntity<>(deviceService.insertDevice(device), HttpStatus.OK);
+    public ResponseEntity<?> insertDevice(@RequestBody DeviceDTO deviceDTO) {
+        return new ResponseEntity<>(deviceService.insertDevice(deviceDTO), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "")
-    public ResponseEntity<?> deleteDevice(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<?> deleteDevice(@RequestParam(value = "id") String id) {
         return new ResponseEntity<>(deviceService.deleteDevice(id), HttpStatus.OK);
     }
 
     @PutMapping(value = "")
-    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") Long id, @RequestBody Device device) {
-        return new ResponseEntity<>(deviceService.updateDevice(id, device), HttpStatus.OK);
+    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") String id, @RequestBody DeviceDTO deviceDTO) {
+        return new ResponseEntity<>(deviceService.updateDevice(id, deviceDTO), HttpStatus.OK);
     }
 
     @GetMapping(value = "")
-    public ResponseEntity<?> getDevice(@RequestParam(value = "id") Long id) {
+    public ResponseEntity<?> getDevice(@RequestParam(value = "id") String id) {
         return new ResponseEntity<>(deviceService.getDevice(id), HttpStatus.OK);
     }
 

@@ -1,21 +1,21 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.ddo;
+package cn.edu.sjtu.ist.ecssbackendedge.model;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class DeviceProducedData {
+public class DeviceData {
 
     /**
      * 设备数据id
      */
-    private Long id;
+    private String id;
 
     /**
      * 对应设备id
      */
-    private Long deviceId;
+    private String deviceId;
 
     /**
      * 数据的时间

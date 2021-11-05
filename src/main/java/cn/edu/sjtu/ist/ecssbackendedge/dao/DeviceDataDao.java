@@ -1,14 +1,14 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceProducedData;
+import cn.edu.sjtu.ist.ecssbackendedge.model.DeviceData;
 
 public interface DeviceDataDao {
 
-    boolean createDeviceData(DeviceProducedData deviceProducedData);
+    boolean createDeviceData(DeviceData deviceData);
 
-    void removeDeviceDataById(Long id);
+    void removeDeviceDataById(String id);
 
-    boolean modifyDeviceData(DeviceProducedData deviceProducedData);
+    boolean modifyDeviceData(DeviceData deviceData);
 
-    DeviceProducedData findDeviceDataById(Long id);
+    DeviceData findDeviceDataById(String id);
 }

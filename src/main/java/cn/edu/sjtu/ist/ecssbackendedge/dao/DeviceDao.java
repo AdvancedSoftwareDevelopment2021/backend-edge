@@ -1,18 +1,18 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.ddo.DeviceModel;
+import cn.edu.sjtu.ist.ecssbackendedge.model.Device;
 
 import java.util.List;
 
 public interface DeviceDao {
 
-    void createDevice(DeviceModel device);
+    void createDevice(Device device);
 
-    void removeDevice(Long id);
+    void removeDevice(String id);
 
-    void modifyDevice(DeviceModel device);
+    void modifyDevice(Device device);
 
-    DeviceModel findDeviceById(Long id);
+    Device findDeviceById(String id);
 
-    List<DeviceModel> findDeviceByName(String name);
+    List<Device> findDeviceByName(String name);
 }

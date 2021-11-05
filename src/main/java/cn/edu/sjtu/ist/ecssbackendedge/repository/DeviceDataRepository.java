@@ -1,25 +1,61 @@
 package cn.edu.sjtu.ist.ecssbackendedge.repository;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceData;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceDataPO;
 
-import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 import java.util.List;
 
-@Repository
-public interface DeviceDataRepository extends JpaRepository<DeviceData, Long> {
+@Component
+public class DeviceDataRepository {
 
-    DeviceData findDeviceDataById(Long id);
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
-    List<DeviceData> findDeviceDataByTimestampBeforeAndTimestampAfter(Date before, Date after);
+    public void save(DeviceDataPO deviceDataPO) {
+        mongoTemplate.insert(deviceDataPO);
+    }
 
-    List<DeviceData> findDeviceDataByDevice_Id(Long deviceId);
+    public void deleteDeviceDataByDevice_Id(Long deviceId) {
+        Query query = new Query(Criteria.where("deviceId").is(deviceId));
+        mongoTemplate.remove(query, DeviceDataPO.class);
+    }
 
-    void deleteDeviceDataByDevice_Id(Long deviceId);
+    public void deleteDeviceDataById(String id) {
+        Query query = new Query(Criteria.where("id").is(id));
+        mongoTemplate.remove(query, DeviceDataPO.class);
+    }
 
-    @Transactional
-    void deleteDeviceDataById(Long id);
+    public void modifyDeviceData(DeviceDataPO deviceDataPO) {
+        Query query = new Query(Criteria.where("id").is(deviceDataPO.getId()));
+
+        Update update = new Update();
+        update.set("device", deviceDataPO.getDevice());
+        update.set("timestamp", deviceDataPO.getTimestamp());
+        update.set("data", deviceDataPO.getData());
+
+        mongoTemplate.updateFirst(query, update, DeviceDataPO.class);
+    }
+
+    public DeviceDataPO findDeviceDataById(String id) {
+        Query query = new Query(Criteria.where("id").is(id));
+        return mongoTemplate.findOne(query, DeviceDataPO.class);
+    }
+
+    public List<DeviceDataPO> findDeviceDataByTimestampBeforeAndTimestampAfter(Date before, Date after) {
+        Query query = new Query(Criteria.where("timestamp").gte(after).lte(before));
+        return mongoTemplate.find(query, DeviceDataPO.class);
+    }
+
+    public List<DeviceDataPO> findDeviceDataByDevice_Id(String deviceId) {
+        Query query = new Query(Criteria.where("deviceId").is(deviceId));
+        return mongoTemplate.find(query, DeviceDataPO.class);
+    }
 
 }

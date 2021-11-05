@@ -1,15 +1,15 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 
 public interface DeviceDataService {
 
-    Response insertDeviceData(DeviceData deviceData);
+    Response insertDeviceData(DeviceDataDTO deviceDataDTO);
 
-    Response deleteDeviceData(Long id);
+    Response deleteDeviceData(String id);
 
-    Response updateDeviceData(Long id, DeviceData deviceData);
+    Response updateDeviceData(String id, DeviceDataDTO deviceDataDTO);
 
-    Response getDeviceData(Long id);
+    Response getDeviceData(String id);
 }

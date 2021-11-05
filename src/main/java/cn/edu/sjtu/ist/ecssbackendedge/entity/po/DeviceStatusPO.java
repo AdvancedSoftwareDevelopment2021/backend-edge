@@ -1,6 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,29 +11,30 @@ import java.util.Date;
  * 设备的实时状态数据
  */
 @Data
-@Entity
-public class DeviceStatus {
+@Document(collection = "device_status")
+public class DeviceStatusPO {
 
     /**
      * 状态数据id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     /**
      * 对应的设备id
      */
-    @ManyToOne
-    private Device device;
+    @Field
+    private DevicePO device;
 
     /**
      * 对应时刻
      */
+    @Field
     private Date timestamp;
 
     /**
      * 状态信息
      */
+    @Field
     private String status;
 }

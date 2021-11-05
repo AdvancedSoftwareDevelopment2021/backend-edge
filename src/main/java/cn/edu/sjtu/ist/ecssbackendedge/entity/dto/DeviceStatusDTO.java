@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.ddo;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
 
 import lombok.Data;
 
@@ -8,17 +8,17 @@ import java.util.Date;
  * 设备的实时状态数据
  */
 @Data
-public class DeviceOwnedStatus {
+public class DeviceStatusDTO {
 
     /**
      * 状态数据id
      */
-    private Long id;
+    private String id;
 
     /**
      * 对应的设备id
      */
-    private Long deviceId;
+    private String deviceId;
 
     /**
      * 对应时刻

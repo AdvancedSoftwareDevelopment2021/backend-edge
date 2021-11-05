@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
+package cn.edu.sjtu.ist.ecssbackendedge.model;
 
 import lombok.Data;
 
@@ -13,12 +13,12 @@ public class DeviceStatus {
     /**
      * 状态数据id
      */
-    private Long id;
+    private String id;
 
     /**
      * 对应的设备id
      */
-    private Long deviceId;
+    private String deviceId;
 
     /**
      * 对应时刻
