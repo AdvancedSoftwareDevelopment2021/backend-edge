@@ -19,6 +19,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CollectScheduler {
+    private String id;
+
     private int interval;
 
     private TimeUnit unit;
