@@ -1,10 +1,12 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DataEntry;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.service.SensorService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.SensorUtil;
@@ -29,15 +31,34 @@ public class SensorServiceImpl implements SensorService {
     private SensorDao sensorDao;
 
     @Autowired
+    private DeviceDao deviceDao;
+
+    @Autowired
     private SensorUtil sensorUtil;
 
     @Override
     public Response createSensor(String deviceId, SensorRequest sensorRequest) {
+        Sensor sensor = sensorDao.findSensorByDeviceIDAndName(deviceId, sensorRequest.getName());
+        if (sensor != null) {
+            return new Response(300, "创建sensor名称"+sensorRequest.getName()+"失败，同名sensor已存在", null);
+        }
+
         // 创建Sensor
-        Sensor sensor = sensorUtil.convertRequestDTO2Domain(sensorRequest);
+        sensor = sensorUtil.convertRequestDTO2Domain(sensorRequest);
         sensor.setDeviceId(deviceId);
         sensorDao.createSensor(sensor);
-        return new Response(200, "创建sensor成功", null);
+
+        // 把sensorId装配进device
+        sensor = sensorDao.findSensorByDeviceIDAndName(deviceId, sensorRequest.getName());
+        Device device = deviceDao.findDeviceById(deviceId);
+        for (DataEntry entry: device.getValues()) {
+            if (entry.getName().equals(sensor.getName())) {
+                entry.setSensorId(sensor.getId());
+                break;
+            }
+        }
+        deviceDao.modifyDevice(device);
+        return new Response(200, "创建sensor名称"+sensorRequest.getName()+"成功", null);
     }
 
     @Override
@@ -63,7 +84,6 @@ public class SensorServiceImpl implements SensorService {
         Sensor sensor = sensorDao.findSensorById(id);
         if (sensor != null) {
             return new Response(200, "获取sensor id=" + id + "成功", sensorUtil.convertDomain2ResponseDTO(sensor));
-
         } else {
             return new Response(200, "获取sensor id=" + id + "失败，sensor不存在", null);
         }

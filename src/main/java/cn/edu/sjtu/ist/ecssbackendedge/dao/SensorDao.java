@@ -19,11 +19,14 @@ public interface SensorDao {
 
     void deleteSensorByDeviceId(String deviceId);
 
-    Sensor findSensorById(String id);
-
-    List<Sensor> findSensorsByDeviceId(String id);
-
     void updateSensor(Sensor sensor);
 
     void updateSensorStatus(String id, Status status);
+
+    Sensor findSensorById(String id);
+
+    Sensor findSensorByDeviceIDAndName(String deviceId, String name);
+
+    List<Sensor> findSensorsByDeviceId(String id);
+
 }
