@@ -4,7 +4,7 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ModbusCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.ModbusCollector;
-import cn.edu.sjtu.ist.ecssbackendedge.enumeration.MessageProtocol;
+import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

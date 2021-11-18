@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.enumeration;
+package cn.edu.sjtu.ist.ecssbackendedge.model.enumeration;
 
 public enum DataType {
 

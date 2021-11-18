@@ -3,8 +3,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.model.sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 
@@ -13,11 +12,6 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * @author dyanjun
