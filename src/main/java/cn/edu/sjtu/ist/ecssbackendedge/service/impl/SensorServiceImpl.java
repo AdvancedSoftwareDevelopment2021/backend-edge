@@ -33,7 +33,6 @@ public class SensorServiceImpl implements SensorService {
 
     @Override
     public Response createSensor(String deviceId, SensorRequest sensorRequest) {
-        // 创建Sensor
         Sensor sensor = sensorUtil.convertRequestDTO2Domain(sensorRequest);
         sensor.setDeviceId(deviceId);
         sensorDao.createSensor(sensor);

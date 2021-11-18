@@ -25,7 +25,7 @@ public class ModbusUtil {
     private ModbusConfig modbusConfig;
 
     public String collectData(String id, String ip, Integer port, Integer slaveId, Integer offset, Integer num, ModbusFunction modbusFunction, String datatype) throws ModbusTransportException {
-        this.slaveId = slaveId;
+        if(slaveId != null) this.slaveId = slaveId;
         String output = "";
         switch(modbusFunction){
             case COIL_STATUS:
@@ -47,7 +47,6 @@ public class ModbusUtil {
             default:
                 break;
         }
-        // TODO 储存到数据中
         return output;
     }
 

@@ -20,12 +20,6 @@ public class SensorController {
     @Autowired
     private SensorService sensorService;
 
-    // test
-    @GetMapping(value = "/hello")
-    public ResponseEntity<?> getDevice() {
-        return new ResponseEntity<>("hello, sensor!", HttpStatus.OK);
-    }
-
     @PostMapping(value = "/{id}")
     public ResponseEntity<?> insertSensor(@PathVariable String id, @RequestBody SensorRequest request) {
         return new ResponseEntity<>(sensorService.createSensor(id, request), HttpStatus.OK);

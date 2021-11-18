@@ -23,12 +23,6 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
-    // test
-    @GetMapping(value = "/hello")
-    public ResponseEntity<?> getDevice() {
-        return new ResponseEntity<>("hello, device!", HttpStatus.OK);
-    }
-
     @PostMapping(value = "")
     public ResponseEntity<?> insertDevice(@RequestBody DeviceDTO deviceDTO) {
         return new ResponseEntity<>(deviceService.insertDevice(deviceDTO), HttpStatus.OK);
@@ -44,9 +38,13 @@ public class DeviceController {
         return new ResponseEntity<>(deviceService.updateDevice(id, deviceDTO), HttpStatus.OK);
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> getDevice(@RequestParam(value = "id") String id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getDevice(@PathVariable String id) {
         return new ResponseEntity<>(deviceService.getDevice(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "")
+    public ResponseEntity<?> getDeviceAll() {
+        return new ResponseEntity<>(deviceService.getDeviceAll(), HttpStatus.OK);
+    }
 }

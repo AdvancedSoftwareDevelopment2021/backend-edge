@@ -21,12 +21,6 @@ public class DeviceDataController {
     @Autowired
     private DeviceDataService deviceDataService;
 
-    // test
-    @GetMapping(value = "/hello")
-    public ResponseEntity<?> getDevice() {
-        return new ResponseEntity<>("hello, device data!", HttpStatus.OK);
-    }
-
     @PostMapping(value = "")
     public ResponseEntity<?> insertDeviceData(@RequestBody DeviceDataDTO deviceDataDTO) {
         return new ResponseEntity<>(deviceDataService.insertDeviceData(deviceDataDTO), HttpStatus.OK);

@@ -4,7 +4,6 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ public class DeviceDaoImpl implements DeviceDao {
         DevicePO devicePO = new DevicePO();
         devicePO.setName(device.getName());
         devicePO.setModel(device.getModel());
-        devicePO.setMessageProtocol(device.getMessageProtocol().getProtocol());
         deviceRepository.save(devicePO);
     }
 
@@ -38,8 +36,21 @@ public class DeviceDaoImpl implements DeviceDao {
         DevicePO devicePO = deviceRepository.findDeviceById(device.getId());
         devicePO.setName(device.getName());
         devicePO.setModel(device.getModel());
-        devicePO.setMessageProtocol(device.getMessageProtocol().getProtocol());
         deviceRepository.modifyDevice(devicePO);
+    }
+
+    @Override
+    public List<Device> findDeviceAll(){
+        List<DevicePO> devicePOList = deviceRepository.findDeviceAll();
+        List<Device> deviceList = new ArrayList<>();
+        for(DevicePO devicePO : devicePOList){
+            Device device = new Device();
+            device.setId(devicePO.getId());
+            device.setName(devicePO.getName());
+            device.setModel(devicePO.getModel());
+            deviceList.add(device);
+        }
+        return deviceList;
     }
 
     @Override
@@ -49,7 +60,6 @@ public class DeviceDaoImpl implements DeviceDao {
         device.setId(devicePO.getId());
         device.setName(devicePO.getName());
         device.setModel(devicePO.getModel());
-        device.setMessageProtocol(MessageProtocol.fromString(devicePO.getMessageProtocol()));
         log.info(String.valueOf(device));
         return device;
     }
@@ -63,7 +73,6 @@ public class DeviceDaoImpl implements DeviceDao {
             dm.setId(devicePO.getId());
             dm.setName(devicePO.getName());
             dm.setModel(devicePO.getModel());
-            dm.setMessageProtocol(MessageProtocol.fromString(devicePO.getMessageProtocol()));
             devices.add(dm);
         }
         return devices;

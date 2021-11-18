@@ -17,4 +17,6 @@ public interface DeviceService {
     Response updateDevice(String id, DeviceDTO deviceDTO);
 
     Response getDevice(String id);
+
+    Response getDeviceAll();
 }

@@ -26,10 +26,4 @@ public class DevicePO {
      */
     @Field
     private String model;
-
-    /**
-     * 通信协议
-     */
-    @Field
-    private String messageProtocol;
 }

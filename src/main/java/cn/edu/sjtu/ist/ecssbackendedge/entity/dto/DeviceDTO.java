@@ -6,7 +6,7 @@ import lombok.Data;
 public class DeviceDTO {
 
     /**
-     * 设备数据id
+     * 设备id
      */
     private String id;
 
@@ -19,9 +19,4 @@ public class DeviceDTO {
      * 产品型号
      */
     private String model;
-
-    /**
-     * 通信协议
-     */
-    private String messageProtocol;
 }
