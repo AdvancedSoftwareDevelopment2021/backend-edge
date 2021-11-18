@@ -1,39 +1,31 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
+package cn.edu.sjtu.ist.ecssbackendedge.model.device;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DataEntry;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
 /**
- * @brief 设备PO
+ * @brief 设备
  * @author rsp
  * @version 0.1
  * @date 2021-11-08
  */
 @Data
-@Document(collection = "device")
-public class DevicePO {
+public class Device {
 
     /**
      * 设备id
      */
-    @Id
     private String id;
 
     /**
      * 设备名称
      */
-    @Field
     private String name;
 
     /**
      * 设备型号
      */
-    @Field
     private String model;
 
     /**
@@ -44,6 +36,5 @@ public class DevicePO {
     /**
      * 设备的数据项列表
      */
-    @Field
     private List<DataEntry> values;
 }

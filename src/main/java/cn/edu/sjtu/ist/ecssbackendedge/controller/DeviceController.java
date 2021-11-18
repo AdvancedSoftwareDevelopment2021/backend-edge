@@ -31,22 +31,27 @@ public class DeviceController {
 
     @PostMapping(value = "")
     public ResponseEntity<?> insertDevice(@RequestBody DeviceDTO deviceDTO) {
+        System.out.println(deviceDTO);
         return new ResponseEntity<>(deviceService.insertDevice(deviceDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "")
-    public ResponseEntity<?> deleteDevice(@RequestParam(value = "id") String id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteDevice(@PathVariable String id) {
         return new ResponseEntity<>(deviceService.deleteDevice(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") String id, @RequestBody DeviceDTO deviceDTO) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateDevice(@PathVariable String id, @RequestBody DeviceDTO deviceDTO) {
         return new ResponseEntity<>(deviceService.updateDevice(id, deviceDTO), HttpStatus.OK);
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> getDevice(@RequestParam(value = "id") String id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getDevice(@PathVariable String id) {
         return new ResponseEntity<>(deviceService.getDevice(id), HttpStatus.OK);
     }
 
+    @GetMapping(value = "")
+    public ResponseEntity<?> getAllDevices() {
+        return new ResponseEntity<>(deviceService.getAllDevices(), HttpStatus.OK);
+    }
 }

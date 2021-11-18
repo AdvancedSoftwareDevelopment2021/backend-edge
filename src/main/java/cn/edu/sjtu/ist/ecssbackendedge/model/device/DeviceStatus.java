@@ -1,11 +1,14 @@
-package cn.edu.sjtu.ist.ecssbackendedge.model;
+package cn.edu.sjtu.ist.ecssbackendedge.model.device;
 
 import lombok.Data;
 
 import java.util.Date;
 
 /**
- * 设备的实时状态数据
+ * @brief 设备状态PO
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-08
  */
 @Data
 public class DeviceStatus {

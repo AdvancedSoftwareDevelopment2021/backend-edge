@@ -3,7 +3,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.model.sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.model.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 
@@ -40,13 +40,8 @@ public class Sensor {
 
     private DeviceDataDao deviceDataDao;
 
-    public void init(SensorDao sensorDao, DeviceDataDao deviceDataDao) {
-        this.sensorDao = sensorDao;
-        this.deviceDataDao = deviceDataDao;
-    }
-
     private void collectData() throws Exception {
-        log.info("{}开始采集数据", this.name);
+        log.info("开始采集数据项{}", this.name);
         this.status = Status.RUNNING;
         this.sensorDao.updateSensorStatus(this.id, this.status);
 
@@ -59,7 +54,7 @@ public class Sensor {
             this.status = Status.SLEEP;
             this.sensorDao.updateSensorStatus(this.id, this.status);
         }
-        log.info("{}采集数据结束", this.name);
+        log.info("采集数据项{}结束", this.name);
     }
 
     private void saveData(String data) {
@@ -93,12 +88,6 @@ public class Sensor {
     public static class CollectDataJob implements Job {
         @Setter
         Sensor sensor;
-
-        @Setter
-        SensorDao sensorDao;
-
-        @Setter
-        DeviceDataDao deviceDataDao;
 
         @SneakyThrows
         @Override
