@@ -4,6 +4,12 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @brief 设备数据DTO
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-08
+ */
 @Data
 public class DeviceDataDTO {
 

@@ -37,4 +37,12 @@ public class Device {
      * 设备的数据项列表
      */
     private List<DataEntry> values;
+
+    /**
+     * 将collector收集到的原始数据包装为key-value形式返回存储
+     * @param data 收集到的数据
+     */
+    public String wrapData(String data) {
+        return data;
+    }
 }

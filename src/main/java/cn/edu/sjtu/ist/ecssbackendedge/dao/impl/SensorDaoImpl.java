@@ -100,15 +100,14 @@ public class SensorDaoImpl implements SensorDao {
     @Override
     public Sensor findSensorByDeviceIDAndName(String deviceId, String name) {
         SensorPO po = sensorRepository.findSensorPOByDeviceIdAndName(deviceId, name);
-        if (po == null) {
-            throw new RuntimeException("数据采集过程不存在");
+        if (po != null) {
+            Sensor sensor = sensorUtil.convertPO2Domain(po);
+            sensor.setQuartzScheduler(quartzScheduler);
+            sensor.setSensorDao(this);
+            sensor.setDeviceDataDao(deviceDataDao);
+            return sensor;
         }
-
-        Sensor sensor = sensorUtil.convertPO2Domain(po);
-        sensor.setQuartzScheduler(quartzScheduler);
-        sensor.setSensorDao(this);
-        sensor.setDeviceDataDao(deviceDataDao);
-        return sensor;
+        return null;
     }
 
     @Override

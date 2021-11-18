@@ -21,7 +21,6 @@ public class DeviceUtil {
         res.setModel(dto.getModel());
         res.setDescription(dto.getDescription());
         res.setValues(dto.getValues());
-        System.out.println(res);
         return res;
     }
 
@@ -32,19 +31,16 @@ public class DeviceUtil {
         res.setModel(domain.getModel());
         res.setDescription(domain.getDescription());
         res.setValues(domain.getValues());
-        System.out.println(res);
         return res;
     }
 
     public Device convertPO2Domain(DevicePO po) {
-        System.out.println(po);
         Device res = new Device();
         res.setId(po.getId());
         res.setName(po.getName());
         res.setModel(po.getModel());
         res.setDescription(po.getDescription());
         res.setValues(po.getValues());
-        System.out.println(res);
         return res;
     }
 
@@ -55,7 +51,6 @@ public class DeviceUtil {
         res.setModel(domain.getModel());
         res.setDescription(domain.getDescription());
         res.setValues(domain.getValues());
-        System.out.println(res);
         return res;
     }
 }

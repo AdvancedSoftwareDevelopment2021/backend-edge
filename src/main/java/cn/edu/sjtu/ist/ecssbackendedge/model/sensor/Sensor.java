@@ -3,6 +3,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.model.sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
@@ -40,7 +41,7 @@ public class Sensor {
 
     private DeviceDataDao deviceDataDao;
 
-    private void collectData() throws Exception {
+    private String collectData() throws Exception {
         log.info("开始采集数据项{}", this.name);
         this.status = Status.RUNNING;
         this.sensorDao.updateSensorStatus(this.id, this.status);
@@ -50,19 +51,11 @@ public class Sensor {
             this.status = Status.FAILURE;
             this.sensorDao.updateSensorStatus(this.id, this.status);
         } else {
-            saveData(collectedData);
             this.status = Status.SLEEP;
             this.sensorDao.updateSensorStatus(this.id, this.status);
         }
         log.info("采集数据项{}结束", this.name);
-    }
-
-    private void saveData(String data) {
-        DeviceData deviceData = new DeviceData();
-        deviceData.setDeviceId(this.deviceId);
-        deviceData.setTimestamp(new Date());
-        deviceData.setData(data);
-        deviceDataDao.createDeviceData(deviceData);
+        return collectedData;
     }
 
     public void schedule() {
@@ -92,7 +85,11 @@ public class Sensor {
         @SneakyThrows
         @Override
         public void execute(JobExecutionContext context) {
-            sensor.collectData();
+            String collectedData = sensor.collectData();
+            if (collectedData != null) {
+                // TODO 保存数据的方式有待商榷
+                sensor.deviceDataDao.saveDeviceData(sensor.deviceId, "\"" + sensor.name + "\":" + collectedData);
+            }
         }
     }
 }

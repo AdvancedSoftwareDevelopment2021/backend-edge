@@ -43,10 +43,8 @@ public class ModbusCollector extends DataCollector {
     @Override
     public String execute(String id) {
         try {
-            String collectedData = modbusUtil.collectData(id, ip, port, slaveId, offset, num, COIL_STATUS, datatype);
-            System.out.println(collectedData);
-            System.out.println("---------------\n");
-            return collectedData;
+//            return modbusUtil.collectData(id, ip, port, slaveId, offset, num, COIL_STATUS, datatype);
+            return modbusUtil.collectData(id, ip, port, slaveId, offset, num, modbusFunction, datatype);
         } catch (ModbusTransportException e) {
             log.warn("收集数据出错，error: " + e.getMessage());
             return null;
