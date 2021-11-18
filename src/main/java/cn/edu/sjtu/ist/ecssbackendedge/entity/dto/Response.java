@@ -1,12 +1,21 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
 
+import lombok.Data;
+
+/**
+ * @brief 标准返回类
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-18
+ */
+@Data
 public class Response {
 
-    private Integer code;
+    private final Integer code;
 
-    private String message;
+    private final String message;
 
-    private Object object;
+    private final Object object;
 
     public Response(Integer code, String message, Object object) {
         this.code = code;
@@ -16,6 +25,10 @@ public class Response {
 
     @Override
     public String toString() {
-        return "code=" + code + ", message=" + message + ", response=" + object.toString();
+        return "{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                ", object=" + object +
+                '}';
     }
 }
