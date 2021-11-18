@@ -39,6 +39,7 @@ public class DevicePO {
     /**
      * 设备描述，可有可无
      */
+    @Field
     private String description;
 
     /**

@@ -23,12 +23,6 @@ public class DeviceController {
     @Autowired
     private DeviceService deviceService;
 
-    // test
-    @GetMapping(value = "/hello")
-    public ResponseEntity<?> getDevice() {
-        return new ResponseEntity<>("hello, device!", HttpStatus.OK);
-    }
-
     @PostMapping(value = "")
     public ResponseEntity<?> insertDevice(@RequestBody DeviceDTO deviceDTO) {
         System.out.println(deviceDTO);

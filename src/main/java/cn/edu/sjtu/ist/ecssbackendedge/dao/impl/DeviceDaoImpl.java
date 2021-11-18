@@ -49,6 +49,20 @@ public class DeviceDaoImpl implements DeviceDao {
     }
 
     @Override
+    public List<Device> findDeviceAll(){
+        List<DevicePO> devicePOList = deviceRepository.findAll();
+        List<Device> deviceList = new ArrayList<>();
+        for(DevicePO devicePO : devicePOList){
+            Device device = new Device();
+            device.setId(devicePO.getId());
+            device.setName(devicePO.getName());
+            device.setModel(devicePO.getModel());
+            deviceList.add(device);
+        }
+        return deviceList;
+    }
+
+    @Override
     public Device findDeviceById(String id) {
         DevicePO devicePO = deviceRepository.findDeviceById(id);
         Device device = deviceUtil.convertPO2Domain(devicePO);

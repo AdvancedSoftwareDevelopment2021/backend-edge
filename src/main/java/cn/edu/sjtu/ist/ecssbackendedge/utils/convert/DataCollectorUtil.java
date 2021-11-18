@@ -25,7 +25,7 @@ public class DataCollectorUtil {
 
     public DataCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
         DataCollector dataCollector = null;
-        MessageProtocol protocol = MessageProtocol.fromString(dataCollectorPO.getProtocol());
+        MessageProtocol protocol = MessageProtocol.fromString(dataCollectorPO.getType());
         switch (Objects.requireNonNull(protocol)) {
             case MODBUS:
                 ModbusCollector collector = (new ModbusCollectorPO()).convertPO2Domain(dataCollectorPO);
@@ -42,20 +42,7 @@ public class DataCollectorUtil {
     }
 
     public DataCollectorPO convertDomain2PO(DataCollector dataCollector) {
-        DataCollectorPO dataCollectorPO = null;
-        MessageProtocol protocol = MessageProtocol.fromString(dataCollector.getProtocol());
-        switch (Objects.requireNonNull(protocol)) {
-            case MODBUS:
-                ModbusCollectorPO collectorPO = new ModbusCollectorPO();
-                dataCollectorPO = collectorPO.convertDomain2PO(dataCollector);
-            case ZIGBEE:
-            case CANBUS:
-            case HTTP:
-                break;
-            default:
-                break;
-        }
-        return dataCollectorPO;
+        return dataCollector.convertDomain2PO();
     }
 
 }

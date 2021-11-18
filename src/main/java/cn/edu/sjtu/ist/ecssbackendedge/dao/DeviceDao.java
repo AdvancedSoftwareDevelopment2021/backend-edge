@@ -20,6 +20,8 @@ public interface DeviceDao {
 
     Device findDeviceById(String id);
 
+    List<Device> findDeviceAll();
+
     List<Device> findDeviceByName(String name);
 
     List<Device> findAllDevices();

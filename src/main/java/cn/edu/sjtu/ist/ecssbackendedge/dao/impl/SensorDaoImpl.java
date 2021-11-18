@@ -8,7 +8,6 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.SensorRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.CollectSchedulerUtil;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DataCollectorUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.SensorUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,9 +40,6 @@ public class SensorDaoImpl implements SensorDao {
     private SensorUtil sensorUtil;
 
     @Autowired
-    private DataCollectorUtil dataCollectorUtil;
-
-    @Autowired
     private CollectSchedulerUtil collectSchedulerUtil;
 
     @Override
@@ -68,7 +64,7 @@ public class SensorDaoImpl implements SensorDao {
         res.setName(sensor.getName());
         res.setStatus(sensor.getStatus());
         res.setCollectorScheduler(collectSchedulerUtil.convertDomain2PO(sensor.getCollectorScheduler()));
-        res.setDataCollector(dataCollectorUtil.convertDomain2PO(sensor.getDataCollector()));
+        res.setDataCollector(sensor.getDataCollector().convertDomain2PO());
         sensorRepository.save(res);
     }
 

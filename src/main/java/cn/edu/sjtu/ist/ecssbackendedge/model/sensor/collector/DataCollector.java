@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
@@ -16,9 +17,9 @@ import lombok.*;
 })
 public abstract class DataCollector {
 
-    private String protocol;
-
     public abstract String execute(String id) throws Exception;
 
     protected abstract void verify();
+
+    public abstract DataCollectorPO convertDomain2PO();
 }

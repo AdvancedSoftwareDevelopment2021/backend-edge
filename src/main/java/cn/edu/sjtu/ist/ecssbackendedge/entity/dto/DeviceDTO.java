@@ -15,7 +15,7 @@ import java.util.List;
 public class DeviceDTO {
 
     /**
-     * 设备数据id
+     * 设备id
      */
     private String id;
 
