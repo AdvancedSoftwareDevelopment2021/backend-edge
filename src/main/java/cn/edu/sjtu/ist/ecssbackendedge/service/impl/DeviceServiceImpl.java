@@ -5,13 +5,13 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
 
+
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Slf4j
 @Service
@@ -25,8 +25,6 @@ public class DeviceServiceImpl implements DeviceService {
         Device device = new Device();
         device.setName(deviceDTO.getName());
         device.setModel(deviceDTO.getModel());
-        log.info(Objects.requireNonNull(MessageProtocol.fromString(deviceDTO.getMessageProtocol())).getProtocol());
-        device.setMessageProtocol(MessageProtocol.fromString(deviceDTO.getMessageProtocol()));
         deviceDao.createDevice(device);
         return new Response(200, "OK", "insert ok!");
     }
@@ -43,7 +41,6 @@ public class DeviceServiceImpl implements DeviceService {
         device.setId(id);
         device.setName(deviceDTO.getName());
         device.setModel(deviceDTO.getModel());
-        device.setMessageProtocol(MessageProtocol.fromString(deviceDTO.getMessageProtocol()));
         deviceDao.modifyDevice(device);
         return new Response(200, "OK", "update ok!");
     }
@@ -55,7 +52,20 @@ public class DeviceServiceImpl implements DeviceService {
         deviceDTO.setId(device.getId());
         deviceDTO.setName(device.getName());
         deviceDTO.setModel(device.getModel());
-        deviceDTO.setMessageProtocol(device.getMessageProtocol().getProtocol());
         return new Response(200, "OK", device);
+    }
+
+    @Override
+    public Response getDeviceAll(){
+        List<Device> deviceList = deviceDao.findDeviceAll();
+        List<DeviceDTO> deviceDTOList = new ArrayList<>();
+        for(Device device : deviceList){
+            DeviceDTO deviceDTO = new DeviceDTO();
+            deviceDTO.setId(device.getId());
+            deviceDTO.setName(device.getName());
+            deviceDTO.setModel(device.getModel());
+            deviceDTOList.add(deviceDTO);
+        }
+        return  new Response(200, "OK", deviceDTOList);
     }
 }

@@ -13,9 +13,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class DataCollectorPO {
 
-    private String protocol;
-
-    public abstract DataCollectorPO convertDomain2PO(DataCollector collector);
+    private String type;
 
     public abstract DataCollector convertPO2Domain(DataCollectorPO collectorPO);
 

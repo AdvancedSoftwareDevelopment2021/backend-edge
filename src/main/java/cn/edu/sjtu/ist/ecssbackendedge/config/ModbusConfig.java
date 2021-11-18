@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import com.serotonin.modbus4j.ip.IpParameters;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author dyanjun
@@ -25,11 +25,11 @@ public class ModbusConfig {
 
     @Autowired
     @Qualifier("modbusMasterHashMap")
-    private HashMap<String, ModbusMaster> masterMap;
+    private ConcurrentHashMap<String, ModbusMaster> masterMap;
 
     @Bean
-    public HashMap<String, ModbusMaster> modbusMasterHashMap() {
-        return new HashMap<>();
+    public ConcurrentHashMap<String, ModbusMaster> modbusMasterHashMap() {
+        return new ConcurrentHashMap<>();
     }
 
     /**

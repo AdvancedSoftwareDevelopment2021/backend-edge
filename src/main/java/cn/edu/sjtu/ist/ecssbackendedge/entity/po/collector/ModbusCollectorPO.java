@@ -30,27 +30,10 @@ public class ModbusCollectorPO extends DataCollectorPO {
     private String datatype; //TODO
 
     @Override
-    public ModbusCollectorPO convertDomain2PO(DataCollector dataCollector) {
-        ModbusCollector collector = (ModbusCollector)dataCollector;
-        ModbusCollectorPO collectorPO = new ModbusCollectorPO();
-
-        collectorPO.setProtocol(collector.getProtocol());
-        collectorPO.setIp(collector.getIp());
-        collectorPO.setPort(collector.getPort());
-        collectorPO.setModbusFunction(collector.getModbusFunction());
-        collectorPO.setDatatype(collector.getDatatype());
-        collectorPO.setNum(collector.getNum());
-        collectorPO.setOffset(collector.getOffset());
-        collectorPO.setSlaveId(collector.getSlaveId());
-        return collectorPO;
-    }
-
-    @Override
     public ModbusCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
         ModbusCollectorPO collectorPO = (ModbusCollectorPO)dataCollectorPO;
         ModbusCollector collector = new ModbusCollector();
 
-        collector.setProtocol(collectorPO.getProtocol());
         collector.setIp(collectorPO.getIp());
         collector.setPort(collectorPO.getPort());
         collector.setModbusFunction(collectorPO.getModbusFunction());

@@ -32,9 +32,12 @@ public class DeviceRepository {
         Update update = new Update();
         update.set("name", devicePO.getName());
         update.set("model", devicePO.getModel());
-        update.set("messageProtocol", devicePO.getMessageProtocol());
 
         mongoTemplate.updateFirst(query, update, DevicePO.class);
+    }
+
+    public List<DevicePO>  findDeviceAll() {
+        return mongoTemplate.findAll(DevicePO.class);
     }
 
     public DevicePO findDeviceById(String id) {
