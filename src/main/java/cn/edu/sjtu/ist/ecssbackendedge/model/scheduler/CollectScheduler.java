@@ -1,6 +1,5 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.scheduler;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.scheduler.CollectSchedulerPO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,21 +18,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CollectScheduler {
-    private String id;
 
     private int interval;
 
     private TimeUnit unit;
 
     private Date startTime;
-
-    public CollectSchedulerPO convert2PO() {
-        CollectSchedulerPO res = new CollectSchedulerPO();
-        res.setInterval(this.interval);
-        res.setUnit(this.unit);
-        res.setStartTime(startTime);
-        return res;
-    }
 
     public Trigger generateTrigger() {
         CalendarIntervalScheduleBuilder scheduleBuilder = CalendarIntervalScheduleBuilder.calendarIntervalSchedule();

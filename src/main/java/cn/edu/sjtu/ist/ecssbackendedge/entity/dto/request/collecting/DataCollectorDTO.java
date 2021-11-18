@@ -1,9 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collecting.DataCollectorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.dataCollecting.collector.ModbusFunction;
+import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction;
 import lombok.Data;
-import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 
@@ -29,9 +27,4 @@ public class DataCollectorDTO implements Serializable {
 
     Integer num;
 
-    public DataCollectorPO convert2PO() {
-        DataCollectorPO res = new DataCollectorPO();
-        BeanUtils.copyProperties(this, res);
-        return res;
-    }
 }
