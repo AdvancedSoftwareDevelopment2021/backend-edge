@@ -1,19 +1,29 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.DeviceStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceStatusPO;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceStatusRepository;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceStatusUtil;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * @brief 设备状态DaoImpl
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-19
+ */
 @Slf4j
 @Component
 public class DeviceStatusDaoImpl implements DeviceStatusDao {
+
+    @Autowired
+    private DeviceStatusUtil deviceStatusUtil;
 
     @Autowired
     private DeviceStatusRepository deviceStatusRepository;
@@ -29,10 +39,7 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
             return false;
         }
 
-        DeviceStatusPO deviceStatusPO = new DeviceStatusPO();
-        deviceStatusPO.setDevice(devicePO);
-        deviceStatusPO.setTimestamp(deviceStatus.getTimestamp());
-        deviceStatusPO.setStatus(deviceStatus.getStatus());
+        DeviceStatusPO deviceStatusPO = deviceStatusUtil.convertDomain2PO(deviceStatus);
         deviceStatusRepository.save(deviceStatusPO);
         return true;
     }
@@ -44,33 +51,25 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
 
     @Override
     public boolean modifyDeviceStatus(DeviceStatus deviceStatus) {
-        DeviceStatusPO deviceStatusPO = deviceStatusRepository.findDeviceStatusById(deviceStatus.getId());
-        if (deviceStatusPO == null) {
-            log.info("device status id=" + deviceStatus.getId() + " not exists!");
-            return true;
-        }
         DevicePO devicePO = deviceRepository.findDeviceById(deviceStatus.getDeviceId());
         if (devicePO == null) {
-            log.info("device status id=" + deviceStatus.getId() + ", device id=" + deviceStatus.getDeviceId() +" not exists!");
+            log.info("设备状态id=" + deviceStatus.getId() + ", 设备id=" + deviceStatus.getDeviceId() +"不存在!");
             return false;
         }
 
-        deviceStatusPO.setDevice(devicePO);
-        deviceStatusPO.setTimestamp(deviceStatus.getTimestamp());
-        deviceStatusPO.setStatus(deviceStatus.getStatus());
-        deviceStatusRepository.modifyDeviceStatus(deviceStatusPO);
+        DeviceStatusPO deviceStatusPO = deviceStatusRepository.findDeviceStatusById(deviceStatus.getId());
+        if (deviceStatusPO == null) {
+            deviceStatusPO = deviceStatusUtil.convertDomain2PO(deviceStatus);
+            deviceStatusRepository.save(deviceStatusPO);
+        }
+        log.info("设备状态id=" + deviceStatus.getId() + " 不存在!");
         return true;
     }
 
     @Override
     public DeviceStatus findDeviceStatusById(String id) {
         DeviceStatusPO deviceStatusPO = deviceStatusRepository.findDeviceStatusById(id);
-        DeviceStatus deviceStatus = new DeviceStatus();
-        deviceStatus.setId(deviceStatusPO.getId());
-        deviceStatus.setDeviceId(deviceStatusPO.getDevice().getId());
-        deviceStatus.setTimestamp(deviceStatusPO.getTimestamp());
-        deviceStatus.setStatus(deviceStatusPO.getStatus());
-        return deviceStatus;
+        return deviceStatusUtil.convertPO2Domain(deviceStatusPO);
     }
 
 }

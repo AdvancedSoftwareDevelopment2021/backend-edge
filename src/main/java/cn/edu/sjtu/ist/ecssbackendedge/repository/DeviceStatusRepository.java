@@ -7,55 +7,29 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @brief 设备状态repository
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-08
+ */
 @Component
-public class DeviceStatusRepository {
+public interface DeviceStatusRepository extends MongoRepository<DeviceStatusPO, String> {
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
+    void deleteDeviceStatusPOSByDeviceId(String deviceId);
 
-    public void save(DeviceStatusPO deviceStatusPO) {
-        mongoTemplate.insert(deviceStatusPO);
-    }
+    void deleteDeviceStatusById(String id);
 
-    public void deleteDeviceStatusByDevice_Id(String deviceId) {
-        Query query = new Query(Criteria.where("deviceId").is(deviceId));
-        mongoTemplate.remove(query, DeviceStatusPO.class);
-    }
+    DeviceStatusPO findDeviceStatusById(String id);
 
-    public void deleteDeviceStatusById(String id) {
-        Query query = new Query(Criteria.where("id").is(id));
-        mongoTemplate.remove(query, DeviceStatusPO.class);
-    }
+    List<DeviceStatusPO> findDeviceStatusPOSByDeviceId(String deviceId);
 
-    public void modifyDeviceStatus(DeviceStatusPO deviceStatusPO) {
-        Query query = new Query(Criteria.where("id").is(deviceStatusPO.getId()));
-
-        Update update = new Update();
-        update.set("device", deviceStatusPO.getDevice());
-        update.set("timestamp", deviceStatusPO.getTimestamp());
-        update.set("status", deviceStatusPO.getStatus());
-
-        mongoTemplate.updateFirst(query, update, DeviceStatusPO.class);
-    }
-
-    public DeviceStatusPO findDeviceStatusById(String id) {
-        Query query = new Query(Criteria.where("id").is(id));
-        return mongoTemplate.findOne(query, DeviceStatusPO.class);
-    }
-
-    public List<DeviceStatusPO> findDeviceStatusByTimestampBeforeAndTimestampAfter(Date before, Date after) {
-        Query query = new Query(Criteria.where("timestamp").gte(after).lte(before));
-        return mongoTemplate.find(query, DeviceStatusPO.class);
-    }
-
-    public List<DeviceStatusPO> findDeviceStatusByDevice_Id(String deviceId) {
-        Query query = new Query(Criteria.where("deviceId").is(deviceId));
-        return mongoTemplate.find(query, DeviceStatusPO.class);
-    }
+    List<DeviceStatusPO> findDeviceStatusPOSByTimestampBeforeAndTimestampAfter(Date before, Date after);
 
 }

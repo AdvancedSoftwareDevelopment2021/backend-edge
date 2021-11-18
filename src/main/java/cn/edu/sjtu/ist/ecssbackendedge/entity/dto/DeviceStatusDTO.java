@@ -5,7 +5,10 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * 设备的实时状态数据
+ * @brief 设备状态DTO
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-08
  */
 @Data
 public class DeviceStatusDTO {
