@@ -1,7 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.repository;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor.SensorPO;
-import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

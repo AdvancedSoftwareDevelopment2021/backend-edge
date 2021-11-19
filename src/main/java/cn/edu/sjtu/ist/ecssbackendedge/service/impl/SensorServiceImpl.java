@@ -3,7 +3,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting.SensorRequest;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DataEntry;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;

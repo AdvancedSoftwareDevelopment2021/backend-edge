@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting.SensorRequest;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 
 /**

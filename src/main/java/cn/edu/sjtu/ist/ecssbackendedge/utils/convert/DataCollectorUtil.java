@@ -1,8 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.HttpCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ModbusCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.HttpCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.ModbusCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
@@ -28,13 +30,15 @@ public class DataCollectorUtil {
         MessageProtocol protocol = MessageProtocol.fromString(dataCollectorPO.getType());
         switch (Objects.requireNonNull(protocol)) {
             case MODBUS:
-                ModbusCollector collector = (new ModbusCollectorPO()).convertPO2Domain(dataCollectorPO);
-                collector.setModbusUtil(modbusUtil);
-                return collector;
+                ModbusCollector modbusCollector = (new ModbusCollectorPO()).convertPO2Domain(dataCollectorPO);
+                modbusCollector.setModbusUtil(modbusUtil);
+                return modbusCollector;
             case ZIGBEE:
             case CANBUS:
-            case HTTP:
                 break;
+            case HTTP:
+                HttpCollector httpCollector = (new HttpCollectorPO()).convertPO2Domain(dataCollectorPO);
+                return httpCollector;
             default:
                 break;
         }
