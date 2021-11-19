@@ -51,10 +51,10 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
 
         try {
             sessionPool.insertRecord(tableName, (new Date()).getTime(), measurements, values);
-            log.info(String.format("iotdb: 插入数据成功！ 表名=%s", tableName));
+            log.info(String.format("iotdb: 插入设备数据成功！ 表名=%s", tableName));
         } catch (IoTDBConnectionException | StatementExecutionException e) {
-            log.error(String.format("iotdb: 插入数据数据失败，设备id=%s，数据=%s", deviceId, data));
-            throw new RuntimeException("iotdb: 插入数据数据失败，报错信息：" + e.getMessage() );
+            log.error(String.format("iotdb: 插入设备数据失败，设备id=%s，数据=%s", deviceId, data));
+            throw new RuntimeException("iotdb: 插入设备数据失败，报错信息：" + e.getMessage() );
         }
     }
 
@@ -70,10 +70,10 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
         List<String> values = Arrays.asList(deviceData.getDeviceId(), deviceData.getSensorName(), deviceData.getData());
         try {
             sessionPool.insertRecord(tableName, deviceData.getTimestamp().getTime(), measurements, values);
-            log.info(String.format("iotdb: 插入数据数据成功！表名=%s", tableName));
+            log.info(String.format("iotdb: 插入设备数据成功！表名=%s", tableName));
         } catch (IoTDBConnectionException | StatementExecutionException e) {
-            log.error(String.format("iotdb: 插入数据数据报错，设备id=%s, 数据=%s", deviceData.getDeviceId(), deviceData.getData()));
-            throw new RuntimeException("iotdb: 插入数据数据失败，报错信息：" + e.getMessage());
+            log.error(String.format("iotdb: 插入设备数据报错，设备id=%s, 数据=%s", deviceData.getDeviceId(), deviceData.getData()));
+            throw new RuntimeException("iotdb: 插入设备数据失败，报错信息：" + e.getMessage());
         }
         return true;
     }
@@ -122,16 +122,15 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
             String sql = IotdbDeviceDataUtil.sqlToSelectLatestData(deviceId, sensorName);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
-            session.close();
-
             SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
-            dataIterator.next(); // 跳过表头的属性项
+            dataIterator.next();
 
             res.setDeviceId(deviceId);
             res.setSensorName(sensorName);
             res.setTimestamp(dataIterator.getTimestamp("Time"));
             res.setData(dataIterator.getString(IotdbDeviceDataUtil.getDeviceDataTimeSeries(deviceId) + ".data"));
 
+            session.close();
             log.info(String.format("iotdb: 查询最新数据成功！设备id=%s, sensor名称=%s的最新数据: %s", deviceId,  sensorName, res));
             return res;
         }catch (IoTDBConnectionException | StatementExecutionException e){
@@ -157,11 +156,7 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
             String sql = IotdbDeviceDataUtil.sqlToSelectDeviceData(deviceId, sensorName, startTime, endTime);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
-            session.close();
-
             SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
-            dataIterator.next();
-
             while (dataIterator.next()) {
                 DeviceData data = new DeviceData();
                 data.setDeviceId(deviceId);
@@ -170,7 +165,8 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
                 data.setData(dataIterator.getString(IotdbDeviceDataUtil.getDeviceDataTimeSeries(deviceId) + ".data"));
                 res.add(data);
             }
-            log.info(String.format("iotdb: 查询所有历史数据失败，设备id=%s, sensor名称=%s, 返回数据数量%d", deviceId, sensorName, res.size()));
+            session.close();
+            log.info(String.format("iotdb: 查询所有历史数据成功，设备id=%s, sensor名称=%s, 返回数据数量%d", deviceId, sensorName, res.size()));
             return res;
         }catch (IoTDBConnectionException | StatementExecutionException e){
             log.error(String.format("iotdb: 查询所有历史数据失败，设备id=%s, sensor名称=%s", deviceId, sensorName));

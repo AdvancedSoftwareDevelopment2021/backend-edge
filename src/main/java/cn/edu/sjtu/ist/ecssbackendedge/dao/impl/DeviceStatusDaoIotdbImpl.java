@@ -47,8 +47,8 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
             sessionPool.insertRecord(tableName, (new Date()).getTime(), measurements, values);
             log.info(String.format("iotdb: 插入状态成功！ 表名=%s", tableName));
         } catch (IoTDBConnectionException | StatementExecutionException e) {
-            log.error(String.format("iotdb: 插入状态数据失败，设备id=%s，状态=%s", deviceId, status));
-            throw new RuntimeException("iotdb: 插入状态数据失败，报错信息：" + e.getMessage() );
+            log.error(String.format("iotdb: 插入设备状态失败，设备id=%s，状态=%s", deviceId, status));
+            throw new RuntimeException("iotdb: 插入设备状态失败，报错信息：" + e.getMessage() );
         }
     }
 
@@ -64,10 +64,10 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
         List<String> values = Arrays.asList(deviceStatus.getDeviceId(), deviceStatus.getSensorName(), deviceStatus.getStatus());
         try {
             sessionPool.insertRecord(tableName, deviceStatus.getTimestamp().getTime(), measurements, values);
-            log.info(String.format("iotdb: 插入状态数据成功！表名=%s", tableName));
+            log.info(String.format("iotdb: 插入设备状态成功！表名=%s", tableName));
         } catch (IoTDBConnectionException | StatementExecutionException e) {
-            log.error(String.format("iotdb: 插入状态数据报错，设备id=%s, 状态=%s", deviceStatus.getDeviceId(), deviceStatus.getStatus()));
-            throw new RuntimeException("iotdb: 插入状态数据失败，报错信息：" + e.getMessage());
+            log.error(String.format("iotdb: 插入设备状态报错，设备id=%s, 状态=%s", deviceStatus.getDeviceId(), deviceStatus.getStatus()));
+            throw new RuntimeException("iotdb: 插入设备状态失败，报错信息：" + e.getMessage());
         }
         return true;
     }
@@ -116,16 +116,15 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
             String sql = IotdbDeviceStatusUtil.sqlToSelectLatestStatus(deviceId, sensorName);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
-            session.close();
-
             SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
-            dataIterator.next(); // 跳过表头的属性项
+            dataIterator.next();
 
             res.setDeviceId(deviceId);
             res.setSensorName(sensorName);
             res.setTimestamp(dataIterator.getTimestamp("Time"));
             res.setStatus(dataIterator.getString(IotdbDeviceStatusUtil.getDeviceStatusTimeSeries(deviceId) + ".status"));
 
+            session.close();
             log.info(String.format("iotdb: 查询最新状态成功！设备id=%s, sensor名称=%s的最新状态: %s", deviceId,  sensorName, res));
             return res;
         }catch (IoTDBConnectionException | StatementExecutionException e){
@@ -151,11 +150,7 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
             String sql = IotdbDeviceStatusUtil.sqlToSelectDeviceStatus(deviceId, sensorName, startTime, endTime);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
-            session.close();
-
             SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
-            dataIterator.next();
-
             while (dataIterator.next()) {
                 DeviceStatus status = new DeviceStatus();
                 status.setDeviceId(deviceId);
@@ -164,11 +159,12 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
                 status.setStatus(dataIterator.getString(IotdbDeviceStatusUtil.getDeviceStatusTimeSeries(deviceId) + ".status"));
                 res.add(status);
             }
-            log.info(String.format("iotdb: 查询所有历史数据失败，设备id=%s, sensor名称=%s, 返回状态数量%d", deviceId, sensorName, res.size()));
+            session.close();
+            log.info(String.format("iotdb: 查询所有历史状态成功，设备id=%s, sensor名称=%s, 返回状态数量%d", deviceId, sensorName, res.size()));
             return res;
         }catch (IoTDBConnectionException | StatementExecutionException e){
-            log.error(String.format("iotdb: 查询所有历史数据失败，设备id=%s, sensor名称=%s", deviceId, sensorName));
-            throw new RuntimeException("iotdb: 查询所有历史数据失败，报错信息：" + e.getMessage());
+            log.error(String.format("iotdb: 查询所有历史状态失败，设备id=%s, sensor名称=%s", deviceId, sensorName));
+            throw new RuntimeException("iotdb: 查询所有历史状态失败，报错信息：" + e.getMessage());
         }
     }
 }

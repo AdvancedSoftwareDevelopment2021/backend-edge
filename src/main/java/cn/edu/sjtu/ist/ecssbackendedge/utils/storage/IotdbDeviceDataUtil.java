@@ -39,8 +39,8 @@ public class IotdbDeviceDataUtil {
      * @param endTime 结束时间
      */
     public static String sqlToSelectDeviceData(String deviceId, String sensorName, String startTime, String endTime) {
-        String sql = String.format("select * from %s where sensorName=\"%s\"", getDeviceDataTimeSeries(deviceId), sensorName);
-        sql = String.format("%s where timestamp > %s and timestamp < %s", sql, startTime, endTime);
+        String sql = String.format("select * from %s", getDeviceDataTimeSeries(deviceId));
+        sql = String.format("%s where sensorName=\"%s\" and timestamp > %s and timestamp < %s", sql, sensorName, startTime, endTime);
         log.info(sql);
         return sql;
     }
