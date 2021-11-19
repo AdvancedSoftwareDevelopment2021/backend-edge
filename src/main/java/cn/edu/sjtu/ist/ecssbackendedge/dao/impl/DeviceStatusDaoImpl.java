@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
+
 /**
  * @brief 设备状态DaoImpl
  * @author rsp
@@ -64,6 +66,15 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
         }
         log.info("设备状态id=" + deviceStatus.getId() + " 不存在!");
         return true;
+    }
+
+    @Override
+    public void saveDeviceStatus(String deviceId, String status) {
+        DeviceStatusPO po = new DeviceStatusPO();
+        po.setDeviceId(deviceId);
+        po.setTimestamp(new Date());
+        po.setStatus(status);
+        deviceStatusRepository.save(po);
     }
 
     @Override

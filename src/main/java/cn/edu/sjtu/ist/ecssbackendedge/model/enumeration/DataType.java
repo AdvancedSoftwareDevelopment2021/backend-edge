@@ -31,8 +31,8 @@ public enum DataType {
     }
 
     /**
-     * 从字符串转为文本
-     * @param text 文本
+     * 从字符串表示转为枚举
+     * @param text 字符串表示
      */
     public static DataType fromString(String text) {
         for (DataType b : DataType.values()) {

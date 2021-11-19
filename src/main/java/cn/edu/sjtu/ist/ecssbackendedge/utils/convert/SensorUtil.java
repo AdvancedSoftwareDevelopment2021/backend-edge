@@ -1,5 +1,9 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
+import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor.SensorPO;
@@ -24,11 +28,27 @@ public class SensorUtil {
     @Autowired
     private DataCollectorUtil dataCollectorUtil;
 
+    @Autowired
+    private QuartzScheduler quartzScheduler;
+
+    @Autowired
+    private DeviceDataDao deviceDataDao;
+
+    @Autowired
+    private DeviceStatusDao deviceStatusDao;
+
+    @Autowired
+    private SensorDao sensorDao;
+
     public Sensor convertRequestDTO2Domain(SensorRequest request) {
         Sensor res = new Sensor();
         res.setName(request.getName());
         res.setCollectorScheduler(request.getCollectScheduler());
         res.setDataCollector(request.getDataCollector());
+        res.setQuartzScheduler(quartzScheduler);
+        res.setSensorDao(sensorDao);
+        res.setDeviceDataDao(deviceDataDao);
+        res.setDeviceStatusDao(deviceStatusDao);
         return res;
     }
 
@@ -51,6 +71,10 @@ public class SensorUtil {
         res.setStatus(sensorPO.getStatus());
         res.setCollectorScheduler(collectSchedulerUtil.convertPO2Domain(sensorPO.getCollectorScheduler()));
         res.setDataCollector(dataCollectorUtil.convertPO2Domain(sensorPO.getDataCollector()));
+        res.setQuartzScheduler(quartzScheduler);
+        res.setSensorDao(sensorDao);
+        res.setDeviceDataDao(deviceDataDao);
+        res.setDeviceStatusDao(deviceStatusDao);
         return res;
     }
 

@@ -1,11 +1,12 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.sensor;
 
-import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 
 import lombok.Data;
 import lombok.Setter;
@@ -39,7 +40,9 @@ public class Sensor {
 
     private DeviceDataDao deviceDataDao;
 
-    private String collectData() throws Exception {
+    private DeviceStatusDao deviceStatusDao;
+
+    private String collectData() {
         log.info("开始采集数据项{}", this.name);
         this.status = Status.RUNNING;
         this.sensorDao.updateSensorStatus(this.id, this.status);
@@ -67,6 +70,7 @@ public class Sensor {
         Trigger trigger = collectorScheduler.generateTrigger();
         try {
             this.quartzScheduler.getScheduler().scheduleJob(job, trigger);
+            log.info("sensor " + name + "开启成功！");
         } catch (SchedulerException e) {
             throw new RuntimeException("数据采集任务调度失败", e);
         }
@@ -74,6 +78,7 @@ public class Sensor {
 
     public void stopSchedule() throws SchedulerException {
         quartzScheduler.getScheduler().deleteJob(JobKey.jobKey(id));
+        log.info("sensor " + name + "关闭成功！");
     }
 
     public static class CollectDataJob implements Job {
@@ -84,10 +89,11 @@ public class Sensor {
         @Override
         public void execute(JobExecutionContext context) {
             String collectedData = sensor.collectData();
-            if (collectedData != null) {
+            if (collectedData != null && !collectedData.equals("null")) {
                 // TODO 保存数据的方式有待商榷
                 sensor.deviceDataDao.saveDeviceData(sensor.deviceId, "\"" + sensor.name + "\":" + collectedData);
             }
+            sensor.deviceStatusDao.saveDeviceStatus(sensor.deviceId, sensor.status.getType());
         }
     }
 }

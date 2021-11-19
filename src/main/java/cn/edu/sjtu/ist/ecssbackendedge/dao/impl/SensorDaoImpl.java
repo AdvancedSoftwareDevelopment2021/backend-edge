@@ -1,7 +1,5 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor.SensorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
@@ -28,13 +26,7 @@ import java.util.List;
 public class SensorDaoImpl implements SensorDao {
 
     @Autowired
-    private QuartzScheduler quartzScheduler;
-
-    @Autowired
     private SensorRepository sensorRepository;
-
-    @Autowired
-    private DeviceDataDao deviceDataDao;
 
     @Autowired
     private SensorUtil sensorUtil;
@@ -86,24 +78,13 @@ public class SensorDaoImpl implements SensorDao {
             throw new RuntimeException("数据采集过程不存在");
         }
 
-        Sensor sensor = sensorUtil.convertPO2Domain(po);
-        sensor.setQuartzScheduler(quartzScheduler);
-        sensor.setSensorDao(this);
-        sensor.setDeviceDataDao(deviceDataDao);
-        return sensor;
+        return sensorUtil.convertPO2Domain(po);
     }
 
     @Override
     public Sensor findSensorByDeviceIDAndName(String deviceId, String name) {
         SensorPO po = sensorRepository.findSensorPOByDeviceIdAndName(deviceId, name);
-        if (po != null) {
-            Sensor sensor = sensorUtil.convertPO2Domain(po);
-            sensor.setQuartzScheduler(quartzScheduler);
-            sensor.setSensorDao(this);
-            sensor.setDeviceDataDao(deviceDataDao);
-            return sensor;
-        }
-        return null;
+        return (po != null) ? sensorUtil.convertPO2Domain(po) : null;
     }
 
     @Override
@@ -112,9 +93,6 @@ public class SensorDaoImpl implements SensorDao {
         List<Sensor> res = new ArrayList<>();
         for (SensorPO sensorPO : sensors) {
             Sensor sensor = sensorUtil.convertPO2Domain(sensorPO);
-            sensor.setQuartzScheduler(quartzScheduler);
-            sensor.setSensorDao(this);
-            sensor.setDeviceDataDao(deviceDataDao);
             res.add(sensor);
         }
         return res;

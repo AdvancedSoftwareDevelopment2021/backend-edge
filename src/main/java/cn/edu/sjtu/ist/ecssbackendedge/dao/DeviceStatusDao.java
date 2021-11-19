@@ -16,6 +16,8 @@ public interface DeviceStatusDao {
 
     boolean modifyDeviceStatus(DeviceStatus deviceStatus);
 
+    void saveDeviceStatus(String deviceId, String status);
+
     DeviceStatus findDeviceStatusById(String id);
 
 }
