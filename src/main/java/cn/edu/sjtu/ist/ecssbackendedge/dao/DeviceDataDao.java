@@ -3,6 +3,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @brief 设备数据Dao
@@ -12,14 +13,16 @@ import java.util.Date;
  */
 public interface DeviceDataDao {
 
+    void saveDeviceData(String deviceId, String sensorName, String data);
+
     boolean createDeviceData(DeviceData deviceData);
 
-    void saveDeviceData(String deviceId, String data);
-
-    void removeDeviceDataById(String id);
+    void removeDeviceDataById(String deviceId, String startTime, String endTime);
 
     boolean modifyDeviceData(DeviceData deviceData);
 
-    DeviceData findDeviceDataById(String id);
+    DeviceData findLatestDeviceData(String deviceId, String sensorName);
+
+    List<DeviceData> findDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset);
 
 }

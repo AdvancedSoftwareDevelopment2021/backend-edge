@@ -10,9 +10,12 @@ import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @brief 设备数据DaoImpl
@@ -21,6 +24,7 @@ import java.util.Date;
  * @date 2021-11-19
  */
 @Slf4j
+@Profile("mongodb")
 @Component
 public class DeviceDataDaoImpl implements DeviceDataDao {
 
@@ -32,6 +36,15 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
 
     @Autowired
     private DeviceRepository deviceRepository;
+
+    @Override
+    public void saveDeviceData(String deviceId, String sensorName, String data) {
+        DeviceDataPO po = new DeviceDataPO();
+        po.setDeviceId(deviceId);
+        po.setTimestamp(new Date());
+        po.setData(data);
+        deviceDataRepository.save(po);
+    }
 
     @Override
     public boolean createDeviceData(DeviceData deviceData) {
@@ -47,18 +60,8 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     }
 
     @Override
-    public void saveDeviceData(String deviceId, String data) {
-        DeviceDataPO po = new DeviceDataPO();
-        po.setDeviceId(deviceId);
-        po.setTimestamp(new Date());
-        po.setData(data);
-        deviceDataRepository.save(po);
-    }
-
-    @Override
-    public void removeDeviceDataById(String id) {
-        log.info("id: " + id);
-        deviceDataRepository.deleteDeviceDataById(id);
+    public void removeDeviceDataById(String deviceId, String startTime, String endTime) {
+        // deviceDataRepository.deleteDeviceDataById(id);
     }
 
     @Override
@@ -79,8 +82,13 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     }
 
     @Override
-    public DeviceData findDeviceDataById(String id) {
-        DeviceDataPO deviceDataPO = deviceDataRepository.findDeviceDataById(id);
+    public DeviceData findLatestDeviceData(String deviceId, String sensorName) {
+        DeviceDataPO deviceDataPO = deviceDataRepository.findDeviceDataPOByDeviceIdAndSensorNameOrderByTimestamp(deviceId, sensorName);
         return deviceDataUtil.convertPO2Domain(deviceDataPO);
+    }
+
+    @Override
+    public List<DeviceData> findDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset) {
+        return new ArrayList<>();
     }
 }
