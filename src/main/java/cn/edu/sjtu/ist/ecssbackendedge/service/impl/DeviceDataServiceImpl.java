@@ -1,27 +1,33 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.model.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceDataService;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @brief 设备数据serviceImpl
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-08
+ */
 @Service
 public class DeviceDataServiceImpl implements DeviceDataService {
+
+    @Autowired
+    private DeviceDataUtil deviceDataUtil;
 
     @Autowired
     private DeviceDataDao deviceDataDao;
 
     @Override
     public Response insertDeviceData(DeviceDataDTO deviceDataDTO) {
-        DeviceData deviceData = new DeviceData();
-        deviceData.setDeviceId(deviceDataDTO.getDeviceId());
-        deviceData.setTimestamp(deviceDataDTO.getTimestamp());
-        deviceData.setData(deviceDataDTO.getData());
-
+        DeviceData deviceData = deviceDataUtil.convertDTO2Domain(deviceDataDTO);
         boolean ret = deviceDataDao.createDeviceData(deviceData);
         if (ret) {
             return new Response(200, "OK", "insert device data ok!");
@@ -38,11 +44,8 @@ public class DeviceDataServiceImpl implements DeviceDataService {
 
     @Override
     public Response updateDeviceData(String id, DeviceDataDTO deviceDataDTO) {
-        DeviceData deviceData = new DeviceData();
-        deviceData.setId(id);
-        deviceData.setDeviceId(deviceDataDTO.getDeviceId());
-        deviceData.setTimestamp(deviceDataDTO.getTimestamp());
-        deviceData.setData(deviceDataDTO.getData());
+        deviceDataDTO.setId(id);
+        DeviceData deviceData = deviceDataUtil.convertDTO2Domain(deviceDataDTO);
         if (deviceDataDao.modifyDeviceData(deviceData)) {
             return new Response(200, "OK", "update device data ok!");
         } else {
@@ -53,11 +56,7 @@ public class DeviceDataServiceImpl implements DeviceDataService {
     @Override
     public Response getDeviceData(String id) {
         DeviceData deviceData = deviceDataDao.findDeviceDataById(id);
-        DeviceDataDTO deviceDataDTO = new DeviceDataDTO();
-        deviceDataDTO.setId(deviceData.getId());
-        deviceDataDTO.setDeviceId(deviceData.getDeviceId());
-        deviceDataDTO.setTimestamp(deviceData.getTimestamp());
-        deviceDataDTO.setData(deviceData.getData());
+        DeviceDataDTO deviceDataDTO = deviceDataUtil.convertDomain2DTO(deviceData);
         return new Response(200, "OK", deviceDataDTO);
     }
 }

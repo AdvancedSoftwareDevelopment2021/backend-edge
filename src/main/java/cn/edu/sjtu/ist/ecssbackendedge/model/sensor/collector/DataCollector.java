@@ -17,7 +17,7 @@ import lombok.*;
 })
 public abstract class DataCollector {
 
-    public abstract String execute(String id) throws Exception;
+    public abstract String execute(String id);
 
     protected abstract void verify();
 

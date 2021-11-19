@@ -26,18 +26,18 @@ public class DeviceDataController {
         return new ResponseEntity<>(deviceDataService.insertDeviceData(deviceDataDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "")
-    public ResponseEntity<?> deleteDeviceData(@RequestParam(value = "id") String id) {
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteDeviceData(@PathVariable String id) {
         return new ResponseEntity<>(deviceDataService.deleteDeviceData(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> updateDeviceData(@RequestParam(value = "id") String id, @RequestBody DeviceDataDTO deviceDataDTO) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateDeviceData(@PathVariable String id, @RequestBody DeviceDataDTO deviceDataDTO) {
         return new ResponseEntity<>(deviceDataService.updateDeviceData(id, deviceDataDTO), HttpStatus.OK);
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> getDeviceData(@RequestParam(value = "id") String id) {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> getDeviceData(@PathVariable String id) {
         return new ResponseEntity<>(deviceDataService.getDeviceData(id), HttpStatus.OK);
     }
 }

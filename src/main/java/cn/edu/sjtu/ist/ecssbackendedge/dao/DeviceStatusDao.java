@@ -1,7 +1,13 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.DeviceStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
 
+/**
+ * @brief 设备状态Dao
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-06
+ */
 public interface DeviceStatusDao {
 
     boolean createDeviceStatus(DeviceStatus deviceStatus);
@@ -9,6 +15,8 @@ public interface DeviceStatusDao {
     void removeDeviceStatusById(String id);
 
     boolean modifyDeviceStatus(DeviceStatus deviceStatus);
+
+    void saveDeviceStatus(String deviceId, String status);
 
     DeviceStatus findDeviceStatusById(String id);
 

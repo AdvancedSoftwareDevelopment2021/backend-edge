@@ -1,20 +1,14 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector;
 
-import static cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction.COIL_STATUS;
-
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ModbusCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
 
 import com.serotonin.modbus4j.exception.ModbusTransportException;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.annotation.Resource;
 
 /**
  * @author dyanjun
@@ -45,9 +39,7 @@ public class ModbusCollector extends DataCollector {
     @Override
     public String execute(String id) {
         try {
-            String collectedData = modbusUtil.collectData(id, ip, port, slaveId, offset, num, modbusFunction, datatype);
-            System.out.println(collectedData);
-            return collectedData;
+            return modbusUtil.collectData(id, ip, port, slaveId, offset, num, modbusFunction, datatype);
         } catch (ModbusTransportException e) {
             log.warn("收集数据出错，error: " + e.getMessage());
             return null;

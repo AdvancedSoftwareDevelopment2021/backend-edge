@@ -1,9 +1,15 @@
-package cn.edu.sjtu.ist.ecssbackendedge.model;
+package cn.edu.sjtu.ist.ecssbackendedge.model.device;
 
 import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * @brief 设备数据
+ * @author rsp
+ * @version 0.1
+ * @date 2021-11-08
+ */
 @Data
 public class DeviceData {
 
