@@ -18,6 +18,7 @@ public class DeviceStatusUtil {
         DeviceStatus res = new DeviceStatus();
         res.setId(dto.getId());
         res.setDeviceId(dto.getDeviceId());
+        res.setSensorName(dto.getSensorName());
         res.setTimestamp(dto.getTimestamp());
         res.setStatus(dto.getStatus());
         return res;
@@ -27,6 +28,7 @@ public class DeviceStatusUtil {
         DeviceStatusDTO res = new DeviceStatusDTO();
         res.setId(domain.getId());
         res.setDeviceId(domain.getDeviceId());
+        res.setSensorName(domain.getSensorName());
         res.setTimestamp(domain.getTimestamp());
         res.setStatus(domain.getStatus());
         return res;
@@ -36,6 +38,7 @@ public class DeviceStatusUtil {
         DeviceStatus res = new DeviceStatus();
         res.setId(po.getId());
         res.setDeviceId(po.getDeviceId());
+        res.setSensorName(po.getSensorName());
         res.setTimestamp(po.getTimestamp());
         res.setStatus(po.getStatus());
         return res;
@@ -45,6 +48,7 @@ public class DeviceStatusUtil {
         DeviceStatusPO res = new DeviceStatusPO();
         res.setId(domain.getId());
         res.setDeviceId(domain.getDeviceId());
+        res.setSensorName(domain.getSensorName());
         res.setTimestamp(domain.getTimestamp());
         res.setStatus(domain.getStatus());
         return res;

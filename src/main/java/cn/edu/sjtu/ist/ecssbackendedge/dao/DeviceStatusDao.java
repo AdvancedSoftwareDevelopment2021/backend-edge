@@ -2,6 +2,8 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
 
+import java.util.List;
+
 /**
  * @brief 设备状态Dao
  * @author rsp
@@ -10,14 +12,16 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
  */
 public interface DeviceStatusDao {
 
+    void saveDeviceStatus(String deviceId, String sensorName, String status);
+
     boolean createDeviceStatus(DeviceStatus deviceStatus);
 
-    void removeDeviceStatusById(String id);
+    void removeDeviceStatusById(String deviceId, String startTime, String endTime);
 
     boolean modifyDeviceStatus(DeviceStatus deviceStatus);
 
-    void saveDeviceStatus(String deviceId, String status);
+    DeviceStatus findLatestDeviceStatus(String deviceId, String sensorName);
 
-    DeviceStatus findDeviceStatusById(String id);
+    List<DeviceStatus> findDeviceHistoryStatus(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset);
 
 }

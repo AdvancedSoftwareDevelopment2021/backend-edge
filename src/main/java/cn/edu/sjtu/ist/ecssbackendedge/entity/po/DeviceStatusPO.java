@@ -2,6 +2,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -15,6 +16,7 @@ import java.util.Date;
  * @date 2021-11-08
  */
 @Data
+@Profile("mongodb")
 @Document(collection = "device_status")
 public class DeviceStatusPO {
 
@@ -31,10 +33,16 @@ public class DeviceStatusPO {
     private String deviceId;
 
     /**
+     * 对应的sensor名称
+     */
+    @Field
+    private String sensorName;
+
+    /**
      * 对应时刻
      */
     @Field
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date timestamp;
 
     /**

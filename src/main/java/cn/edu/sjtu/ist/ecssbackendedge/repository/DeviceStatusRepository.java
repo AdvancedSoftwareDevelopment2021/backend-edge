@@ -28,6 +28,8 @@ public interface DeviceStatusRepository extends MongoRepository<DeviceStatusPO, 
 
     DeviceStatusPO findDeviceStatusById(String id);
 
+    DeviceStatusPO findDeviceStatusPOByDeviceIdAndSensorNameOrderByTimestamp(String deviceId, String sensorName);
+
     List<DeviceStatusPO> findDeviceStatusPOSByDeviceId(String deviceId);
 
     List<DeviceStatusPO> findDeviceStatusPOSByTimestampBeforeAndTimestampAfter(Date before, Date after);

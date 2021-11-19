@@ -1,18 +1,22 @@
-package cn.edu.sjtu.ist.ecssbackendedge.model.device;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.context.annotation.Profile;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @brief 设备状态PO
  * @author rsp
  * @version 0.1
- * @date 2021-11-08
+ * @date 2021-11-19
  */
 @Data
-public class DeviceStatus {
+@Profile("dev")
+public class DeviceStatusIotdbPO {
 
     /**
      * 状态数据id
@@ -25,7 +29,7 @@ public class DeviceStatus {
     private String deviceId;
 
     /**
-     * 对应的sensor名称
+     * 对应的senser名称
      */
     private String sensorName;
 
@@ -39,4 +43,8 @@ public class DeviceStatus {
      * 状态信息
      */
     private String status;
+
+    public static List<String> getMeasurements() {
+        return Arrays.asList("deviceId", "sensorName", "status");
+    }
 }

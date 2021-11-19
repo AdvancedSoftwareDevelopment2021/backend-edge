@@ -24,22 +24,28 @@ public class DeviceStatusController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<?> insertDevice(@RequestBody DeviceStatusDTO deviceStatusDTO) {
+    public ResponseEntity<?> insertDeviceStatus(@RequestBody DeviceStatusDTO deviceStatusDTO) {
         return new ResponseEntity<>(deviceStatusService.insertDeviceStatus(deviceStatusDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "")
-    public ResponseEntity<?> deleteDevice(@RequestParam(value = "id") String id) {
-        return new ResponseEntity<>(deviceStatusService.deleteDeviceStatus(id), HttpStatus.OK);
+    @DeleteMapping(value = "/history/{id}")
+    public ResponseEntity<?> deleteDeviceAllHistoryStatus(@PathVariable String id) {
+        return new ResponseEntity<>(deviceStatusService.deleteDeviceAllHistoryStatus(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "")
-    public ResponseEntity<?> updateDevice(@RequestParam(value = "id") String id, @RequestBody DeviceStatusDTO deviceStatusDTO) {
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> updateDevice(@PathVariable String id, @RequestBody DeviceStatusDTO deviceStatusDTO) {
         return new ResponseEntity<>(deviceStatusService.updateDeviceStatus(id, deviceStatusDTO), HttpStatus.OK);
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> getDevice(@RequestParam(value = "id") String id) {
-        return new ResponseEntity<>(deviceStatusService.getDeviceStatus(id), HttpStatus.OK);
+    @GetMapping(value = "/{id}/{sensorName}")
+    public ResponseEntity<?> getLatestDeviceStatus(@PathVariable String id, @PathVariable String sensorName) {
+        return new ResponseEntity<>(deviceStatusService.getLatestDeviceStatus(id, sensorName), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/history/{id}/{sensorName}")
+    public ResponseEntity<?> getDeviceHistoryStatus(@PathVariable String id, @PathVariable String sensorName,
+            @RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize, @RequestParam("filters") String filters) {
+        return new ResponseEntity<>(deviceStatusService.getDeviceHistoryStatus(id, sensorName, filters, pageIndex, pageSize), HttpStatus.OK);
     }
 }
