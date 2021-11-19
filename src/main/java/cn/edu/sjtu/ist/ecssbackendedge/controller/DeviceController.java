@@ -25,7 +25,6 @@ public class DeviceController {
 
     @PostMapping(value = "")
     public ResponseEntity<?> insertDevice(@RequestBody DeviceDTO deviceDTO) {
-        System.out.println(deviceDTO);
         return new ResponseEntity<>(deviceService.insertDevice(deviceDTO), HttpStatus.OK);
     }
 

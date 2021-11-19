@@ -13,7 +13,8 @@ import lombok.*;
 @NoArgsConstructor
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXTERNAL_PROPERTY, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = ModbusCollector.class, name = "Modbus")
+        @JsonSubTypes.Type(value = ModbusCollector.class, name = "Modbus"),
+        @JsonSubTypes.Type(value = HttpCollector.class, name = "Http")
 })
 public abstract class DataCollector {
 

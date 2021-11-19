@@ -12,15 +12,11 @@ public class HttpCollectorPO extends DataCollectorPO {
 
     private String url;
 
-    private String charset;
-
     @Override
     public HttpCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
         HttpCollectorPO collectorPO = (HttpCollectorPO)dataCollectorPO;
         HttpCollector collector = new HttpCollector();
-
         collector.setUrl(collectorPO.getUrl());
-
         return collector;
     }
 }
