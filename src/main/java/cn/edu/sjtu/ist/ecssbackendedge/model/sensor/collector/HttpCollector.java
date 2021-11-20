@@ -20,7 +20,7 @@ public class HttpCollector  extends DataCollector {
 
     @Override
     public String execute(String id) {
-        return HttpClientPoolUtil.doGet(url);
+        return HttpClientPoolUtil.doGet(id, url);
     }
 
     @Override
@@ -39,5 +39,17 @@ public class HttpCollector  extends DataCollector {
         collectorPO.setUrl(url);
 
         return collectorPO;
+    }
+
+    @Override
+    public Boolean monitor(String id) {
+        log.error("http无法监听");
+        return false;
+    }
+
+    @Override
+    public Boolean stopMonitor(String id) {
+        log.error("http无法停止监听");
+        return false;
     }
 }

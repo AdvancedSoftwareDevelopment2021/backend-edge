@@ -25,4 +25,8 @@ public interface SensorService {
     Response startSensor(String id, String sensorId);
 
     Response stopSensor(String id, String sensorId);
+
+    Response startMonitor(String id, String sensorId);
+
+    Response stopMonitor(String id, String sensorId);
 }

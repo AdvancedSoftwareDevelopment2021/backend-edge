@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.*;
 
+import java.net.URISyntaxException;
+
 /**
  * @author dyanjun
  * @date 2021/10/28 10:24
@@ -14,7 +16,8 @@ import lombok.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXTERNAL_PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ModbusCollector.class, name = "Modbus"),
-        @JsonSubTypes.Type(value = HttpCollector.class, name = "Http")
+        @JsonSubTypes.Type(value = HttpCollector.class, name = "Http"),
+        @JsonSubTypes.Type(value = WebSocketCollector.class, name = "WebSocket"),
 })
 public abstract class DataCollector {
 
@@ -23,4 +26,8 @@ public abstract class DataCollector {
     protected abstract void verify();
 
     public abstract DataCollectorPO convertDomain2PO();
+
+    public abstract Boolean monitor(String id);
+
+    public abstract Boolean stopMonitor(String id);
 }

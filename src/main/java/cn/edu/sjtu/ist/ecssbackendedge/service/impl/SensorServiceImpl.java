@@ -121,4 +121,26 @@ public class SensorServiceImpl implements SensorService {
             return new Response(200, "sensor" + sensor.getName() + "关闭失败！", null);
         }
     }
+
+    @Override
+    public Response startMonitor(String id, String sensorId) {
+        Sensor sensor = sensorDao.findSensorById(sensorId);
+        try {
+            sensor.monitor(); // 开始监听
+            return new Response(200, "sensor" + sensor.getName() + "启动监听成功！", null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Response stopMonitor(String id, String sensorId) {
+        Sensor sensor = sensorDao.findSensorById(sensorId);
+        try {
+            sensor.stopMonitor(); // 停止监听
+            return new Response(200, "sensor" + sensor.getName() + "停止监听成功！", null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

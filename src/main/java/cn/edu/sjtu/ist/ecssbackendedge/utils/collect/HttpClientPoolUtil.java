@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HeaderElement;
 import org.apache.http.HeaderElementIterator;
 import org.apache.http.HttpEntity;
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Component;
  * @date 2021/11/19 19:06
  */
 @Component
+@Slf4j
 public class HttpClientPoolUtil {
     /**
      * 默认content 类型
@@ -41,7 +43,6 @@ public class HttpClientPoolUtil {
     private static final int Http_Default_Keep_Time = 15000;
     public static PoolingHttpClientConnectionManager cm = null;
     public static CloseableHttpClient httpClient = null;
-    private static Logger logger = LoggerFactory.getLogger(HttpClientPoolUtil.class);
     /**
      * Http connection keepAlive 设置
      */
@@ -58,7 +59,7 @@ public class HttpClientPoolUtil {
                         return Long.parseLong(value) * 1000;
                     } catch (Exception e) {
                         e.printStackTrace();
-                        logger.error("format KeepAlive timeout exception, exception:" + e.toString());
+                        log.error("format KeepAlive timeout exception, exception:" + e.toString());
                     }
                 }
             }
@@ -104,24 +105,30 @@ public class HttpClientPoolUtil {
             method = (HttpEntityEnclosingRequestBase) getRequest(uri, HttpPost.METHOD_NAME, DEFAULT_CONTENT_TYPE, 0);
             method.setEntity(new StringEntity(data));
             HttpContext context = HttpClientContext.create();
-            CloseableHttpResponse httpResponse = httpClient.execute(method, context);
-            httpEntity = httpResponse.getEntity();
-            if (httpEntity != null) {
-                responseBody = EntityUtils.toString(httpEntity, "UTF-8");
+            try{
+                CloseableHttpResponse httpResponse = httpClient.execute(method, context);
+                httpEntity = httpResponse.getEntity();
+                if (httpEntity != null) {
+                    responseBody = EntityUtils.toString(httpEntity, "UTF-8");
+                }
+            }catch (Exception e){
+                log.error(e.getMessage());
             }
+
+
         } catch (Exception e) {
             if (method != null) {
                 method.abort();
             }
             e.printStackTrace();
-            logger.error("execute post request exception, url:" + uri + ", exception:" + e.toString() + ", cost time(ms):" + (System.currentTimeMillis() - startTime));
+            log.error("execute post request exception, url:" + uri + ", exception:" + e.toString() + ", cost time(ms):" + (System.currentTimeMillis() - startTime));
         } finally {
             if (httpEntity != null) {
                 try {
                     EntityUtils.consumeQuietly(httpEntity);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    logger.error("close response exception, url:" + uri + ", exception:" + e.toString() + ", cost time(ms):" + (System.currentTimeMillis() - startTime));
+                    log.error("close response exception, url:" + uri + ", exception:" + e.toString() + ", cost time(ms):" + (System.currentTimeMillis() - startTime));
                 }
             }
         }
@@ -168,7 +175,7 @@ public class HttpClientPoolUtil {
      * @param uri
      * @return
      */
-    public static String doGet(String uri) {
+    public static String doGet(String id, String uri){
         long startTime = System.currentTimeMillis();
         HttpEntity httpEntity = null;
         HttpRequestBase method = null;
@@ -183,21 +190,22 @@ public class HttpClientPoolUtil {
             httpEntity = httpResponse.getEntity();
             if (httpEntity != null) {
                 responseBody = EntityUtils.toString(httpEntity, "UTF-8");
-                logger.info("请求URL: " + uri + "+ 返回状态码：" + httpResponse.getStatusLine().getStatusCode());
+                log.info("请求URL: " + uri + "+ 返回状态码：" + httpResponse.getStatusLine().getStatusCode());
             }
+
         } catch (Exception e) {
             if (method != null) {
                 method.abort();
             }
             e.printStackTrace();
-            logger.error("execute get request exception, url:" + uri + ", exception:" + e.toString() + ",cost time(ms):" + (System.currentTimeMillis() - startTime));
+            log.error("execute get request exception, url:" + uri + ", exception:" + e.toString() + ",cost time(ms):" + (System.currentTimeMillis() - startTime));
         } finally {
             if (httpEntity != null) {
                 try {
                     EntityUtils.consumeQuietly(httpEntity);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    logger.error("close response exception, url:" + uri + ", exception:" + e.toString() + ",cost time(ms):" + (System.currentTimeMillis() - startTime));
+                    log.error("close response exception, url:" + uri + ", exception:" + e.toString() + ",cost time(ms):" + (System.currentTimeMillis() - startTime));
                 }
             }
         }
