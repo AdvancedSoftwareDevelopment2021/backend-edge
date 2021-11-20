@@ -75,4 +75,14 @@ public class CommandController {
     public Result<?> restartEdge(@RequestBody CollectScheduler scheduler) {
         return ResultUtil.success(edgeService.restartEdge(scheduler));
     }
+
+    @PostMapping(value = "/start_monitor/{id}/{sensorId}")
+    public Result<?> startMonitorSensor(@PathVariable String id, @PathVariable String sensorId) {
+        return ResultUtil.success(sensorService.startMonitor(id, sensorId));
+    }
+
+    @PostMapping(value = "/stop_monitor/{id}/{sensorId}")
+    public Result<?> stopMonitorSensor(@PathVariable String id, @PathVariable String sensorId) {
+        return ResultUtil.success(sensorService.stopMonitor(id, sensorId));
+    }
 }

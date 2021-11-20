@@ -3,7 +3,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting.SensorRequest;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DataEntry;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
@@ -119,6 +119,28 @@ public class SensorServiceImpl implements SensorService {
         } catch (SchedulerException e) {
             log.info(e.getMessage());
             return new Response(200, "sensor" + sensor.getName() + "关闭失败！", null);
+        }
+    }
+
+    @Override
+    public Response startMonitor(String id, String sensorId) {
+        Sensor sensor = sensorDao.findSensorById(sensorId);
+        try {
+            sensor.monitor(); // 开始监听
+            return new Response(200, "sensor" + sensor.getName() + "启动监听成功！", null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public Response stopMonitor(String id, String sensorId) {
+        Sensor sensor = sensorDao.findSensorById(sensorId);
+        try {
+            sensor.stopMonitor(); // 停止监听
+            return new Response(200, "sensor" + sensor.getName() + "停止监听成功！", null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
