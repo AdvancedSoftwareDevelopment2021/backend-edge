@@ -3,8 +3,8 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceStatusIotdbPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
-
 import cn.edu.sjtu.ist.ecssbackendedge.utils.storage.IotdbDeviceStatusUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.iotdb.rpc.IoTDBConnectionException;
 import org.apache.iotdb.rpc.StatementExecutionException;
@@ -12,7 +12,6 @@ import org.apache.iotdb.session.Session;
 import org.apache.iotdb.session.SessionDataSet;
 import org.apache.iotdb.session.pool.SessionPool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ import java.util.List;
 
 @Slf4j
 @Component
-@Profile("dev")
 public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
 
     @Autowired

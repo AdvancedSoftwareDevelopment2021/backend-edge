@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 

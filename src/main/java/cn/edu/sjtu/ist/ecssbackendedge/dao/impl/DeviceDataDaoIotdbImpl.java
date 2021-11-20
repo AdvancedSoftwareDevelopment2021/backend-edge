@@ -12,7 +12,6 @@ import org.apache.iotdb.session.Session;
 import org.apache.iotdb.session.SessionDataSet;
 import org.apache.iotdb.session.pool.SessionPool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -28,7 +27,6 @@ import java.util.List;
  */
 @Slf4j
 @Component
-@Profile("dev")
 public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
 
     @Autowired

@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 
-import java.util.Date;
 import java.util.List;
 
 /**
