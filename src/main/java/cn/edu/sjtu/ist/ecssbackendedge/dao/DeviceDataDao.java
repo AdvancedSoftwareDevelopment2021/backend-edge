@@ -24,4 +24,7 @@ public interface DeviceDataDao {
 
     List<DeviceData> findDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset);
 
+    List<DeviceData> findDeviceAllHistoryData(String deviceId, String startTime, String endTime);
+
+//    List<DeviceData> findAllDeviceHistoryData(String deviceId, String startTime, String endTime);
 }

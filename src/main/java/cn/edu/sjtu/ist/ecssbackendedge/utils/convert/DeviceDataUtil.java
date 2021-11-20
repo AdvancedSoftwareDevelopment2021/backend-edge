@@ -16,7 +16,6 @@ public class DeviceDataUtil {
 
     public DeviceData convertDTO2Domain(DeviceDataDTO dto) {
         DeviceData res = new DeviceData();
-        res.setId(dto.getId());
         res.setDeviceId(dto.getDeviceId());
         res.setSensorName(dto.getSensorName());
         res.setTimestamp(dto.getTimestamp());
@@ -26,7 +25,6 @@ public class DeviceDataUtil {
 
     public DeviceDataDTO convertDomain2DTO(DeviceData domain) {
         DeviceDataDTO res = new DeviceDataDTO();
-        res.setId(domain.getId());
         res.setDeviceId(domain.getDeviceId());
         res.setSensorName(domain.getSensorName());
         res.setTimestamp(domain.getTimestamp());

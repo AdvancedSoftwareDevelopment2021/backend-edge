@@ -138,7 +138,8 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
     }
 
     /**
-     * 按条件查询某段时间内的数据
+     * 查询设备的某个sensor在某个时间区段的历史数据
+     * 分页查询，limit, offset
      * @param deviceId 设备id
      * @param sensorName sensor名称
      * @param startTime 开始时间
@@ -151,7 +152,7 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
     public List<DeviceData> findDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset) {
         List<DeviceData> res = new ArrayList<>();
         try{
-            String sql = IotdbDeviceDataUtil.sqlToSelectDeviceData(deviceId, sensorName, startTime, endTime);
+            String sql = IotdbDeviceDataUtil.sqlToSelectDeviceDataWithLimit(deviceId, sensorName, startTime, endTime, limit, offset);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
             SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
@@ -168,6 +169,38 @@ public class DeviceDataDaoIotdbImpl implements DeviceDataDao {
             return res;
         }catch (IoTDBConnectionException | StatementExecutionException e){
             log.error(String.format("iotdb: 查询所有历史数据失败，设备id=%s, sensor名称=%s", deviceId, sensorName));
+            throw new RuntimeException("iotdb: 查询所有历史数据失败，报错信息：" + e.getMessage());
+        }
+    }
+
+    /**
+     * 查询设备的所有sensor在某个时间区段的历史数据
+     * @param deviceId 设备id
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @return 设备数据列表
+     */
+    @Override
+    public List<DeviceData> findDeviceAllHistoryData(String deviceId, String startTime, String endTime) {
+        List<DeviceData> res = new ArrayList<>();
+        try{
+            String sql = IotdbDeviceDataUtil.sqlToSelectDeviceAllData(deviceId, startTime, endTime);
+            session.open();
+            SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
+            SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
+            while (dataIterator.next()) {
+                DeviceData data = new DeviceData();
+                data.setDeviceId(deviceId);
+                data.setTimestamp(dataIterator.getTimestamp("Time"));
+                data.setSensorName(dataIterator.getString(IotdbDeviceDataUtil.getDeviceDataTimeSeries(deviceId) + ".sensorName"));
+                data.setData(dataIterator.getString(IotdbDeviceDataUtil.getDeviceDataTimeSeries(deviceId) + ".data"));
+                res.add(data);
+            }
+            session.close();
+            log.info(String.format("iotdb: 查询所有历史数据成功，设备id=%s, 返回数据数量%d", deviceId, res.size()));
+            return res;
+        }catch (IoTDBConnectionException | StatementExecutionException e){
+            log.error(String.format("iotdb: 查询所有历史数据失败，设备id=%s", deviceId));
             throw new RuntimeException("iotdb: 查询所有历史数据失败，报错信息：" + e.getMessage());
         }
     }

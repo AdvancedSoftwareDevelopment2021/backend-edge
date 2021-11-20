@@ -33,7 +33,7 @@ public class DeviceDataController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<?> updateDeviceData(@PathVariable String id, @RequestBody DeviceDataDTO deviceDataDTO) {
-        return new ResponseEntity<>(deviceDataService.updateDeviceData(id, deviceDataDTO), HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}/{sensorName}")

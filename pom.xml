@@ -74,6 +74,13 @@
             <version>3.0.3</version>
         </dependency>
 
+        <!-- 数据导出 excel依赖包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.2.10</version>
+        </dependency>
+
         <!--quartz依赖包-->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
