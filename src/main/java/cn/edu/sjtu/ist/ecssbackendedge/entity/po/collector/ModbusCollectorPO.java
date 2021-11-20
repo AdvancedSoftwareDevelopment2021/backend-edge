@@ -1,6 +1,5 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.ModbusCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction;
 

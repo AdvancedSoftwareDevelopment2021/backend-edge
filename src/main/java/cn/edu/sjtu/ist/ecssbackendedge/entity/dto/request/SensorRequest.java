@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request;
 
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;

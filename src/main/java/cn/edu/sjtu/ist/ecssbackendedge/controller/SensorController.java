@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.collecting.SensorRequest;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
