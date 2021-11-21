@@ -18,7 +18,6 @@ public class DeviceDTO {
      * 设备id
      */
     private String id;
-
     /**
      * 设备名称
      */

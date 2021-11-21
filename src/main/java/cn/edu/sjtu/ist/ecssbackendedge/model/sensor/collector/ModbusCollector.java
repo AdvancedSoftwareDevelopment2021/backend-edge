@@ -70,4 +70,16 @@ public class ModbusCollector extends DataCollector {
         collectorPO.setSlaveId(slaveId);
         return collectorPO;
     }
+
+    @Override
+    public Boolean monitor(String id) {
+        log.error("modbus无法监听");
+        return false;
+    }
+
+    @Override
+    public Boolean stopMonitor(String id) {
+        log.error("modbus无法停止监听");
+        return false;
+    }
 }
