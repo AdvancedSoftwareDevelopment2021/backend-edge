@@ -18,6 +18,7 @@ import java.net.URISyntaxException;
         @JsonSubTypes.Type(value = ModbusCollector.class, name = "Modbus"),
         @JsonSubTypes.Type(value = HttpCollector.class, name = "Http"),
         @JsonSubTypes.Type(value = WebSocketCollector.class, name = "WebSocket"),
+        @JsonSubTypes.Type(value = ZigBeeCollector.class, name = "ZigBee"),
 })
 public abstract class DataCollector {
 

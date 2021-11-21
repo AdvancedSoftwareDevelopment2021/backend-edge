@@ -16,6 +16,7 @@ import java.util.Date;
 public class CollectSchedulerUtil {
 
     public CollectSchedulerPO convertDomain2PO(CollectScheduler scheduler) {
+        if(scheduler==null) return null;
         CollectSchedulerPO res = new CollectSchedulerPO();
         res.setInterval(scheduler.getInterval());
         res.setUnit(scheduler.getUnit());
@@ -24,6 +25,7 @@ public class CollectSchedulerUtil {
     }
 
     public CollectScheduler convertPO2Domain(CollectSchedulerPO schedulerPO) {
+        if(schedulerPO==null) return null;
         CollectScheduler res = new CollectScheduler();
         res.setInterval(schedulerPO.getInterval());
         res.setUnit(schedulerPO.getUnit());

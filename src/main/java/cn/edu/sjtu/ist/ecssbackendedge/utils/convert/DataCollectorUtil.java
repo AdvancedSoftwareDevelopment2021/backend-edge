@@ -1,16 +1,11 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.HttpCollectorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ModbusCollectorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.WebSocketCollectorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.HttpCollector;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.ModbusCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.*;
+import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.*;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.WebSocketCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket.WebSocketUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +26,9 @@ public class DataCollectorUtil {
     @Autowired
     private WebSocketUtil webSocketUtil;
 
+    @Autowired
+    private ZigBeeUtil zigBeeUtil;
+
     public DataCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
         DataCollector dataCollector = null;
         MessageProtocol protocol = MessageProtocol.fromString(dataCollectorPO.getType());
@@ -40,7 +38,9 @@ public class DataCollectorUtil {
                 modbusCollector.setModbusUtil(modbusUtil);
                 return modbusCollector;
             case ZIGBEE:
-                break;
+                ZigBeeCollector zigBeeCollector = (new ZigBeeCollectorPO()).convertPO2Domain(dataCollectorPO);
+                zigBeeCollector.setZigBeeUtil(zigBeeUtil);
+                return zigBeeCollector;
             case CANBUS:
                 break;
             case HTTP:
