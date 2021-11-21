@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket;
 
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -57,9 +58,9 @@ public class MyWebSocketClient extends WebSocketClient {
         log.info(sensor.getName()+": "+ message);
         if (message != null && !message.equals("null")) {
             // TODO 保存数据的方式有待商榷
-            sensor.getDeviceDataDao().saveDeviceData(sensor.getDeviceId(), "\"" + sensor.getName() + "\":" + message);
+            sensor.getDeviceDataDao().saveDeviceData(sensor.getDeviceId(), sensor.getName() , "\"" + sensor.getName()  + "\":" + message);
         }
-        sensor.getDeviceStatusDao().saveDeviceStatus(sensor.getDeviceId(), sensor.getStatus().getType());
+        sensor.getDeviceStatusDao().saveDeviceStatus(sensor.getDeviceId(), sensor.getName(), sensor.getStatus().getType());
     }
 
 }
