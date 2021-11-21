@@ -26,9 +26,9 @@ public class DeviceDataController {
         return new ResponseEntity<>(deviceDataService.insertDeviceData(deviceDataDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/history/{id}")
     public ResponseEntity<?> deleteDeviceData(@PathVariable String id) {
-        return new ResponseEntity<>(deviceDataService.deleteDeviceData(id), HttpStatus.OK);
+        return new ResponseEntity<>(deviceDataService.deleteDeviceAllHistoryData(id), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
@@ -36,8 +36,14 @@ public class DeviceDataController {
         return new ResponseEntity<>(deviceDataService.updateDeviceData(id, deviceDataDTO), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getDeviceData(@PathVariable String id) {
-        return new ResponseEntity<>(deviceDataService.getDeviceData(id), HttpStatus.OK);
+    @GetMapping(value = "/{id}/{sensorName}")
+    public ResponseEntity<?> getDeviceData(@PathVariable String id, @PathVariable String sensorName) {
+        return new ResponseEntity<>(deviceDataService.getLatestDeviceData(id, sensorName), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/history/{id}/{sensorName}")
+    public ResponseEntity<?> getDeviceHistoryData(@PathVariable String id, @PathVariable String sensorName,
+            @RequestParam("pageIndex") int pageIndex, @RequestParam("pageSize") int pageSize, @RequestParam("filters") String filters) {
+        return new ResponseEntity<>(deviceDataService.getDeviceHistoryData(id, sensorName, filters, pageIndex, pageSize), HttpStatus.OK);
     }
 }

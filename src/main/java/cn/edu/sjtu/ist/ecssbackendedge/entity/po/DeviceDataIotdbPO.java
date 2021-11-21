@@ -1,18 +1,20 @@
-package cn.edu.sjtu.ist.ecssbackendedge.model.device;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
- * @brief 设备数据
+ * @brief 设备数据PO
  * @author rsp
  * @version 0.1
- * @date 2021-11-08
+ * @date 2021-11-19
  */
 @Data
-public class DeviceData {
+public class DeviceDataIotdbPO {
 
     /**
      * 设备数据id
@@ -25,7 +27,7 @@ public class DeviceData {
     private String deviceId;
 
     /**
-     * 对应的sensor名称
+     * 对应的senser名称
      */
     private String sensorName;
 
@@ -40,4 +42,7 @@ public class DeviceData {
      */
     private String data;
 
+    public static List<String> getMeasurements() {
+        return Arrays.asList("deviceId", "sensorName", "data");
+    }
 }

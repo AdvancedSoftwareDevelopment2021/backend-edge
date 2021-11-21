@@ -13,9 +13,14 @@ public interface DeviceDataService {
 
     Response insertDeviceData(DeviceDataDTO deviceDataDTO);
 
-    Response deleteDeviceData(String id);
+    Response deleteDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime);
+
+    Response deleteDeviceAllHistoryData(String deviceId);
 
     Response updateDeviceData(String id, DeviceDataDTO deviceDataDTO);
 
-    Response getDeviceData(String id);
+    Response getLatestDeviceData(String deviceId, String sensorName);
+
+    Response getDeviceHistoryData(String deviceId, String sensorName, String filters, int pageIndex, int pageSize);
+
 }

@@ -13,10 +13,14 @@ public interface DeviceStatusService {
 
     Response insertDeviceStatus(DeviceStatusDTO deviceStatusDTO);
 
-    Response deleteDeviceStatus(String id);
+    Response deleteDeviceHistoryStatus(String deviceId, String sensorName, String startTime, String endTime);
+
+    Response deleteDeviceAllHistoryStatus(String deviceId);
 
     Response updateDeviceStatus(String id, DeviceStatusDTO deviceStatusDTO);
 
-    Response getDeviceStatus(String id);
+    Response getLatestDeviceStatus(String deviceId, String sensorName);
+
+    Response getDeviceHistoryStatus(String deviceId, String sensorName, String filters, int pageIndex, int pageSize);
 
 }

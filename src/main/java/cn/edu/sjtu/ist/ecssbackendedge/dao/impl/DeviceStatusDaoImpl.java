@@ -9,10 +9,13 @@ import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceStatusRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceStatusUtil;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @brief 设备状态DaoImpl
@@ -21,6 +24,7 @@ import java.util.Date;
  * @date 2021-11-19
  */
 @Slf4j
+@Profile("mongodb")
 @Component
 public class DeviceStatusDaoImpl implements DeviceStatusDao {
 
@@ -32,6 +36,15 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
 
     @Autowired
     private DeviceRepository deviceRepository;
+
+    @Override
+    public void saveDeviceStatus(String deviceId, String sensorName, String status) {
+        DeviceStatusPO po = new DeviceStatusPO();
+        po.setDeviceId(deviceId);
+        po.setTimestamp(new Date());
+        po.setStatus(status);
+        deviceStatusRepository.save(po);
+    }
 
     @Override
     public boolean createDeviceStatus(DeviceStatus deviceStatus) {
@@ -47,8 +60,8 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
     }
 
     @Override
-    public void removeDeviceStatusById(String id) {
-        deviceStatusRepository.deleteDeviceStatusById(id);
+    public void removeDeviceStatusById(String deviceId, String startTime, String endTime) {
+//        deviceStatusRepository.deleteDeviceStatusById(id);
     }
 
     @Override
@@ -69,18 +82,13 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
     }
 
     @Override
-    public void saveDeviceStatus(String deviceId, String status) {
-        DeviceStatusPO po = new DeviceStatusPO();
-        po.setDeviceId(deviceId);
-        po.setTimestamp(new Date());
-        po.setStatus(status);
-        deviceStatusRepository.save(po);
-    }
-
-    @Override
-    public DeviceStatus findDeviceStatusById(String id) {
-        DeviceStatusPO deviceStatusPO = deviceStatusRepository.findDeviceStatusById(id);
+    public DeviceStatus findLatestDeviceStatus(String deviceId, String sensorName) {
+        DeviceStatusPO deviceStatusPO = deviceStatusRepository.findDeviceStatusPOByDeviceIdAndSensorNameOrderByTimestamp(deviceId, sensorName);
         return deviceStatusUtil.convertPO2Domain(deviceStatusPO);
     }
 
+    @Override
+    public List<DeviceStatus> findDeviceHistoryStatus(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset) {
+        return new ArrayList<>();
+    }
 }

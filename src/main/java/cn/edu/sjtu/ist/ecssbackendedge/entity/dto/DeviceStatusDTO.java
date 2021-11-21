@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -24,8 +25,14 @@ public class DeviceStatusDTO {
     private String deviceId;
 
     /**
+     * 对应的sensor名称
+     */
+    private String sensorName;
+
+    /**
      * 对应时刻
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     private Date timestamp;
 
     /**

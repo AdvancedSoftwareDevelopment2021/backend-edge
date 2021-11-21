@@ -16,11 +16,13 @@ import java.util.List;
 @Repository
 public interface DeviceDataRepository extends MongoRepository<DeviceDataPO, String> {
 
-    void deleteDeviceDataById(String id);
-
     void deleteDeviceDataPOSByDeviceId(String deviceId);
 
+    void deleteDeviceDataById(String id);
+
     DeviceDataPO findDeviceDataById(String id);
+
+    DeviceDataPO findDeviceDataPOByDeviceIdAndSensorNameOrderByTimestamp(String deviceId, String sensorName);
 
     List<DeviceDataPO> findDeviceDataPOSByDeviceId(String deviceId);
 

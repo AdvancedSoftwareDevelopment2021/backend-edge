@@ -109,10 +109,9 @@ public class Sensor {
             String collectedData = sensor.collectData();
             if (collectedData != null && !collectedData.equals("null") && !collectedData.equals(AsynDataStatus.WAITING_DATA.getDataStatus())) {
                 // TODO 保存数据的方式有待商榷
-                log.info(collectedData);
-                sensor.deviceDataDao.saveDeviceData(sensor.deviceId, "\"" + sensor.name + "\":" + collectedData);
+                sensor.deviceDataDao.saveDeviceData(sensor.deviceId, sensor.name, "\"" + sensor.name + "\":" + collectedData);
             }
-            sensor.deviceStatusDao.saveDeviceStatus(sensor.deviceId, sensor.status.getType());
+            sensor.deviceStatusDao.saveDeviceStatus(sensor.deviceId, sensor.name, sensor.status.getType());
         }
     }
 }
