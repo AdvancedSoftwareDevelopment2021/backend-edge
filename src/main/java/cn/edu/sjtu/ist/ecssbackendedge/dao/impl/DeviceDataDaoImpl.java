@@ -91,4 +91,9 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     public List<DeviceData> findDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset) {
         return new ArrayList<>();
     }
+
+    @Override
+    public List<DeviceData> findDeviceAllHistoryData(String deviceId, String startTime, String endTime) {
+        return new ArrayList<>();
+    }
 }

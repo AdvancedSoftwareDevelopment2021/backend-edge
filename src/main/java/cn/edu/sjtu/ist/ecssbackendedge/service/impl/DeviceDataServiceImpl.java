@@ -61,13 +61,7 @@ public class DeviceDataServiceImpl implements DeviceDataService {
 
     @Override
     public Response updateDeviceData(String id, DeviceDataDTO deviceDataDTO) {
-        deviceDataDTO.setId(id);
-        DeviceData deviceData = deviceDataUtil.convertDTO2Domain(deviceDataDTO);
-        if (deviceDataDao.modifyDeviceData(deviceData)) {
-            return new Response(200, "OK", "update device data ok!");
-        } else {
-            return new Response(400, "ERROR", "update device data error! device id=" + deviceData.getDeviceId() + " not exists!");
-        }
+        return new Response(200, "OK", "更新设备数据成功ok!");
     }
 
 
@@ -102,14 +96,10 @@ public class DeviceDataServiceImpl implements DeviceDataService {
             for (DeviceData Data: deviceDatas) {
                 res.add(deviceDataUtil.convertDomain2DTO(Data));
             }
-            return new Response(200, "查询设备历史状态成功！", res);
+            return new Response(200, "查询设备历史数据成功！", res);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return new Response(200, "查询设备历史状态失败！", null);
+            return new Response(200, "查询设备历史数据失败！", null);
         }
     }
-
-    // TODO: 将采集到的数据定时发送到云端
-    // TODO: 储存采集到的数据到时序数据库
-    //      https://www.jianshu.com/p/524b11e3f43e, https://zhuanlan.zhihu.com/p/385843774
 }

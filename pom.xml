@@ -74,6 +74,13 @@
             <version>3.0.3</version>
         </dependency>
 
+        <!-- 数据导出 excel依赖包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.2.10</version>
+        </dependency>
+
         <!--quartz依赖包-->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
@@ -82,11 +89,11 @@
         </dependency>
 
         <!--http依赖包-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>fastjson</artifactId>-->
+<!--            <version>1.2.4</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
