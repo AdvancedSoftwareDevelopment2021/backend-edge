@@ -5,6 +5,7 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.compress.PackageUtil;
 
 import cn.edu.sjtu.ist.ecssbackendedge.utils.connect.ConnectCloudUtil;
+import lombok.Data;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Slf4j
+@Data
 @Component
 public class Edge {
 
@@ -28,6 +30,8 @@ public class Edge {
 
     @Autowired
     private ConnectCloudUtil connectCloudUtil;
+
+    private String id;
 
     private final String jobId = UUID.randomUUID().toString();
 
