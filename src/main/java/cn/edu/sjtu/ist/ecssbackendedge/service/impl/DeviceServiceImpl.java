@@ -34,7 +34,12 @@ public class DeviceServiceImpl implements DeviceService {
     public Response insertDevice(DeviceDTO deviceDTO) {
         Device device = deviceUtil.convertDTO2Domain(deviceDTO);
         deviceDao.createDevice(device);
-        return new Response(200, "插入设备成功!", null);
+        Device device1 = deviceDao.findDeviceByName(device.getName()).get(0);
+        if (device1 == null) {
+            return new Response(400, "插入设备失败!", null);
+        } else {
+            return new Response(200, "插入设备成功!", deviceUtil.convertDomain2DTO(device1));
+        }
     }
 
     @Override
