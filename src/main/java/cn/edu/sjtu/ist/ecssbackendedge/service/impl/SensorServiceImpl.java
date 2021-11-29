@@ -58,7 +58,7 @@ public class SensorServiceImpl implements SensorService {
             }
         }
         deviceDao.modifyDevice(device);
-        return new Response(200, "创建sensor名称"+sensorRequest.getName()+"成功", null);
+        return new Response(200, "创建sensor名称"+sensorRequest.getName()+"成功", sensor);
     }
 
     @Override

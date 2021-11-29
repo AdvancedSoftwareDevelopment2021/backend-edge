@@ -5,6 +5,7 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.compress.PackageUtil;
 
 import cn.edu.sjtu.ist.ecssbackendedge.utils.connect.ConnectCloudUtil;
+import lombok.Data;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Slf4j
+@Data
 @Component
 public class Edge {
 
@@ -28,6 +30,8 @@ public class Edge {
 
     @Autowired
     private ConnectCloudUtil connectCloudUtil;
+
+    private String id;
 
     private final String jobId = UUID.randomUUID().toString();
 
@@ -93,7 +97,7 @@ public class Edge {
         public void execute(JobExecutionContext context) {
             String filepath = edge.getAllDeviceHistoryData();
             log.info(String.format("边缘端收集到的数据路径: %s", filepath));
-            edge.connectCloudUtil.sendDataPackage(filepath);
+            edge.connectCloudUtil.sendDataPackage(edge.getId(), filepath);
             log.info(String.format("边缘端设备数据包上传成功，时间：%s", edge.lastTime));
         }
     }

@@ -87,16 +87,14 @@
             <artifactId>quartz</artifactId>
             <version>2.3.0</version>
         </dependency>
-
-        <!--http依赖包-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>fastjson</artifactId>-->
-<!--            <version>1.2.4</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
+            <version>4.5.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
             <version>4.5.7</version>
         </dependency>
 
@@ -116,7 +114,11 @@
             <version>1.4.0</version>
             <scope>compile</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.12</version>
+        </dependency>
     </dependencies>
 
     <repositories>
