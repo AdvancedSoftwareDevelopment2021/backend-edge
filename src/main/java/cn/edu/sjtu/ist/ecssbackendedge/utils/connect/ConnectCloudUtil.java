@@ -9,6 +9,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -24,16 +25,19 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class ConnectCloudUtil {
 
-    public static String CLOUD_SERVER_URL = "http://localhost:8080/dataPackage";
+    public static String CLOUD_SERVER_URL = "http://localhost:8080";
+
+    @Value("${cloud.server.data.path}")
+    public String DATA_PATH;
 
     /**
      * @brief 发送数据包到云端
      * @param filepath 数据包的本地绝对路径
      */
-    public void sendDataPackage(String filepath) {
+    public void sendDataPackage(String edgeId, String filepath) {
         // 获取本地文件
         try {
-            HttpPost httpPost = new HttpPost(CLOUD_SERVER_URL);
+            HttpPost httpPost = new HttpPost(CLOUD_SERVER_URL + DATA_PATH + "/" + edgeId);
             CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 
             File file = new File(filepath);

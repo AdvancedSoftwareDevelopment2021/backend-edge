@@ -97,7 +97,7 @@ public class Edge {
         public void execute(JobExecutionContext context) {
             String filepath = edge.getAllDeviceHistoryData();
             log.info(String.format("边缘端收集到的数据路径: %s", filepath));
-            edge.connectCloudUtil.sendDataPackage(filepath);
+            edge.connectCloudUtil.sendDataPackage(edge.getId(), filepath);
             log.info(String.format("边缘端设备数据包上传成功，时间：%s", edge.lastTime));
         }
     }
