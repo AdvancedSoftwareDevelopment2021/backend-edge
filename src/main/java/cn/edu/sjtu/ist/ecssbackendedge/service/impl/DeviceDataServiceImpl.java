@@ -81,7 +81,7 @@ public class DeviceDataServiceImpl implements DeviceDataService {
             System.out.println(filterObj);
 
             String startTime, endTime;
-            if (filterObj.containsKey("startTime") && filterObj.containsKey("endTime")) {
+            if (filterObj != null && filterObj.containsKey("startTime") && filterObj.containsKey("endTime")) {
                 startTime = filterObj.getString("startTime");
                 endTime = filterObj.getString("endTime");
             } else {
