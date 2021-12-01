@@ -86,7 +86,7 @@ public class PackageUtil {
         log.info(String.format("目前设备数量：%d", deviceList.size()));
 
         for (Device device : deviceList) {
-            List<DeviceData> deviceDatas = deviceDataDao.findDeviceAllHistoryData(device.getId(), startTime, endTime);
+            List<DeviceData> deviceDatas = deviceDataDao.findDeviceAllHistoryDataWithTime(device.getId(), startTime, endTime);
             log.info(String.format("设备id: %s, 查询到的数据量为%d", device.getId(), deviceDatas.size()));
 
             List<DeviceDataDTO> res = new ArrayList<>();

@@ -38,7 +38,7 @@ public class DeviceStatusController {
         return new ResponseEntity<>(deviceStatusService.updateDeviceStatus(id, deviceStatusDTO), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}/{sensorName}")
+    @GetMapping(value = "/latest/{id}/{sensorName}")
     public ResponseEntity<?> getLatestDeviceStatus(@PathVariable String id, @PathVariable String sensorName) {
         return new ResponseEntity<>(deviceStatusService.getLatestDeviceStatus(id, sensorName), HttpStatus.OK);
     }

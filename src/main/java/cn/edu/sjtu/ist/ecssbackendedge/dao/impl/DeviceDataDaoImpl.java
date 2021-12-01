@@ -88,12 +88,17 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     }
 
     @Override
-    public List<DeviceData> findDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset) {
+    public List<DeviceData> findDeviceHistoryDataWithLimit(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset) {
         return new ArrayList<>();
     }
 
     @Override
-    public List<DeviceData> findDeviceAllHistoryData(String deviceId, String startTime, String endTime) {
+    public List<DeviceData> findDeviceAllHistoryDataWithTime(String deviceId, String startTime, String endTime) {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<DeviceData> findDeviceAllHistoryData(String deviceId, String sensorName) {
         return new ArrayList<>();
     }
 }

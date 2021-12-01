@@ -81,7 +81,7 @@ public class DeviceDataServiceImpl implements DeviceDataService {
             System.out.println(filterObj);
 
             String startTime, endTime;
-            if (filterObj.containsKey("startTime") && filterObj.containsKey("endTime")) {
+            if (filterObj != null && filterObj.containsKey("startTime") && filterObj.containsKey("endTime")) {
                 startTime = filterObj.getString("startTime");
                 endTime = filterObj.getString("endTime");
             } else {
@@ -91,7 +91,7 @@ public class DeviceDataServiceImpl implements DeviceDataService {
 
             int offset = (pageIndex - 1) * pageSize;
             int limit = pageSize;
-            List<DeviceData> deviceDatas = deviceDataDao.findDeviceHistoryData(deviceId, sensorName, startTime, endTime, limit, offset);
+            List<DeviceData> deviceDatas = deviceDataDao.findDeviceHistoryDataWithLimit(deviceId, sensorName, startTime, endTime, limit, offset);
             List<DeviceDataDTO> res = new ArrayList<>();
             for (DeviceData Data: deviceDatas) {
                 res.add(deviceDataUtil.convertDomain2DTO(Data));
@@ -101,5 +101,15 @@ public class DeviceDataServiceImpl implements DeviceDataService {
             e.printStackTrace();
             return new Response(200, "查询设备历史数据失败！", null);
         }
+    }
+
+    @Override
+    public Response getDeviceAllHistoryData(String deviceId, String sensorName) {
+        List<DeviceData> deviceDatas = deviceDataDao.findDeviceAllHistoryData(deviceId, sensorName);
+        List<DeviceDataDTO> res = new ArrayList<>();
+        for (DeviceData Data: deviceDatas) {
+            res.add(deviceDataUtil.convertDomain2DTO(Data));
+        }
+        return new Response(200, "查询设备历史数据成功！", res);
     }
 }

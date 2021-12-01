@@ -22,9 +22,11 @@ public interface DeviceDataDao {
 
     DeviceData findLatestDeviceData(String deviceId, String sensorName);
 
-    List<DeviceData> findDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset);
+    List<DeviceData> findDeviceHistoryDataWithLimit(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset);
 
-    List<DeviceData> findDeviceAllHistoryData(String deviceId, String startTime, String endTime);
+    List<DeviceData> findDeviceAllHistoryDataWithTime(String deviceId, String startTime, String endTime);
+
+    List<DeviceData> findDeviceAllHistoryData(String deviceId, String sensorName);
 
 //    List<DeviceData> findAllDeviceHistoryData(String deviceId, String startTime, String endTime);
 }
