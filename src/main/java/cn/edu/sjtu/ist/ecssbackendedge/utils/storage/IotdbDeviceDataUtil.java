@@ -56,10 +56,22 @@ public class IotdbDeviceDataUtil {
     /**
      * sql查询设备的所有sensor在某个时间区段的历史数据
      * @param deviceId 设备 id
+     * @param sensorName 传感器名称
+     */
+    public static String sqlToSelectDeviceAllData(String deviceId, String sensorName) {
+        String sql = String.format("select * from %s", getDeviceDataTimeSeries(deviceId));
+        sql = String.format("%s where sensorName=\"%s\"", sql, sensorName);
+        log.info(sql);
+        return sql;
+    }
+
+    /**
+     * sql查询设备的所有sensor在某个时间区段的历史数据
+     * @param deviceId 设备 id
      * @param startTime 开始时间
      * @param endTime 结束时间
      */
-    public static String sqlToSelectDeviceAllData(String deviceId, String startTime, String endTime) {
+    public static String sqlToSelectDeviceAllDataWithTime(String deviceId, String startTime, String endTime) {
         String sql = String.format("select * from %s", getDeviceDataTimeSeries(deviceId));
         sql = String.format("%s where timestamp > %s and timestamp < %s", sql, startTime, endTime);
         log.info(sql);
@@ -74,7 +86,7 @@ public class IotdbDeviceDataUtil {
      * @param startTime 开始时间
      * @param endTime 结束时间
      */
-    public static String sqlToSelectDeviceData(String deviceId, String sensorName, String startTime, String endTime) {
+    public static String sqlToSelectDeviceDataWithSensorAndTime(String deviceId, String sensorName, String startTime, String endTime) {
         String sql = String.format("select * from %s", getDeviceDataTimeSeries(deviceId));
         sql = String.format("%s where sensorName=\"%s\" and timestamp > %s and timestamp < %s", sql, sensorName, startTime, endTime);
         log.info(sql);
@@ -96,7 +108,7 @@ public class IotdbDeviceDataUtil {
                                                           int limit, int offset) {
         String sql = String.format("select * from %s", getDeviceDataTimeSeries(deviceId));
         String limitPart = String.format("limit %d offset %d", limit, offset);
-        sql = String.format("%s where sensorName=%s timestamp > %s and timestamp < %s %s",
+        sql = String.format("%s where sensorName=\"%s\" and timestamp > %s and timestamp < %s %s",
                             sql, sensorName, startTime, endTime, limitPart);
         log.info(sql);
         return sql;

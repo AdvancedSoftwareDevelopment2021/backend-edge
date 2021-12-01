@@ -36,9 +36,14 @@ public class DeviceDataController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}/{sensorName}")
+    @GetMapping(value = "/latest/{id}/{sensorName}")
     public ResponseEntity<?> getDeviceData(@PathVariable String id, @PathVariable String sensorName) {
         return new ResponseEntity<>(deviceDataService.getLatestDeviceData(id, sensorName), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}/{sensorName}")
+    public ResponseEntity<?> getDeviceAllHistoryData(@PathVariable String id, @PathVariable String sensorName) {
+        return new ResponseEntity<>(deviceDataService.getDeviceAllHistoryData(id, sensorName), HttpStatus.OK);
     }
 
     @GetMapping(value = "/history/{id}/{sensorName}")

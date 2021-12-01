@@ -23,4 +23,5 @@ public interface DeviceDataService {
 
     Response getDeviceHistoryData(String deviceId, String sensorName, String filters, int pageIndex, int pageSize);
 
+    Response getDeviceAllHistoryData(String deviceId, String sensorName);
 }
