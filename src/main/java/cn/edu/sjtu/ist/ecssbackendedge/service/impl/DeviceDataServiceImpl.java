@@ -7,6 +7,8 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceDataService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
 
+import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.response.ResultUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -104,12 +106,18 @@ public class DeviceDataServiceImpl implements DeviceDataService {
     }
 
     @Override
-    public Response getDeviceAllHistoryData(String deviceId, String sensorName) {
-        List<DeviceData> deviceDatas = deviceDataDao.findDeviceAllHistoryData(deviceId, sensorName);
-        List<DeviceDataDTO> res = new ArrayList<>();
-        for (DeviceData Data: deviceDatas) {
-            res.add(deviceDataUtil.convertDomain2DTO(Data));
+    public Result<List<DeviceDataDTO>> getDeviceAllHistoryData(String deviceId, String sensorName) {
+        try{
+            List<DeviceData> deviceDatas = deviceDataDao.findDeviceAllHistoryData(deviceId, sensorName);
+            List<DeviceDataDTO> res = new ArrayList<>();
+            for (DeviceData Data: deviceDatas) {
+                res.add(deviceDataUtil.convertDomain2DTO(Data));
+            }
+            return ResultUtil.success(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("获取历史数据错误");
         }
-        return new Response(200, "查询设备历史数据成功！", res);
+
     }
 }

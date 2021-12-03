@@ -3,11 +3,12 @@ package cn.edu.sjtu.ist.ecssbackendedge.controller;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceDataService;
 
+import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.*;
 /**
  * @brief 设备数据 Controller
  * @author rsp
@@ -42,8 +43,8 @@ public class DeviceDataController {
     }
 
     @GetMapping(value = "/{id}/{sensorName}")
-    public ResponseEntity<?> getDeviceAllHistoryData(@PathVariable String id, @PathVariable String sensorName) {
-        return new ResponseEntity<>(deviceDataService.getDeviceAllHistoryData(id, sensorName), HttpStatus.OK);
+    public Result<List<DeviceDataDTO>> getDeviceAllHistoryData(@PathVariable String id, @PathVariable String sensorName) {
+        return deviceDataService.getDeviceAllHistoryData(id, sensorName);
     }
 
     @GetMapping(value = "/history/{id}/{sensorName}")

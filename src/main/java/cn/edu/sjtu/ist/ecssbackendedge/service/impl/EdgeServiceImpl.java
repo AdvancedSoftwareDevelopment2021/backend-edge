@@ -68,7 +68,6 @@ public class EdgeServiceImpl implements EdgeService {
         String id = map.get("id");
         int interval = Integer.parseInt(map.get("interval"));
         TimeUnit unit = TimeUnit.valueOf(map.get("timeUnit"));
-
         ConnectCloudUtil.CLOUD_SERVER_URL = url;
         CollectScheduler scheduler = new CollectScheduler();
         scheduler.setInterval(interval);

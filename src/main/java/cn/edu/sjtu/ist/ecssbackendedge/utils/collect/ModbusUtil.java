@@ -38,7 +38,13 @@ public class ModbusUtil {
                 break;
             case HOLDING_REGISTER:
                 byte[] holdingRegister = readHoldingRegister(id, ip, port, offset, num, datatype);
-                output = Arrays.toString(holdingRegister);
+                byte[] e = new byte[holdingRegister.length/2];
+                for(int i=0;i<holdingRegister.length;i++){
+                    if(i%2 != 0){
+                        e[i/2] = holdingRegister[i];
+                    }
+                }
+                output = Arrays.toString(e);
                 break;
             case INPUT_REGISTER:
                 byte[] inputRegisters = readInputRegisters(id, ip, port, offset, num, datatype);

@@ -2,6 +2,9 @@ package cn.edu.sjtu.ist.ecssbackendedge.service;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
+
+import java.util.List;
 
 /**
  * @brief 设备数据service
@@ -23,5 +26,5 @@ public interface DeviceDataService {
 
     Response getDeviceHistoryData(String deviceId, String sensorName, String filters, int pageIndex, int pageSize);
 
-    Response getDeviceAllHistoryData(String deviceId, String sensorName);
+    Result<List<DeviceDataDTO>> getDeviceAllHistoryData(String deviceId, String sensorName);
 }
