@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2021/11/20 20:15
  */
 @Data
-public class WebSocketCollectorPO extends DataCollectorPO{
+public class WebSocketCollectorPO extends DataCollectorPO {
 
     private String uri;
 

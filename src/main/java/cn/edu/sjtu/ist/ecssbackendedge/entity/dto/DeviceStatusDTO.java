@@ -6,9 +6,9 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @brief 设备状态DTO
  * @author rsp
  * @version 0.1
+ * @brief 设备状态DTO
  * @date 2021-11-08
  */
 @Data

@@ -84,32 +84,26 @@ public class ZigBeeListener implements SerialPortEventListener {
     }
 
 
-    public static int hexToDec(String hex){
+    public static int hexToDec(String hex) {
         int dec = 0;
         int upper = hex.length();
-        for(int i =0;i<hex.length();i++){
-            if(hex.charAt(i)=='A'){
-                dec += 10*Math.pow(16,upper);
-            }
-            else if(hex.charAt(i)=='B'){
-                dec += 11*Math.pow(16,upper);
-            }
-            else if(hex.charAt(i)=='C'){
-                dec += 12*Math.pow(16,upper);
-            }
-            else if(hex.charAt(i)=='D'){
-                dec += 13*Math.pow(16,upper);
-            }
-            else if(hex.charAt(i)=='E'){
-                dec += 14*Math.pow(16,upper);
-            }
-            else if(hex.charAt(i)=='F'){
-                dec += 15*Math.pow(16,upper);
-            }
-            else{
-                int b = (int)hex.charAt(i);
-                int n = b -(int)'0';
-                dec += n*Math.pow(16,upper);
+        for (int i = 0; i < hex.length(); i++) {
+            if (hex.charAt(i) == 'A') {
+                dec += 10 * Math.pow(16, upper);
+            } else if (hex.charAt(i) == 'B') {
+                dec += 11 * Math.pow(16, upper);
+            } else if (hex.charAt(i) == 'C') {
+                dec += 12 * Math.pow(16, upper);
+            } else if (hex.charAt(i) == 'D') {
+                dec += 13 * Math.pow(16, upper);
+            } else if (hex.charAt(i) == 'E') {
+                dec += 14 * Math.pow(16, upper);
+            } else if (hex.charAt(i) == 'F') {
+                dec += 15 * Math.pow(16, upper);
+            } else {
+                int b = hex.charAt(i);
+                int n = b - (int) '0';
+                dec += n * Math.pow(16, upper);
             }
             upper--;
         }

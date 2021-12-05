@@ -39,6 +39,7 @@ public enum MessageProtocol {
 
     /**
      * 构造函数
+     *
      * @param protocol 协议名称
      */
     MessageProtocol(String protocol) {
@@ -54,6 +55,7 @@ public enum MessageProtocol {
 
     /**
      * 从字符串转为文本
+     *
      * @param text 文本
      */
     public static MessageProtocol fromString(String text) {

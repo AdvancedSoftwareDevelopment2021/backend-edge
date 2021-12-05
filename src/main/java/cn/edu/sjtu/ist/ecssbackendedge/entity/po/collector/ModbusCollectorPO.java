@@ -2,13 +2,12 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector;
 
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.ModbusCollector;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction;
-
 import lombok.Data;
 
 /**
- * @brief Modbus收集器PO类
  * @author rsp
  * @version 0.1
+ * @brief Modbus收集器PO类
  * @date 2021-11-21
  */
 @Data
@@ -30,7 +29,7 @@ public class ModbusCollectorPO extends DataCollectorPO {
 
     @Override
     public ModbusCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
-        ModbusCollectorPO collectorPO = (ModbusCollectorPO)dataCollectorPO;
+        ModbusCollectorPO collectorPO = (ModbusCollectorPO) dataCollectorPO;
         ModbusCollector collector = new ModbusCollector();
 
         collector.setIp(collectorPO.getIp());

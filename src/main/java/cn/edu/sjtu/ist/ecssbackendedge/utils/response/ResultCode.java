@@ -7,7 +7,7 @@ import lombok.Getter;
  * @author dyanjun
  * @date 2021/10/31 15:42
  */
-public enum  ResultCode {
+public enum ResultCode {
     SUCCESS(0, "success"),
     ERROR(-1, "error"),
     OBJECT_NOT_FOUND(-2, "%s 不存在"),
@@ -19,8 +19,7 @@ public enum  ResultCode {
     WRONG_INFORMATION(-8, "输入信息有误"),
     NON_ACCOUNT(-9, "账户不存在"),
     EXIST_ACCOUNT(-10, "账号已存在"),
-    RUN_TIME_EXCEPTION(-11, "运行时错误: %s"),
-    NON_HISTORY(-12, "获取历史数据失败");
+    RUN_TIME_EXCEPTION(-100, "运行时错误: %s");
 
 
     @Getter
@@ -50,4 +49,5 @@ public enum  ResultCode {
         this.message = message;
     }
 }
+
 

@@ -2,12 +2,11 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor.SensorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.SensorRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.CollectSchedulerUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.SensorUtil;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @brief SensorDaoImpl
  * @author rsp
  * @version 0.1
+ * @brief SensorDaoImpl
  * @date 2021-11-19
  */
 @Slf4j
@@ -35,9 +34,10 @@ public class SensorDaoImpl implements SensorDao {
     private CollectSchedulerUtil collectSchedulerUtil;
 
     @Override
-    public void createSensor(Sensor sensor) {
+    public Sensor createSensor(Sensor sensor) {
         SensorPO sensorPO = sensorUtil.convertDomain2PO(sensor);
         sensorRepository.save(sensorPO);
+        return sensorUtil.convertPO2Domain(sensorPO);
     }
 
     @Override

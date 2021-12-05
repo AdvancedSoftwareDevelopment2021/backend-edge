@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HeaderElement;
 import org.apache.http.HeaderElementIterator;
 import org.apache.http.HttpEntity;
@@ -17,10 +18,6 @@ import org.apache.http.message.BasicHeaderElementIterator;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 /**
@@ -89,7 +86,8 @@ public class HttpClientPoolUtil {
 
     /**
      * 执行http post请求 默认采用Content-Type：application/json，Accept：application/json
-     * @param uri 请求地址
+     *
+     * @param uri  请求地址
      * @param data 请求数据
      * @return
      */
@@ -105,13 +103,13 @@ public class HttpClientPoolUtil {
             method = (HttpEntityEnclosingRequestBase) getRequest(uri, HttpPost.METHOD_NAME, DEFAULT_CONTENT_TYPE, 0);
             method.setEntity(new StringEntity(data));
             HttpContext context = HttpClientContext.create();
-            try{
+            try {
                 CloseableHttpResponse httpResponse = httpClient.execute(method, context);
                 httpEntity = httpResponse.getEntity();
                 if (httpEntity != null) {
                     responseBody = EntityUtils.toString(httpEntity, "UTF-8");
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 log.error(e.getMessage());
             }
 
@@ -137,10 +135,11 @@ public class HttpClientPoolUtil {
 
     /**
      * 创建请求
-     * @param uri 请求url
-     * @param methodName 请求的方法类型
+     *
+     * @param uri         请求url
+     * @param methodName  请求的方法类型
      * @param contentType contentType类型
-     * @param timeout 超时时间
+     * @param timeout     超时时间
      * @return
      */
     public static HttpRequestBase getRequest(String uri, String methodName, String contentType, int timeout) {
@@ -172,10 +171,11 @@ public class HttpClientPoolUtil {
 
     /**
      * 执行GET 请求
+     *
      * @param uri
      * @return
      */
-    public static String doGet(String id, String uri){
+    public static String doGet(String id, String uri) {
         long startTime = System.currentTimeMillis();
         HttpEntity httpEntity = null;
         HttpRequestBase method = null;

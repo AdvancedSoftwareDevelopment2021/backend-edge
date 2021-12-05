@@ -1,7 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.scheduler.CollectSchedulerPO;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;

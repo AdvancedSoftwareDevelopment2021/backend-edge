@@ -14,7 +14,7 @@ public class HttpCollectorPO extends DataCollectorPO {
 
     @Override
     public HttpCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
-        HttpCollectorPO collectorPO = (HttpCollectorPO)dataCollectorPO;
+        HttpCollectorPO collectorPO = (HttpCollectorPO) dataCollectorPO;
         HttpCollector collector = new HttpCollector();
         collector.setUrl(collectorPO.getUrl());
         return collector;

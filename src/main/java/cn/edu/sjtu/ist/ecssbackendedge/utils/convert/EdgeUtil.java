@@ -3,7 +3,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.EdgePO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.Edge;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.connect.ConnectCloudUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

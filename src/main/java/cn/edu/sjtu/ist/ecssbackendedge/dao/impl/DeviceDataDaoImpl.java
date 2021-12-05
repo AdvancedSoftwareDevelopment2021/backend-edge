@@ -1,13 +1,12 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceDataPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceDataRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -18,9 +17,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @brief 设备数据DaoImpl
  * @author rsp
  * @version 0.1
+ * @brief 设备数据DaoImpl
  * @date 2021-11-19
  */
 @Slf4j
@@ -49,7 +48,7 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     @Override
     public boolean createDeviceData(DeviceData deviceData) {
         DevicePO devicePO = deviceRepository.findDeviceById(deviceData.getDeviceId());
-        if(devicePO == null) {
+        if (devicePO == null) {
             log.error("设备数据对应的设备不存在，数据无法保存");
             return false;
         }
@@ -68,7 +67,7 @@ public class DeviceDataDaoImpl implements DeviceDataDao {
     public boolean modifyDeviceData(DeviceData deviceData) {
         DevicePO devicePO = deviceRepository.findDeviceById(deviceData.getDeviceId());
         if (devicePO == null) {
-            log.info("设备数据id=" + deviceData.getId() + ", 设备id=" + deviceData.getDeviceId() +"不存在!");
+            log.info("设备数据id=" + deviceData.getId() + ", 设备id=" + deviceData.getDeviceId() + "不存在!");
             return false;
         }
 

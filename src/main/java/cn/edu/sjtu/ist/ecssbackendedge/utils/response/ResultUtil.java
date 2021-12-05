@@ -4,15 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
-
-import reactor.core.publisher.Mono;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
+import static cn.edu.sjtu.ist.ecssbackendedge.utils.response.ResultCode.SUCCESS;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-
-import static cn.edu.sjtu.ist.ecssbackendedge.utils.response.ResultCode.SUCCESS;
 /**
  * @author dyanjun
  * @date 2021/10/31 15:41
@@ -38,6 +36,7 @@ public class ResultUtil {
         Result<T> result = new Result<>();
         result.setMessage(message);
         result.setCode(code);
+        System.out.println(message);
         return result;
     }
 

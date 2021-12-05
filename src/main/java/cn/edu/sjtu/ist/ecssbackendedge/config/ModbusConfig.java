@@ -3,12 +3,12 @@ package cn.edu.sjtu.ist.ecssbackendedge.config;
 import com.serotonin.modbus4j.ModbusFactory;
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;
+import com.serotonin.modbus4j.ip.IpParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import com.serotonin.modbus4j.ip.IpParameters;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,7 +41,7 @@ public class ModbusConfig {
     public ModbusMaster getMaster(String id, String ip, Integer port) {
 
         ModbusMaster modbusMaster = masterMap.get(id);
-        if(modbusMaster == null) {
+        if (modbusMaster == null) {
             setMaster(id, ip, port);
             modbusMaster = masterMap.get(id);
         }
@@ -66,7 +66,7 @@ public class ModbusConfig {
         master = modbusFactory.createTcpMaster(params, false);// TCP 协议
         try {
             //设置超时时间
-            master.setTimeout(3*1000);
+            master.setTimeout(3 * 1000);
             //设置重连次数
             master.setRetries(3);
             //初始化

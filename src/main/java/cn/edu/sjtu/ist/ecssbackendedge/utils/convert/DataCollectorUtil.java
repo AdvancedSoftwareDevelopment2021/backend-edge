@@ -1,8 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.*;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.*;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
+import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.*;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket.WebSocketUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 /**
- * @brief DataCollector对象转换工具类
  * @author rsp
  * @version 0.1
+ * @brief DataCollector对象转换工具类
  * @date 2021-11-20
  */
 @Component

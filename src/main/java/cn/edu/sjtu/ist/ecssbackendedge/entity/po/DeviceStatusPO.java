@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.Date;
 
 /**
- * @brief 设备状态PO
  * @author rsp
  * @version 0.1
+ * @brief 设备状态PO
  * @date 2021-11-08
  */
 @Data

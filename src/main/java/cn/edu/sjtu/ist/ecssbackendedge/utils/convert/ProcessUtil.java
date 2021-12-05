@@ -3,7 +3,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.ProcessDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.ProcessPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
-
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

@@ -9,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.List;
 
 /**
- * @brief 设备PO
  * @author rsp
  * @version 0.1
+ * @brief 设备PO
  * @date 2021-11-08
  */
 @Data

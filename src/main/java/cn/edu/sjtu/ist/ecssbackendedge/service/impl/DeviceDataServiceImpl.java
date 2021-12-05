@@ -1,14 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceDataService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
-
-import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.response.ResultUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +16,11 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * @brief 设备数据serviceImpl
  * @author rsp
  * @version 0.1
+ * @brief 设备数据serviceImpl
  * @date 2021-11-08
  */
 @Slf4j
@@ -37,50 +34,43 @@ public class DeviceDataServiceImpl implements DeviceDataService {
     private DeviceDataDao deviceDataDao;
 
     @Override
-    public Response insertDeviceData(DeviceDataDTO deviceDataDTO) {
+    public void insertDeviceData(DeviceDataDTO deviceDataDTO) {
         DeviceData deviceData = deviceDataUtil.convertDTO2Domain(deviceDataDTO);
         boolean ret = deviceDataDao.createDeviceData(deviceData);
-        if (ret) {
-            return new Response(200, "OK", "insert device data ok!");
-        } else {
-            return new Response(400, "ERROR", "insert device data error! device id=" + deviceData.getDeviceId() + " not exists!");
+        if (!ret) {
+            throw new RuntimeException("insert device data error! device id=" + deviceData.getDeviceId() + " not exists!");
         }
     }
 
     @Override
-    public Response deleteDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime) {
+    public void deleteDeviceHistoryData(String deviceId, String sensorName, String startTime, String endTime) {
         deviceDataDao.removeDeviceDataById(deviceId, startTime, endTime);
-        return new Response(200, "OK", "删除设备数据成功!");
     }
 
     @Override
-    public Response deleteDeviceAllHistoryData(String deviceId) {
+    public void deleteDeviceAllHistoryData(String deviceId) {
         String startTime = "1000-01-01 08:00:00";
         String endTime = "3000-01-01 08:00:00";
         deviceDataDao.removeDeviceDataById(deviceId, startTime, endTime);
-        return new Response(200, "OK", "删除设备数据成功!");
     }
 
     @Override
-    public Response updateDeviceData(String id, DeviceDataDTO deviceDataDTO) {
-        return new Response(200, "OK", "更新设备数据成功ok!");
+    public void updateDeviceData(String id, DeviceDataDTO deviceDataDTO) {
     }
 
 
     @Override
-    public Response getLatestDeviceData(String deviceId, String sensorName) {
+    public DeviceDataDTO getLatestDeviceData(String deviceId, String sensorName) {
         DeviceData deviceData = deviceDataDao.findLatestDeviceData(deviceId, sensorName);
         log.info("deviceData: " + deviceData);
-        DeviceDataDTO deviceDataDTO = deviceDataUtil.convertDomain2DTO(deviceData);
-        return new Response(200, "OK", deviceDataDTO);
+        return deviceDataUtil.convertDomain2DTO(deviceData);
     }
 
     @Override
-    public Response getDeviceHistoryData(String deviceId, String sensorName, String filters, int pageIndex, int pageSize) {
+    public List<DeviceDataDTO> getDeviceHistoryData(String deviceId, String sensorName, String filters, int pageIndex, int pageSize) {
         try {
             String filterString = URLDecoder.decode(filters, "UTF-8");
             JSONObject filterObj = (JSONObject) JSON.parse(filterString);
-            System.out.println(filterObj);
 
             String startTime, endTime;
             if (filterObj != null && filterObj.containsKey("startTime") && filterObj.containsKey("endTime")) {
@@ -95,29 +85,23 @@ public class DeviceDataServiceImpl implements DeviceDataService {
             int limit = pageSize;
             List<DeviceData> deviceDatas = deviceDataDao.findDeviceHistoryDataWithLimit(deviceId, sensorName, startTime, endTime, limit, offset);
             List<DeviceDataDTO> res = new ArrayList<>();
-            for (DeviceData Data: deviceDatas) {
+            for (DeviceData Data : deviceDatas) {
                 res.add(deviceDataUtil.convertDomain2DTO(Data));
             }
-            return new Response(200, "查询设备历史数据成功！", res);
+            return res;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return new Response(200, "查询设备历史数据失败！", null);
+            throw new RuntimeException("查询设备历史数据失败！");
         }
     }
 
     @Override
-    public Result<List<DeviceDataDTO>> getDeviceAllHistoryData(String deviceId, String sensorName) {
-        try{
-            List<DeviceData> deviceDatas = deviceDataDao.findDeviceAllHistoryData(deviceId, sensorName);
-            List<DeviceDataDTO> res = new ArrayList<>();
-            for (DeviceData Data: deviceDatas) {
-                res.add(deviceDataUtil.convertDomain2DTO(Data));
-            }
-            return ResultUtil.success(res);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("获取历史数据错误");
+    public List<DeviceDataDTO> getDeviceAllHistoryData(String deviceId, String sensorName) {
+        List<DeviceData> deviceDatas = deviceDataDao.findDeviceAllHistoryData(deviceId, sensorName);
+        List<DeviceDataDTO> res = new ArrayList<>();
+        for (DeviceData Data : deviceDatas) {
+            res.add(deviceDataUtil.convertDomain2DTO(Data));
         }
-
+        return res;
     }
 }

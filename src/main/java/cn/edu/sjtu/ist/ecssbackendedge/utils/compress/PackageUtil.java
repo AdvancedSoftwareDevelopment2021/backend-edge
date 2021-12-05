@@ -6,7 +6,6 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
-
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
@@ -21,8 +20,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @brief 设备数据打包工具
  * @author rsp
+ * @brief 设备数据打包工具
  * @date 2021-11-20
  */
 @Slf4j
@@ -43,6 +42,7 @@ public class PackageUtil {
 
     /**
      * 根据输入的文件名称返回一个完整文件路径
+     *
      * @return 完整文件路径
      */
     public String getFilepath(String filename) {
@@ -58,6 +58,7 @@ public class PackageUtil {
 
     /**
      * 根据时间返回一个完整文件路径
+     *
      * @return 完整文件路径
      */
     public String getFilepathByDate() {
@@ -66,9 +67,10 @@ public class PackageUtil {
 
     /**
      * 保存设备数据
-     * @param filepath excel文件的完整路径
+     *
+     * @param filepath  excel文件的完整路径
      * @param startTime 开始时间
-     * @param endTime 结束时间
+     * @param endTime   结束时间
      * @return true/false
      */
     public Boolean packageDeviceHistoryData(String filepath, String startTime, String endTime) {

@@ -18,26 +18,26 @@ public class WebSocketUtil {
     @Autowired
     WebSocketClientConfig webSocketClientConfig;
 
-    public void getData(String id, String uri){
-        try{
+    public void getData(String id, String uri) {
+        try {
             MyWebSocketClient client = webSocketClientConfig.getClient(id, uri);
-            if(client.getReadyState().equals(ReadyState.OPEN)){
+            if (client.getReadyState().equals(ReadyState.OPEN)) {
                 client.send("采集数据");
             }
-        }catch (URISyntaxException e){
+        } catch (URISyntaxException e) {
             log.error(e.getMessage());
         }
     }
 
-    public void startMonitor(String id, String uri){
-        try{
+    public void startMonitor(String id, String uri) {
+        try {
             MyWebSocketClient client = webSocketClientConfig.getClient(id, uri);
-        }catch (URISyntaxException e){
+        } catch (URISyntaxException e) {
             log.error(e.getMessage());
         }
     }
 
-    public void stopMonitor(String id){
+    public void stopMonitor(String id) {
         webSocketClientConfig.deleteClient(id);
     }
 }

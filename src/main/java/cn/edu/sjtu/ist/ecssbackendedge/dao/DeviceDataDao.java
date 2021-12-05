@@ -5,9 +5,9 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
 import java.util.List;
 
 /**
- * @brief 设备数据Dao
  * @author rsp
  * @version 0.1
+ * @brief 设备数据Dao
  * @date 2021-11-06
  */
 public interface DeviceDataDao {

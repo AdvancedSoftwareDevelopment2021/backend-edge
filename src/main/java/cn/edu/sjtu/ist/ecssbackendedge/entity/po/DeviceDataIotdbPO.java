@@ -8,9 +8,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @brief 设备数据PO
  * @author rsp
  * @version 0.1
+ * @brief 设备数据PO
  * @date 2021-11-19
  */
 @Data

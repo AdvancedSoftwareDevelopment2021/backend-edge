@@ -34,13 +34,13 @@ public class ZigBeeConfig {
     /**
      * @Title getListener
      * @Description: 通过id获取对应的ZigBeeListener
-     * @params: [id,serialNumber,baudRate,checkoutBit,dataBit,stopBit]
+     * @params: [id, serialNumber, baudRate, checkoutBit, dataBit, stopBit]
      * @return: ZigBeeListener
      */
-    public ZigBeeListener getListener(String id, String serialNumber,int baudRate, int checkoutBit, int dataBit, int stopBit) {
+    public ZigBeeListener getListener(String id, String serialNumber, int baudRate, int checkoutBit, int dataBit, int stopBit) {
 
         ZigBeeListener listener = listenerMap.get(id);
-        if(listener == null) {
+        if (listener == null) {
             setListener(id, serialNumber, baudRate, checkoutBit, dataBit, stopBit);
             listener = listenerMap.get(id);
         }
@@ -50,21 +50,21 @@ public class ZigBeeConfig {
     }
 
     /**
+     * @return void
      * @Title setListener
      * @Description: 设置id对应的ZigBeeListener
      * @params [id, serialNumber, baudRate, checkoutBit, dataBit, stopBit]
-     * @return void
      */
-    private void setListener(String id, String serialNumber,int baudRate, int checkoutBit, int dataBit, int stopBit){
+    private void setListener(String id, String serialNumber, int baudRate, int checkoutBit, int dataBit, int stopBit) {
         Sensor sensor = sensorDao.findSensorById(id);
         ZigBeeListener listener = new ZigBeeListener(sensor);
         listener.init(serialNumber, baudRate, checkoutBit, dataBit, stopBit);
         listenerMap.put(id, listener);
     }
 
-    public void deleteListener(String id){
+    public void deleteListener(String id) {
         ZigBeeListener listener = listenerMap.get(id);
-        if(listener == null) {
+        if (listener == null) {
             return;
         }
         listener.closeSerialPort();

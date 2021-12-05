@@ -1,21 +1,18 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.sensor;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.AsynDataStatus;
-import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
-
+import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
+import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.AsynDataStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
 import lombok.Data;
 import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
-
-import java.net.URISyntaxException;
 
 /**
  * @author dyanjun
@@ -45,21 +42,21 @@ public class Sensor {
 
     private DeviceStatusDao deviceStatusDao;
 
-    public void monitor(){
+    public void monitor() {
         log.info("开始监听{}", this.name);
         this.status = Status.RUNNING;
         this.sensorDao.updateSensorStatus(this.id, this.status);
         this.dataCollector.monitor(id);
     }
 
-    public void stopMonitor(){
+    public void stopMonitor() {
         log.info("停止监听{}", this.name);
         this.status = Status.SLEEP;
         this.sensorDao.updateSensorStatus(this.id, this.status);
         this.dataCollector.stopMonitor(id);
     }
 
-    private String collectData(){
+    private String collectData() {
         log.info("开始采集数据项{}", this.name);
         this.status = Status.RUNNING;
         this.sensorDao.updateSensorStatus(this.id, this.status);
