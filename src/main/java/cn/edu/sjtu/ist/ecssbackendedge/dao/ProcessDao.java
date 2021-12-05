@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ProcessDao {
 
-    void createProcess(Process process);
+    Process createProcess(Process process);
 
     void removeProcess(String id);
 

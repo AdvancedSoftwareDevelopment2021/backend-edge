@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.CommandResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 
@@ -8,13 +8,13 @@ import java.util.Map;
 
 public interface EdgeService {
 
-    Response startEdge(CollectScheduler scheduler);
+    CommandResponse startEdge(CollectScheduler scheduler);
 
-    Response stopEdge();
+    CommandResponse stopEdge();
 
-    Response restartEdge(CollectScheduler scheduler);
+    CommandResponse restartEdge(CollectScheduler scheduler);
 
-    Response setCloudUrl(Map<String, String> map);
+    CommandResponse setCloudUrl(Map<String, String> map);
 
-    Response processControl(Process process);
+    CommandResponse processControl(Process process);
 }

@@ -36,13 +36,13 @@ public class WebSocketClientConfig {
     /**
      * @Title getClient
      * @Description: 通过id获取对应的websocketClient
-     * @params: [id,uri]
+     * @params: [id, uri]
      * @return: MyWebSocketClient
      */
     public MyWebSocketClient getClient(String id, String uri) throws URISyntaxException {
 
         MyWebSocketClient client = clientMap.get(id);
-        if(client == null) {
+        if (client == null) {
             setClient(id, uri);
             client = clientMap.get(id);
         }
@@ -61,10 +61,10 @@ public class WebSocketClientConfig {
     }
 
     /**
+     * @return void
      * @Title setClient
      * @Description: 设置id对应的websocketClient
      * @params [id, uri]
-     * @return void
      */
     private void setClient(String id, String uri) throws URISyntaxException {
         Sensor sensor = sensorDao.findSensorById(id);
@@ -72,9 +72,9 @@ public class WebSocketClientConfig {
         clientMap.put(id, client);
     }
 
-    public void deleteClient(String id){
+    public void deleteClient(String id) {
         MyWebSocketClient client = clientMap.get(id);
-        if(client == null) {
+        if (client == null) {
             return;
         }
         client.close();

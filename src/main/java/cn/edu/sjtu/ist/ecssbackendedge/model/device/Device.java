@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @brief 设备
  * @author rsp
  * @version 0.1
+ * @brief 设备
  * @date 2021-11-08
  */
 @Data
@@ -40,6 +40,7 @@ public class Device {
 
     /**
      * 将collector收集到的原始数据包装为key-value形式返回存储
+     *
      * @param data 收集到的数据
      */
     public String wrapData(String data) {

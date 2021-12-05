@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,9 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.Date;
 
 /**
- * @brief 设备数据PO
  * @author rsp
  * @version 0.1
+ * @brief 设备数据PO
  * @date 2021-11-08
  */
 @Data

@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee;
 
 
 import cn.edu.sjtu.ist.ecssbackendedge.config.ZigBeeConfig;
-import gnu.io.SerialPortEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,16 +12,16 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class ZigBeeUtil{
+public class ZigBeeUtil {
 
     @Autowired
     ZigBeeConfig zigBeeConfig;
 
-    public void startMonitor(String id,  String serialNumber,int baudRate, int checkoutBit, int dataBit, int stopBit){
+    public void startMonitor(String id, String serialNumber, int baudRate, int checkoutBit, int dataBit, int stopBit) {
         ZigBeeListener client = zigBeeConfig.getListener(id, serialNumber, baudRate, checkoutBit, dataBit, stopBit);
     }
 
-    public void stopMonitor(String id){
+    public void stopMonitor(String id) {
         zigBeeConfig.deleteListener(id);
     }
 

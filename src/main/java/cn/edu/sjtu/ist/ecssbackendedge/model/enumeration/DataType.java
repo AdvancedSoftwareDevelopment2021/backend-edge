@@ -17,6 +17,7 @@ public enum DataType {
 
     /**
      * 构造函数
+     *
      * @param type 数据类型
      */
     DataType(String type) {
@@ -32,6 +33,7 @@ public enum DataType {
 
     /**
      * 从字符串表示转为枚举
+     *
      * @param text 字符串表示
      */
     public static DataType fromString(String text) {

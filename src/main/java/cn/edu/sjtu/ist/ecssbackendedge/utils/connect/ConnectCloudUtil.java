@@ -17,8 +17,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @brief 与云端通信的接口
  * @author rsp
+ * @brief 与云端通信的接口
  * @date 2021-11-25
  */
 @Slf4j
@@ -31,8 +31,8 @@ public class ConnectCloudUtil {
     public String DATA_PATH;
 
     /**
-     * @brief 发送数据包到云端
      * @param filepath 数据包的本地绝对路径
+     * @brief 发送数据包到云端
      */
     public void sendDataPackage(String edgeId, String filepath) {
         // 获取本地文件

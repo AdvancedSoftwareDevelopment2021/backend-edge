@@ -5,9 +5,9 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
 import java.util.List;
 
 /**
- * @brief 设备状态Dao
  * @author rsp
  * @version 0.1
+ * @brief 设备状态Dao
  * @date 2021-11-06
  */
 public interface DeviceStatusDao {

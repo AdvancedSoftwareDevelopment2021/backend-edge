@@ -1,18 +1,19 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.ProcessDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
+
+import java.util.List;
 
 public interface ProcessService {
 
-    Response insertProcess(ProcessDTO processDTO);
+    ProcessDTO insertProcess(ProcessDTO processDTO);
 
-    Response deleteProcess(String id);
+    void deleteProcess(String id);
 
-    Response updateProcess(String id, ProcessDTO processDTO);
+    void updateProcess(String id, ProcessDTO processDTO);
 
-    Response getProcess(String id);
+    ProcessDTO getProcess(String id);
 
-    Response getAllProcesses();
+    List<ProcessDTO> getAllProcesses();
 
 }

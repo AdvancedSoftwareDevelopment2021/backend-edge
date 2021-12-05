@@ -4,7 +4,6 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ModbusCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
-
 import com.serotonin.modbus4j.exception.ModbusTransportException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,10 +47,10 @@ public class ModbusCollector extends DataCollector {
 
     @Override
     protected void verify() {
-        if(ip == null){
+        if (ip == null) {
             throw new RuntimeException("ip不能为空");
         }
-        if(port == null){
+        if (port == null) {
             throw new RuntimeException("port不能为空");
         }
     }

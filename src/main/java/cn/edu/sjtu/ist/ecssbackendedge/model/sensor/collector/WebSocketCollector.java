@@ -15,23 +15,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @NoArgsConstructor
-public class WebSocketCollector extends DataCollector{
+public class WebSocketCollector extends DataCollector {
 
     private String uri;
 
     private WebSocketUtil webSocketUtil;
+
     /**
      * 主动请求数据
      */
     @Override
-    public String execute(String id){
+    public String execute(String id) {
         webSocketUtil.getData(id, uri);
         return AsynDataStatus.WAITING_DATA.getDataStatus();
     }
 
     @Override
     protected void verify() {
-        if(uri==null) throw new RuntimeException("uri不能为空");
+        if (uri == null) throw new RuntimeException("uri不能为空");
     }
 
     @Override

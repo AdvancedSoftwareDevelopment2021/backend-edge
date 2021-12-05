@@ -1,14 +1,19 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.CommandResponse;
+import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.service.EdgeService;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
-
+import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.response.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
@@ -22,40 +27,44 @@ public class EdgeController {
 
     /**
      * 关闭边缘端数据收集的功能
+     *
      * @return 成功/失败
      */
     @PostMapping("/stop")
-    public ResponseEntity<?> stopEdge() {
-        return new ResponseEntity<>(edgeService.stopEdge(), HttpStatus.OK);
+    public Result<CommandResponse> stopEdge() {
+        return ResultUtil.success(edgeService.stopEdge());
     }
 
     /**
      * 重启边缘端数据收集的功能
+     *
      * @param scheduler 调度器，间隔
      * @return 成功/失败
      */
     @PostMapping("/restart")
-    public ResponseEntity<?> restartEdge(@RequestBody CollectScheduler scheduler) {
-        return new ResponseEntity<>(edgeService.restartEdge(scheduler), HttpStatus.OK);
+    public  Result<CommandResponse> restartEdge(@RequestBody CollectScheduler scheduler) {
+        return ResultUtil.success(edgeService.restartEdge(scheduler));
     }
 
     /**
      * 接收并保存云端的url，默认直接开启
+     *
      * @param map 云url, 边id, interval, timeUnit
      * @return 接收情况
      */
     @PostMapping("")
-    public ResponseEntity<?> receiveCloudUrl(@RequestBody Map<String, String> map) {
-        return new ResponseEntity<>(edgeService.setCloudUrl(map), HttpStatus.OK);
+    public  Result<CommandResponse> receiveCloudUrl(@RequestBody Map<String, String> map) {
+        return ResultUtil.success(edgeService.setCloudUrl(map));
     }
 
     /**
      * 接收下发的流程
+     *
      * @param process 流程
      * @return true/false
      */
     @PostMapping("/process")
-    public ResponseEntity<?> receiveCloudProcess(@RequestBody Process process) {
-        return new ResponseEntity<>(edgeService.processControl(process), HttpStatus.OK);
+    public Result<CommandResponse> receiveCloudProcess(@RequestBody Process process) {
+        return ResultUtil.success(edgeService.processControl(process));
     }
 }

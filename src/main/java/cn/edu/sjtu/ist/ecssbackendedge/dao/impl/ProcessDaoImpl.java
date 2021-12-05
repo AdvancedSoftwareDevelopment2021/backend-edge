@@ -5,7 +5,6 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.po.ProcessPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.ProcessRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.ProcessUtil;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,9 +23,10 @@ public class ProcessDaoImpl implements ProcessDao {
     private ProcessRepository processRepository;
 
     @Override
-    public void createProcess(Process process) {
+    public Process createProcess(Process process) {
         ProcessPO po = processUtil.convertDomain2PO(process);
         processRepository.save(po);
+        return processUtil.convertPO2Domain(po);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ProcessDaoImpl implements ProcessDao {
     public List<Process> findProcessByName(String name) {
         List<ProcessPO> processPOs = processRepository.findProcessPOSByName(name);
         List<Process> processs = new ArrayList<>();
-        for (ProcessPO processPO: processPOs) {
+        for (ProcessPO processPO : processPOs) {
             Process dm = processUtil.convertPO2Domain(processPO);
             processs.add(dm);
         }
@@ -66,7 +66,7 @@ public class ProcessDaoImpl implements ProcessDao {
     public List<Process> findAllProcesss() {
         List<ProcessPO> processPOs = processRepository.findAll();
         List<Process> processs = new ArrayList<>();
-        for (ProcessPO processPO: processPOs) {
+        for (ProcessPO processPO : processPOs) {
             Process dm = processUtil.convertPO2Domain(processPO);
             processs.add(dm);
         }

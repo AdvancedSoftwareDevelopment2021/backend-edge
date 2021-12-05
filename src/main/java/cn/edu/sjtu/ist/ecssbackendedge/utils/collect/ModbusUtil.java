@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.collect;
 
 import cn.edu.sjtu.ist.ecssbackendedge.config.ModbusConfig;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction;
-
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;
 import com.serotonin.modbus4j.exception.ModbusTransportException;
@@ -18,16 +17,16 @@ import java.util.Arrays;
  */
 @Component
 public class ModbusUtil {
-   //从机默认值
-   private Integer slaveId = 1;
+    //从机默认值
+    private Integer slaveId = 1;
 
     @Autowired
     private ModbusConfig modbusConfig;
 
     public String collectData(String id, String ip, Integer port, Integer slaveId, Integer offset, Integer num, ModbusFunction modbusFunction, String datatype) throws ModbusTransportException {
-        if(slaveId != null) this.slaveId = slaveId;
+        if (slaveId != null) this.slaveId = slaveId;
         String output = "";
-        switch(modbusFunction){
+        switch (modbusFunction) {
             case COIL_STATUS:
                 boolean[] coilStatus = readCoilStatus(id, ip, port, offset, num);
                 output = Arrays.toString(coilStatus);
@@ -38,7 +37,13 @@ public class ModbusUtil {
                 break;
             case HOLDING_REGISTER:
                 byte[] holdingRegister = readHoldingRegister(id, ip, port, offset, num, datatype);
-                output = Arrays.toString(holdingRegister);
+                byte[] e = new byte[holdingRegister.length / 2];
+                for (int i = 0; i < holdingRegister.length; i++) {
+                    if (i % 2 != 0) {
+                        e[i / 2] = holdingRegister[i];
+                    }
+                }
+                output = Arrays.toString(e);
                 break;
             case INPUT_REGISTER:
                 byte[] inputRegisters = readInputRegisters(id, ip, port, offset, num, datatype);
@@ -76,7 +81,7 @@ public class ModbusUtil {
     public boolean[] readInputStatus(String id, String ip, Integer port, int offset, int numberOfRegister) throws ModbusTransportException {
 
         ModbusMaster master = modbusConfig.getMaster(id, ip, port);
-        ReadDiscreteInputsRequest request = new ReadDiscreteInputsRequest(slaveId,offset, numberOfRegister);
+        ReadDiscreteInputsRequest request = new ReadDiscreteInputsRequest(slaveId, offset, numberOfRegister);
         ReadDiscreteInputsResponse response = (ReadDiscreteInputsResponse) master.send(request);
         boolean[] booleans = response.getBooleanData();
 
@@ -87,7 +92,7 @@ public class ModbusUtil {
      * @Title readHoldingRegister
      * @Description: 读取保持寄存器数据，相当于功能码：03H-读保持寄存器
      * @params: [ip, offset, numberOfRegister]
-     * @return:  Number[]
+     * @return: Number[]
      * @throws: ModbusTransportException Modbus传输异常
      */
     public byte[] readHoldingRegister(String id, String ip, Integer port, int offset, int numberOfRegister, String datatype) throws ModbusTransportException {

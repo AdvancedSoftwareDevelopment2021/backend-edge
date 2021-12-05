@@ -1,19 +1,19 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 
 import java.util.List;
 
 /**
- * @brief SensorDao
  * @author rsp
  * @version 0.1
+ * @brief SensorDao
  * @date 2021-11-19
  */
 public interface SensorDao {
 
-    void createSensor(Sensor sensor);
+    Sensor createSensor(Sensor sensor);
 
     void deleteSensorById(String id);
 
