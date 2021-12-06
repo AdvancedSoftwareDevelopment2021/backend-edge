@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @NoArgsConstructor
-public class HttpCollector  extends DataCollector {
+public class HttpCollector extends DataCollector {
 
     private String url;
 
@@ -25,7 +25,7 @@ public class HttpCollector  extends DataCollector {
 
     @Override
     protected void verify() {
-        if(url == null){
+        if (url == null) {
             throw new RuntimeException("url不能为空");
         }
     }

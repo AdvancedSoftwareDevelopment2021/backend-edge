@@ -1,26 +1,25 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceStatusPO;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
+import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceStatusRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceStatusUtil;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * @brief 设备状态DaoImpl
  * @author rsp
  * @version 0.1
+ * @brief 设备状态DaoImpl
  * @date 2021-11-19
  */
 @Slf4j
@@ -49,7 +48,7 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
     @Override
     public boolean createDeviceStatus(DeviceStatus deviceStatus) {
         DevicePO devicePO = deviceRepository.findDeviceById(deviceStatus.getDeviceId());
-        if(devicePO == null) {
+        if (devicePO == null) {
             log.error("设备数据对应的设备不存在，数据无法保存");
             return false;
         }
@@ -68,7 +67,7 @@ public class DeviceStatusDaoImpl implements DeviceStatusDao {
     public boolean modifyDeviceStatus(DeviceStatus deviceStatus) {
         DevicePO devicePO = deviceRepository.findDeviceById(deviceStatus.getDeviceId());
         if (devicePO == null) {
-            log.info("设备状态id=" + deviceStatus.getId() + ", 设备id=" + deviceStatus.getDeviceId() +"不存在!");
+            log.info("设备状态id=" + deviceStatus.getId() + ", 设备id=" + deviceStatus.getDeviceId() + "不存在!");
             return false;
         }
 

@@ -15,6 +15,7 @@ public class IotdbDeviceStatusUtil {
 
     /**
      * 设置设备状态存储前缀
+     *
      * @param deviceStatusStoragePrefix 设备状态存储前缀
      */
     @Value("${iotdb.storage.status.name}")
@@ -24,6 +25,7 @@ public class IotdbDeviceStatusUtil {
 
     /**
      * 获取设备状态的时间序列
+     *
      * @param deviceId 设备 id
      */
     public static String getDeviceStatusTimeSeries(String deviceId) {
@@ -32,9 +34,10 @@ public class IotdbDeviceStatusUtil {
 
     /**
      * sql选择设备状态
-     * @param deviceId 设备 id
+     *
+     * @param deviceId  设备 id
      * @param startTime 开始时间
-     * @param endTime 结束时间
+     * @param endTime   结束时间
      */
     public static String sqlToSelectDeviceStatus(String deviceId, String sensorName, String startTime, String endTime) {
         String sql = String.format("select * from %s", getDeviceStatusTimeSeries(deviceId));
@@ -55,9 +58,10 @@ public class IotdbDeviceStatusUtil {
 
     /**
      * sql查询设备历史数据的条数
-     * @param deviceId 设备 id
+     *
+     * @param deviceId  设备 id
      * @param startTime 开始时间
-     * @param endTime 结束时间
+     * @param endTime   结束时间
      */
     public static String sqlToCountDeviceStatus(String deviceId, String startTime, String endTime) {
         String sql = String.format("select count(*) from %s", getDeviceStatusTimeSeries(deviceId));
@@ -68,15 +72,16 @@ public class IotdbDeviceStatusUtil {
 
     /**
      * sql查询设备在某个时间区段的历史状态
-     * @param deviceId 设备 id
+     *
+     * @param deviceId  设备 id
      * @param startTime 开始时间
-     * @param endTime 结束时间
-     * @param limit 返回的行数
-     * @param offset 偏移的行数
+     * @param endTime   结束时间
+     * @param limit     返回的行数
+     * @param offset    偏移的行数
      */
     public static String sqlToSelectDeviceStatusWithLimit(String deviceId,
-                                                        String startTime, String endTime,
-                                                        int limit, int offset) {
+                                                          String startTime, String endTime,
+                                                          int limit, int offset) {
         String sql = String.format("select * from %s", getDeviceStatusTimeSeries(deviceId));
         String limitPart = String.format("limit %d offset %d", limit, offset);
         sql = String.format("%s where timestamp >= %s and timestamp <= %s %s", sql, startTime, endTime, limitPart);
@@ -86,9 +91,10 @@ public class IotdbDeviceStatusUtil {
 
     /**
      * sql删除设备状态
-     * @param deviceId 设备 id
+     *
+     * @param deviceId  设备 id
      * @param startTime 开始时间
-     * @param endTime 结束时间
+     * @param endTime   结束时间
      */
     public static String sqlToDeleteDeviceStatus(String deviceId, String startTime, String endTime) {
         String sql = String.format("delete from %s", getDeviceStatusTimeSeries(deviceId));

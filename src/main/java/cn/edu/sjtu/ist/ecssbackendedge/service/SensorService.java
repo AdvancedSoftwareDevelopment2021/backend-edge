@@ -1,8 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+
+import java.util.List;
 
 /**
  * @author dyanjun
@@ -10,23 +12,23 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
  */
 public interface SensorService {
 
-    Response createSensor(String deviceId, SensorRequest sensorDTO);
+    SensorResponse createSensor(String deviceId, SensorRequest sensorDTO);
 
-    Response deleteSensorById(String id);
+    void deleteSensorById(String id);
 
-    Response deleteSensorsByDeviceId(String id);
+    void deleteSensorsByDeviceId(String id);
 
-    Response syncStatus(Sensor sensor);
+    void syncStatus(Sensor sensor);
 
-    Response getSensorById(String id);
+    SensorResponse getSensorById(String id);
 
-    Response getSensorsByDeviceId(String id);
+    List<SensorResponse> getSensorsByDeviceId(String id);
 
-    Response startSensor(String id, String sensorId);
+    void startSensor(String id, String sensorId);
 
-    Response stopSensor(String id, String sensorId);
+    void stopSensor(String id, String sensorId);
 
-    Response startMonitor(String id, String sensorId);
+    void startMonitor(String id, String sensorId);
 
-    Response stopMonitor(String id, String sensorId);
+    void stopMonitor(String id, String sensorId);
 }

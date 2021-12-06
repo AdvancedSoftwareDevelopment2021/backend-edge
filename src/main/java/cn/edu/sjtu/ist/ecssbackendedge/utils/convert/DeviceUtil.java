@@ -6,9 +6,9 @@ import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
 import org.springframework.stereotype.Component;
 
 /**
- * @brief 设备对象转换工具类
  * @author rsp
  * @version 0.1
+ * @brief 设备对象转换工具类
  * @date 2021-11-20
  */
 @Component

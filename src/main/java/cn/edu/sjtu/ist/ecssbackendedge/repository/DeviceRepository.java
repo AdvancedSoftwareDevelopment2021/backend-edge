@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @brief 设备repository
  * @author rsp
  * @version 0.1
+ * @brief 设备repository
  * @date 2021-11-08
  */
 @Repository

@@ -3,9 +3,8 @@ package cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.*;
-
-import java.net.URISyntaxException;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author dyanjun

@@ -1,7 +1,5 @@
 package cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.WebSocketCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ZigBeeCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
@@ -16,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @NoArgsConstructor
-public class ZigBeeCollector extends DataCollector{
+public class ZigBeeCollector extends DataCollector {
 
     private String serialNumber;// 串口号
     private int baudRate;        // 波特率

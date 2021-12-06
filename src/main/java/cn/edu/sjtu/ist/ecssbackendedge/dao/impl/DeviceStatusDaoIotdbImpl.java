@@ -4,7 +4,6 @@ import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceStatusIotdbPO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.storage.IotdbDeviceStatusUtil;
-
 import lombok.extern.slf4j.Slf4j;
 import org.apache.iotdb.rpc.IoTDBConnectionException;
 import org.apache.iotdb.rpc.StatementExecutionException;
@@ -31,9 +30,10 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
 
     /**
      * 由sensor调用，插入设备的状态
-     * @param deviceId 设备 id
+     *
+     * @param deviceId   设备 id
      * @param sensorName sensor名称
-     * @param status 状态
+     * @param status     状态
      */
     @Override
     public void saveDeviceStatus(String deviceId, String sensorName, String status) {
@@ -46,12 +46,13 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
             log.info(String.format("iotdb: 插入状态成功！ 表名=%s", tableName));
         } catch (IoTDBConnectionException | StatementExecutionException e) {
             log.error(String.format("iotdb: 插入设备状态失败，设备id=%s，状态=%s", deviceId, status));
-            throw new RuntimeException("iotdb: 插入设备状态失败，报错信息：" + e.getMessage() );
+            throw new RuntimeException("iotdb: 插入设备状态失败，报错信息：" + e.getMessage());
         }
     }
 
     /**
      * 插入设备状态
+     *
      * @param deviceStatus 设备状态
      * @return true/false
      */
@@ -72,9 +73,10 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
 
     /**
      * 删除设备某段时间内的状态
-     * @param deviceId 设备id
+     *
+     * @param deviceId  设备id
      * @param startTime 开始时间
-     * @param endTime 结束时间
+     * @param endTime   结束时间
      */
     @Override
     public void removeDeviceStatusById(String deviceId, String startTime, String endTime) {
@@ -93,6 +95,7 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
 
     /**
      * 更新设备状态（未实现，理论上不会被调用）
+     *
      * @param deviceStatus 设备状态
      * @return true/false
      */
@@ -103,14 +106,15 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
 
     /**
      * 查找最新的设备状态
-     * @param deviceId 设备id
+     *
+     * @param deviceId   设备id
      * @param sensorName sensor名称
      * @return 最新的设备状态
      */
     @Override
     public DeviceStatus findLatestDeviceStatus(String deviceId, String sensorName) {
         DeviceStatus res = new DeviceStatus();
-        try{
+        try {
             String sql = IotdbDeviceStatusUtil.sqlToSelectLatestStatus(deviceId, sensorName);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
@@ -123,9 +127,9 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
             res.setStatus(dataIterator.getString(IotdbDeviceStatusUtil.getDeviceStatusTimeSeries(deviceId) + ".status"));
 
             session.close();
-            log.info(String.format("iotdb: 查询最新状态成功！设备id=%s, sensor名称=%s的最新状态: %s", deviceId,  sensorName, res));
+            log.info(String.format("iotdb: 查询最新状态成功！设备id=%s, sensor名称=%s的最新状态: %s", deviceId, sensorName, res));
             return res;
-        }catch (IoTDBConnectionException | StatementExecutionException e){
+        } catch (IoTDBConnectionException | StatementExecutionException e) {
             log.error(String.format("iotdb: 查询最新状态失败，设备id=%s, sensor名称=%s", deviceId, sensorName));
             throw new RuntimeException("iotdb: 查询最新状态失败，报错信息：" + e.getMessage());
         }
@@ -133,18 +137,19 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
 
     /**
      * 按条件查询某段时间内的状态
-     * @param deviceId 设备id
+     *
+     * @param deviceId   设备id
      * @param sensorName sensor名称
-     * @param startTime 开始时间
-     * @param endTime 结束时间
-     * @param limit 限制
-     * @param offset 偏移量
+     * @param startTime  开始时间
+     * @param endTime    结束时间
+     * @param limit      限制
+     * @param offset     偏移量
      * @return 设备状态列表
      */
     @Override
     public List<DeviceStatus> findDeviceHistoryStatus(String deviceId, String sensorName, String startTime, String endTime, int limit, int offset) {
         List<DeviceStatus> res = new ArrayList<>();
-        try{
+        try {
             String sql = IotdbDeviceStatusUtil.sqlToSelectDeviceStatus(deviceId, sensorName, startTime, endTime);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
@@ -160,7 +165,7 @@ public class DeviceStatusDaoIotdbImpl implements DeviceStatusDao {
             session.close();
             log.info(String.format("iotdb: 查询所有历史状态成功，设备id=%s, sensor名称=%s, 返回状态数量%d", deviceId, sensorName, res.size()));
             return res;
-        }catch (IoTDBConnectionException | StatementExecutionException e){
+        } catch (IoTDBConnectionException | StatementExecutionException e) {
             log.error(String.format("iotdb: 查询所有历史状态失败，设备id=%s, sensor名称=%s", deviceId, sensorName));
             throw new RuntimeException("iotdb: 查询所有历史状态失败，报错信息：" + e.getMessage());
         }

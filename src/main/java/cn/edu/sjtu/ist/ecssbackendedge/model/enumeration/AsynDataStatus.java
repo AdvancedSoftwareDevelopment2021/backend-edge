@@ -14,6 +14,7 @@ public enum AsynDataStatus {
 
     /**
      * 构造函数
+     *
      * @param dataStatus 异步数据状态
      */
     AsynDataStatus(String dataStatus) {
@@ -29,6 +30,7 @@ public enum AsynDataStatus {
 
     /**
      * 从字符串表示转为枚举
+     *
      * @param text 字符串表示
      */
     public static AsynDataStatus fromString(String text) {

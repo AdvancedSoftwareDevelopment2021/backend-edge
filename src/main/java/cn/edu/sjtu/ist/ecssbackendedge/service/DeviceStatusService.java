@@ -1,26 +1,27 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceStatusDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
+
+import java.util.List;
 
 /**
- * @brief 设备状态service
  * @author rsp
  * @version 0.1
+ * @brief 设备状态service
  * @date 2021-11-08
  */
 public interface DeviceStatusService {
 
-    Response insertDeviceStatus(DeviceStatusDTO deviceStatusDTO);
+    void insertDeviceStatus(DeviceStatusDTO deviceStatusDTO);
 
-    Response deleteDeviceHistoryStatus(String deviceId, String sensorName, String startTime, String endTime);
+    void deleteDeviceHistoryStatus(String deviceId, String sensorName, String startTime, String endTime);
 
-    Response deleteDeviceAllHistoryStatus(String deviceId);
+    void deleteDeviceAllHistoryStatus(String deviceId);
 
-    Response updateDeviceStatus(String id, DeviceStatusDTO deviceStatusDTO);
+    void updateDeviceStatus(String id, DeviceStatusDTO deviceStatusDTO);
 
-    Response getLatestDeviceStatus(String deviceId, String sensorName);
+    DeviceStatusDTO getLatestDeviceStatus(String deviceId, String sensorName);
 
-    Response getDeviceHistoryStatus(String deviceId, String sensorName, String filters, int pageIndex, int pageSize);
+    List<DeviceStatusDTO> getDeviceHistoryStatus(String deviceId, String sensorName, String filters, int pageIndex, int pageSize);
 
 }

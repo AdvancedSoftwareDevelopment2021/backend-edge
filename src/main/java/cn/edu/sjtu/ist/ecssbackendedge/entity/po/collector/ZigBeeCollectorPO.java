@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2021/11/21 17:35
  */
 @Data
-public class ZigBeeCollectorPO extends DataCollectorPO{
+public class ZigBeeCollectorPO extends DataCollectorPO {
 
     private String serialNumber;
     private int baudRate;

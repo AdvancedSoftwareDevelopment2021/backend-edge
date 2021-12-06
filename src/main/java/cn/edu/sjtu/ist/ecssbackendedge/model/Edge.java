@@ -3,7 +3,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.model;
 import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.compress.PackageUtil;
-
 import cn.edu.sjtu.ist.ecssbackendedge.utils.connect.ConnectCloudUtil;
 import lombok.Data;
 import lombok.Setter;

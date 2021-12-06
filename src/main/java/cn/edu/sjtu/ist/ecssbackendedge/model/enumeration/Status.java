@@ -22,10 +22,11 @@ public enum Status {
 
     /**
      * 从字符串表示转为枚举
+     *
      * @param text 字符串表示
      */
     public static Status fromString(String text) {
-        for (Status status: Status.values()) {
+        for (Status status : Status.values()) {
             if (status.type.equals(text)) {
                 return status;
             }

@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * @brief CollectScheduler对象转换工具类
  * @author rsp
  * @version 0.1
+ * @brief CollectScheduler对象转换工具类
  * @date 2021-11-20
  */
 @Component
 public class CollectSchedulerUtil {
 
     public CollectSchedulerPO convertDomain2PO(CollectScheduler scheduler) {
-        if(scheduler==null) return null;
+        if (scheduler == null) return null;
         CollectSchedulerPO res = new CollectSchedulerPO();
         res.setInterval(scheduler.getInterval());
         res.setUnit(scheduler.getUnit());
@@ -25,7 +25,7 @@ public class CollectSchedulerUtil {
     }
 
     public CollectScheduler convertPO2Domain(CollectSchedulerPO schedulerPO) {
-        if(schedulerPO==null) return null;
+        if (schedulerPO == null) return null;
         CollectScheduler res = new CollectScheduler();
         res.setInterval(schedulerPO.getInterval());
         res.setUnit(schedulerPO.getUnit());

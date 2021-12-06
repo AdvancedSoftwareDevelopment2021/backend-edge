@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.EdgeDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.Response;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.CommandResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.model.Edge;
 import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
@@ -27,43 +27,43 @@ public class EdgeServiceImpl implements EdgeService {
     private EdgeDao edgeDao;
 
     @Override
-    public Response startEdge(CollectScheduler scheduler) {
+    public CommandResponse startEdge(CollectScheduler scheduler) {
         try {
             edge.setCollectorScheduler(scheduler);
             edge.startPackageData(); // 开始收集数据
-            return new Response(200, "Edge收集数据，启动成功！", null);
+            return new CommandResponse(true, "Edge收集数据，启动成功！");
         } catch (Exception e) {
             log.info(e.getMessage());
-            return new Response(200, "Edge收集数据，启动失败！", null);
+            return new CommandResponse(false, "Edge收集数据，启动失败！");
         }
     }
 
     @Override
-    public Response stopEdge() {
+    public CommandResponse stopEdge() {
         try {
             edge.stopPackageData(); // 结束数据打包任务
-            return new Response(200, "Edge收集数据，关闭成功！", null);
+            return new CommandResponse(true, "Edge收集数据，关闭成功！");
         } catch (SchedulerException e) {
             log.info(e.getMessage());
-            return new Response(200, "Edge收集数据，关闭失败！", null);
+            return new CommandResponse(false, "Edge收集数据，关闭失败！");
         }
     }
 
     @Override
-    public Response restartEdge(CollectScheduler scheduler) {
+    public CommandResponse restartEdge(CollectScheduler scheduler) {
         try {
             edge.stopPackageData(); // 结束数据打包任务
             edge.setCollectorScheduler(scheduler);
             edge.startPackageData(); // 重新开始收集数据
-            return new Response(200, "Edge收集数据，重启成功！", null);
+            return new CommandResponse(true, "Edge收集数据，重启成功！");
         } catch (SchedulerException e) {
             log.info(e.getMessage());
-            return new Response(200, "Edge收集数据，重启失败！", null);
+            return new CommandResponse(false, "Edge收集数据，重启失败！");
         }
     }
 
     @Override
-    public Response setCloudUrl(Map<String, String> map) {
+    public CommandResponse setCloudUrl(Map<String, String> map) {
         String url = map.get("url");
         String id = map.get("id");
         int interval = Integer.parseInt(map.get("interval"));
@@ -82,12 +82,11 @@ public class EdgeServiceImpl implements EdgeService {
         log.info(String.format("url: %s", ConnectCloudUtil.CLOUD_SERVER_URL));
 
         edge.startPackageData();
-
-        return new Response(200, String.format("接收并保存云端信息成功, url=%s", url), null);
+        return new CommandResponse(true, String.format("接收并保存云端信息成功, url=%s", url));
     }
 
     @Override
-    public Response processControl(Process process) {
-        return new Response(200, "流程控制成功", null);
+    public CommandResponse processControl(Process process) {
+        return new CommandResponse(true, "流程控制成功");
     }
 }
