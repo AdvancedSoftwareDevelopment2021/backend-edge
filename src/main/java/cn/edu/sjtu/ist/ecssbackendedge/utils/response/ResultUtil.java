@@ -26,7 +26,7 @@ public class ResultUtil {
 
     public static Result<String> success() {
         Result<String> result = new Result<>();
-        result.setMessage("");
+        result.setData("");
         result.setMessage(SUCCESS.getMessage());
         result.setCode(SUCCESS.getCode());
         return result;

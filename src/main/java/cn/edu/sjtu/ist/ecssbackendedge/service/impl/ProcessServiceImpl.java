@@ -1,29 +1,31 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.ProcessDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.ProcessDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ElementDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.TaskWithDeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.service.ProcessService;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.ProcessUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.process.BpmnUtils;
+
+import org.camunda.bpm.model.bpmn.Bpmn;
+import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
+import static cn.edu.sjtu.ist.ecssbackendedge.model.process.ElementType.DEVICE_KEY;
 
 @Service
 public class ProcessServiceImpl implements ProcessService {
 
     @Autowired
-    private ProcessUtil processUtil;
-
-    @Autowired
     private ProcessDao processDao;
 
     @Override
-    public ProcessDTO insertProcess(ProcessDTO processDTO) {
-        Process process = processUtil.convertDTO2Domain(processDTO);
-        return processUtil.convertDomain2DTO(processDao.createProcess(process));
+    public Process insertProcess(Process process) {
+        return processDao.createProcess(process);
     }
 
     @Override
@@ -32,27 +34,82 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public void updateProcess(String id, ProcessDTO processDTO) {
-        processDTO.setId(id);
-        Process process = processUtil.convertDTO2Domain(processDTO);
+    public void updateProcess(String processId, Process process) {
+        process.setId(processId);
         processDao.modifyProcess(process);
     }
 
     @Override
-    public ProcessDTO getProcess(String id) {
-        Process process = processDao.findProcessById(id);
-        ProcessDTO processDTO = processUtil.convertDomain2DTO(process);
-        return processDTO;
+    public void updateProcessName(String processId, String name) {
+        Process process = processDao.findProcessById(processId);
+        process.setName(name);
+        processDao.modifyProcess(process);
     }
 
     @Override
-    public List<ProcessDTO> getAllProcesses() {
-        List<Process> processs = processDao.findAllProcesss();
-        List<ProcessDTO> res = new ArrayList<>();
-        for (Process process : processs) {
-            ProcessDTO dto = processUtil.convertDomain2DTO(process);
-            res.add(dto);
+    public Process getProcess(String processId) {
+        return processDao.findProcessById(processId);
+    }
+
+    @Override
+    public List<Process> getAllProcesses() {
+        return processDao.findAllProcesss();
+    }
+
+    @Override
+    public String findBpmn(String processId) {
+        Process process = processDao.findProcessById(processId);
+        return process.getBpmn();
+    }
+
+    @Override
+    public void updateProcessBpmn(String processId, String bpmn) {
+        Process process = processDao.findProcessById(processId);
+        process.setBpmn(bpmn);
+        processDao.modifyProcess(process);
+    }
+
+    @Override
+    public void bindDevice(String processId, String taskId, String deviceId) {
+        Process process = processDao.findProcessById(processId);
+        BpmnModelInstance instance = Bpmn.readModelFromStream(BpmnUtils.strToInStream(process.getBpmn()));
+        BpmnModelInstance newInstance = BpmnUtils.setExtension(instance, taskId, DEVICE_KEY.getKey(), deviceId);
+        updateProcessBpmn(processId, BpmnUtils.bpmnInstToStr(newInstance));
+    }
+
+    @Override
+    public void deleteDevice(String processId, String taskId) {
+        Process process = processDao.findProcessById(processId);
+        BpmnModelInstance instance = Bpmn.readModelFromStream(BpmnUtils.strToInStream(process.getBpmn()));
+        BpmnModelInstance newInstance = BpmnUtils.deleteExtension(instance, taskId, DEVICE_KEY.getKey());
+        updateProcessBpmn(processId, BpmnUtils.bpmnInstToStr(newInstance));
+    }
+
+    @Override
+    public List<TaskWithDeviceDTO> findAllDevices(String processId) {
+        Process process = processDao.findProcessById(processId);
+        BpmnModelInstance instance = Bpmn.readModelFromStream(BpmnUtils.strToInStream(process.getBpmn()));
+        List<ElementDTO> elementDTOS = BpmnUtils.getExtensionByType(instance, DEVICE_KEY);
+        List<TaskWithDeviceDTO> taskWithDeviceDTOS = new LinkedList<>();
+        for (ElementDTO elementDTO: elementDTOS) {
+            if (elementDTO.getValue() == null){
+                taskWithDeviceDTOS.add(TaskWithDeviceDTO.builder()
+                        .taskId(elementDTO.getElementId())
+                        .taskName(elementDTO.getElementName())
+                        .deviceId(null)
+                        .metadataId(null)
+                        .build());
+            }
+            else {
+                String deviceId = elementDTO.getValue();
+                taskWithDeviceDTOS.add(TaskWithDeviceDTO.builder()
+                        .taskId(elementDTO.getElementId())
+                        .taskName(elementDTO.getElementName())
+                        .deviceId(deviceId)
+                        .metadataId(null)
+                        .build());
+            }
         }
-        return res;
+        return taskWithDeviceDTOS;
     }
 }
