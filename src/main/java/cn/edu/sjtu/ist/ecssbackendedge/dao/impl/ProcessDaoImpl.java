@@ -2,9 +2,10 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.ProcessDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.ProcessPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.ProcessRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.ProcessUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

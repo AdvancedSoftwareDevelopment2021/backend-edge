@@ -1,10 +1,11 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceDataDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceDataService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;

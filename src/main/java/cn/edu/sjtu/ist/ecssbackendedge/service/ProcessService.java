@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.TaskWithDeviceDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 
 import java.util.List;
 

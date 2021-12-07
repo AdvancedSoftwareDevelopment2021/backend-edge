@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 
 import java.util.List;
 

@@ -1,7 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.scheduler.CollectSchedulerPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

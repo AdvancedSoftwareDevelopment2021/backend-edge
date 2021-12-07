@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.process;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ElementDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.ElementType;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.ElementType;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
@@ -13,7 +13,7 @@ import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static cn.edu.sjtu.ist.ecssbackendedge.model.process.ElementType.DEVICE_KEY;
+import static cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.ElementType.DEVICE_KEY;
 
 public class BpmnUtils {
 

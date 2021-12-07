@@ -1,13 +1,14 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
-import cn.edu.sjtu.ist.ecssbackendedge.component.QuartzScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor.SensorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

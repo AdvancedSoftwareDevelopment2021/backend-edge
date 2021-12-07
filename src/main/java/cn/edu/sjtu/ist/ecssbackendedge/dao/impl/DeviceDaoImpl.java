@@ -1,10 +1,11 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.device.DevicePO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

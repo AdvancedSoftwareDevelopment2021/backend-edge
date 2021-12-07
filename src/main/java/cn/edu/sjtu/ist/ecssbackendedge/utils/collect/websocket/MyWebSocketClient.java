@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;

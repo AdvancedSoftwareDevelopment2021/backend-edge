@@ -3,7 +3,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.ProcessDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ElementDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.TaskWithDeviceDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.service.ProcessService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.process.BpmnUtils;
 
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 
-import static cn.edu.sjtu.ist.ecssbackendedge.model.process.ElementType.DEVICE_KEY;
+import static cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.ElementType.DEVICE_KEY;
 
 @Service
 public class ProcessServiceImpl implements ProcessService {

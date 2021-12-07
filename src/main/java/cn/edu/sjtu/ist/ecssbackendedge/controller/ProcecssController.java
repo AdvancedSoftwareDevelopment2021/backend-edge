@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ProcessDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.service.ProcessService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.ProcessUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;

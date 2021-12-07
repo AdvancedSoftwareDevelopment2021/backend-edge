@@ -2,10 +2,11 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.compress;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceDataDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceDataUtil;
+
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;

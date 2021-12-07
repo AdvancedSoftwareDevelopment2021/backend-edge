@@ -2,10 +2,10 @@ package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.EdgeDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.CommandResponse;
-import cn.edu.sjtu.ist.ecssbackendedge.model.Edge;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.TimeUnit;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.Edge;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.TimeUnit;
 import cn.edu.sjtu.ist.ecssbackendedge.service.EdgeService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.connect.ConnectCloudUtil;
 

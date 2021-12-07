@@ -1,8 +1,9 @@
 package cn.edu.sjtu.ist.ecssbackendedge.config;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeListener;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

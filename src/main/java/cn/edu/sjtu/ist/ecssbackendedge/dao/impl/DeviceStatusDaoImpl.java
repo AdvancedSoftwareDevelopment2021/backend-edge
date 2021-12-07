@@ -1,12 +1,13 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceStatusPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.device.DevicePO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.device.DeviceStatusPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DeviceStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DeviceStatusRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.DeviceStatusUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;

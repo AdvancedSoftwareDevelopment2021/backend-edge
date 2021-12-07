@@ -1,9 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceDataIotdbPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DeviceData;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.device.DeviceDataIotdbPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DeviceData;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.storage.IotdbDeviceDataUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.iotdb.rpc.IoTDBConnectionException;
 import org.apache.iotdb.rpc.StatementExecutionException;

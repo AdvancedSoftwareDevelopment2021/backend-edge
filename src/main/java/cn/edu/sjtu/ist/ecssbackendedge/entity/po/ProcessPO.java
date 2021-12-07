@@ -1,8 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Status;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Step;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Step;
+
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDataDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceDataDTO;
 
 import java.util.List;
 

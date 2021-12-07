@@ -2,7 +2,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.service;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 
 import java.util.List;
 
