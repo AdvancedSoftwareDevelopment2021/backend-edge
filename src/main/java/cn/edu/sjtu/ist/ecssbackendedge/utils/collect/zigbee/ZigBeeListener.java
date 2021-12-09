@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
+
 import gnu.io.*;
 import lombok.extern.slf4j.Slf4j;
 

@@ -4,11 +4,12 @@ import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.DataEntry;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DataEntry;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.service.SensorService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.SensorUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;

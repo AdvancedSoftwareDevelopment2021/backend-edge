@@ -2,7 +2,8 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.scheduler.CollectSchedulerPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;

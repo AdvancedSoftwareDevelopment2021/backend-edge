@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.repository;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DeviceDataPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.device.DeviceDataPO;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

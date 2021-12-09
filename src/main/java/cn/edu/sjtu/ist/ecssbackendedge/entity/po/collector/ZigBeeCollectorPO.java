@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.ZigBeeCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.ZigBeeCollector;
+
 import lombok.Data;
 
 /**

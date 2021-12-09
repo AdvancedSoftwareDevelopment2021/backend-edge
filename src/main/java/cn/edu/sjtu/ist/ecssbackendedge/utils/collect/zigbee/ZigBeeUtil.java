@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee;
 
-
 import cn.edu.sjtu.ist.ecssbackendedge.config.ZigBeeConfig;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

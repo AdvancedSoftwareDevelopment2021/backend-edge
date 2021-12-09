@@ -1,8 +1,9 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.DeviceDTO;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.DevicePO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.device.DevicePO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
+
 import org.springframework.stereotype.Component;
 
 /**

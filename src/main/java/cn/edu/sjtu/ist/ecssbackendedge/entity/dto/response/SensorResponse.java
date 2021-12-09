@@ -1,8 +1,9 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.DataCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.DataCollector;
+
 import lombok.Data;
 
 /**

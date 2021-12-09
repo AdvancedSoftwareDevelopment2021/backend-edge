@@ -2,12 +2,13 @@ package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.EdgeDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.CommandResponse;
-import cn.edu.sjtu.ist.ecssbackendedge.model.Edge;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.TimeUnit;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.Edge;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.TimeUnit;
 import cn.edu.sjtu.ist.ecssbackendedge.service.EdgeService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.connect.ConnectCloudUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,7 @@ public class EdgeServiceImpl implements EdgeService {
         String id = map.get("id");
         int interval = Integer.parseInt(map.get("interval"));
         TimeUnit unit = TimeUnit.valueOf(map.get("timeUnit"));
+
         ConnectCloudUtil.CLOUD_SERVER_URL = url;
         CollectScheduler scheduler = new CollectScheduler();
         scheduler.setInterval(interval);

@@ -2,11 +2,12 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor.SensorPO;
-import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.Status;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.SensorRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.CollectSchedulerUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.SensorUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

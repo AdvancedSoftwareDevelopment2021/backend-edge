@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po.scheduler;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.TimeUnit;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.TimeUnit;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 

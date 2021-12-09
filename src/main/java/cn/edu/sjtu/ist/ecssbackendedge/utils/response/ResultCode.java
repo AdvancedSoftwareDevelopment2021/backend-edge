@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.response;
 
 import lombok.Getter;
 
-
 /**
  * @author dyanjun
  * @date 2021/10/31 15:42

@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.device.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
 
 import java.util.List;
 

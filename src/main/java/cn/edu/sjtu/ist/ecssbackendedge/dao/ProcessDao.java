@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 
 import java.util.List;
 

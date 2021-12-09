@@ -1,7 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.ModbusCollector;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.function.ModbusFunction;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.ModbusCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.function.ModbusFunction;
+
 import lombok.Data;
 
 /**

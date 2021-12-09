@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector;
 
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.HttpCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.HttpCollector;
+
 import lombok.Data;
 
 /**

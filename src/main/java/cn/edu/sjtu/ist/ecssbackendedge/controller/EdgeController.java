@@ -1,15 +1,14 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.CommandResponse;
-import cn.edu.sjtu.ist.ecssbackendedge.model.process.Process;
-import cn.edu.sjtu.ist.ecssbackendedge.model.scheduler.CollectScheduler;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.service.EdgeService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.ResultUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket;
 
 import cn.edu.sjtu.ist.ecssbackendedge.config.WebSocketClientConfig;
+
 import lombok.extern.slf4j.Slf4j;
 import org.java_websocket.enums.ReadyState;
 import org.springframework.beans.factory.annotation.Autowired;

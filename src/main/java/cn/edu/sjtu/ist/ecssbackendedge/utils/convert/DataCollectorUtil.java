@@ -1,11 +1,12 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.*;
-import cn.edu.sjtu.ist.ecssbackendedge.model.enumeration.MessageProtocol;
-import cn.edu.sjtu.ist.ecssbackendedge.model.sensor.collector.*;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.*;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket.WebSocketUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
