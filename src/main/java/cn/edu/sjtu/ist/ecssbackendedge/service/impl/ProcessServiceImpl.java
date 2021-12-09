@@ -1,7 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.ProcessDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ElementDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Element;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Step;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.TaskWithDeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.service.ProcessService;
@@ -43,6 +44,13 @@ public class ProcessServiceImpl implements ProcessService {
     public void updateProcessName(String processId, String name) {
         Process process = processDao.findProcessById(processId);
         process.setName(name);
+        processDao.modifyProcess(process);
+    }
+
+    @Override
+    public void updateProcessStep(String processId, Step step) {
+        Process process = processDao.findProcessById(processId);
+        process.setStep(step);
         processDao.modifyProcess(process);
     }
 
@@ -89,15 +97,15 @@ public class ProcessServiceImpl implements ProcessService {
     public List<TaskWithDeviceDTO> findAllDevices(String processId) {
         Process process = processDao.findProcessById(processId);
         BpmnModelInstance instance = Bpmn.readModelFromStream(BpmnUtils.strToInStream(process.getBpmn()));
-        List<ElementDTO> elementDTOS = BpmnUtils.getExtensionByType(instance, DEVICE_KEY);
+        List<Element> elementDTOS = BpmnUtils.getExtensionByType(instance, DEVICE_KEY);
         List<TaskWithDeviceDTO> taskWithDeviceDTOS = new LinkedList<>();
-        for (ElementDTO elementDTO: elementDTOS) {
+        for (Element elementDTO: elementDTOS) {
             if (elementDTO.getValue() == null){
                 taskWithDeviceDTOS.add(TaskWithDeviceDTO.builder()
                         .taskId(elementDTO.getElementId())
                         .taskName(elementDTO.getElementName())
                         .deviceId(null)
-                        .metadataId(null)
+//                        .metadataId(null)
                         .build());
             }
             else {
@@ -106,7 +114,7 @@ public class ProcessServiceImpl implements ProcessService {
                         .taskId(elementDTO.getElementId())
                         .taskName(elementDTO.getElementName())
                         .deviceId(deviceId)
-                        .metadataId(null)
+//                        .metadataId(null)
                         .build());
             }
         }

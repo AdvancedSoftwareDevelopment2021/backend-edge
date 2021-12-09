@@ -14,7 +14,7 @@ public class TaskWithDeviceDTO {
 
     private String taskName;
 
-    private String metadataId;
+//    private String metadataId;
 
     private String deviceId;
 }

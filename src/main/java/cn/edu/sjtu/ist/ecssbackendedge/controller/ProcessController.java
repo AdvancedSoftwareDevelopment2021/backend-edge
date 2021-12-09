@@ -1,5 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Status;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Step;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ProcessDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.service.ProcessService;
@@ -7,12 +9,14 @@ import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.ProcessUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.ResultUtil;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/process")
-public class ProcecssController {
+public class ProcessController {
 
     @Autowired
     private ProcessService processService;
@@ -27,6 +31,8 @@ public class ProcecssController {
      */
     @PostMapping(value = "")
     public Result<?> insertProcess(@RequestBody ProcessDTO dto) {
+        dto.setStep(Step.DEVICE);
+        dto.setStatus(Status.CONSTRUCTING);
         Process process = processUtil.convertDTO2Domain(dto);
         return ResultUtil.success(processService.insertProcess(process));
     }
@@ -55,6 +61,18 @@ public class ProcecssController {
     }
 
     /**
+     * 修改流程构建步骤
+     * @param id 流程id
+     * @param step 新步骤
+     * @return 无
+     */
+    @PutMapping(value = "/{id}/step/{step}")
+    public Result<?> updateProcessStep(@PathVariable String id, @PathVariable String step) {
+        processService.updateProcessStep(id, Step.valueOf(step));
+        return ResultUtil.success();
+    }
+
+    /**
      * 获取单个流程
      * @param id 流程id
      * @return 流程
@@ -78,7 +96,7 @@ public class ProcecssController {
      * @param id 流程id
      * @return 无
      */
-    @PostMapping(value = "/start/{id}")
+    @PostMapping(value = "/{id}/start")
     public Result<?> startProcess(@PathVariable String id) {
         Process process = processService.getProcess(id);
         if (!process.canStart()) {
@@ -94,7 +112,7 @@ public class ProcecssController {
      * @param id 流程id
      * @return 无
      */
-    @PostMapping(value = "/stop/{id}")
+    @PostMapping(value = "/{id}/stop")
     public Result<?> stopProcess(@PathVariable String id) {
         Process process = processService.getProcess(id);
         if (!process.canStop()) {
@@ -110,7 +128,7 @@ public class ProcecssController {
      * @param id 流程id
      * @return bpmn文件内容（String形式)
      */
-    @GetMapping("/bpmn/{id}")
+    @GetMapping("/{id}/bpmn")
     public Result<String> findBpmn(@PathVariable String id) {
         return ResultUtil.success(processService.findBpmn(id));
     }
@@ -122,7 +140,7 @@ public class ProcecssController {
      * @param deviceId 设备id
      * @return 无
      */
-    @PostMapping("/device/{id}/{taskId}/{deviceId}")
+    @PostMapping("/{id}/{taskId}/device/{deviceId}")
     public Result<?> bindServiceForProcess(@PathVariable String id,
                                            @PathVariable String taskId,
                                            @PathVariable String deviceId) {
@@ -136,7 +154,7 @@ public class ProcecssController {
      * @param taskId task id
      * @return 无
      */
-    @DeleteMapping("/device/{id}/{taskId}")
+    @DeleteMapping("/{id}/{taskId}/device")
     public Result<?> deleteDeviceForProcess(@PathVariable String id,
                                             @PathVariable String taskId) {
         processService.deleteDevice(id, taskId);
@@ -148,7 +166,7 @@ public class ProcecssController {
      * @param id 流程id
      * @return 设备信息列表（目前主要只有id）
      */
-    @GetMapping("/device/{id}")
+    @GetMapping("/{id}/device")
     public Result<?> findAllDeviceFromProcess(@PathVariable String id) {
         return ResultUtil.success(processService.findAllDevices(id));
     }

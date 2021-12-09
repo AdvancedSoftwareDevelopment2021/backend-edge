@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Builder
 @Data
-public class ElementDTO {
+public class Element {
 
     private String elementId;
 

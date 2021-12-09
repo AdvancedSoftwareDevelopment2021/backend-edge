@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
  * @date 2021-11-26
  */
 public abstract class AbstractFlowNodeProxy<T extends FlowNode> {
+
     final protected T node;
 
     final protected BpmnModelInstance instance;
@@ -28,23 +29,15 @@ public abstract class AbstractFlowNodeProxy<T extends FlowNode> {
 
     public abstract void verify();
 
-    protected abstract List<AbstractFlowNodeProxy> getNextExecuteFlowNodes();
-
     protected abstract void startWithDataCache(Map<String, Map<String, Object>> dataCache, History history);
 
     protected abstract void startWithKafkaMode(String processId);
 
-    protected void resume() {
-
-    }
+    protected void resume() {}
 
     protected abstract void stop();
 
-    /**
-     * 获取对应的隐式数据源Id，从而完成Channel到DataSource的注册，打通流程
-     * @return 隐式数据源Id
-     */
-    public abstract String getDataSourceId();
+    protected abstract List<AbstractFlowNodeProxy> getNextExecuteFlowNodes();
 
     List<AbstractFlowNodeProxy> getFollowingFlowNodes() {
         return node.getSucceedingNodes().list()

@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Step;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.TaskWithDeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 
@@ -14,6 +15,8 @@ public interface ProcessService {
     void updateProcess(String processId, Process process);
 
     void updateProcessName(String processId, String name);
+
+    void updateProcessStep(String processId, Step step);
 
     Process getProcess(String processId);
 

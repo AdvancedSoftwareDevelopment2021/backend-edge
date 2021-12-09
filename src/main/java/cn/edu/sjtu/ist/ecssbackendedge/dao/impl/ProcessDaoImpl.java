@@ -47,9 +47,7 @@ public class ProcessDaoImpl implements ProcessDao {
     @Override
     public Process findProcessById(String id) {
         ProcessPO po = processRepository.findProcessById(id);
-        Process process = processUtil.convertPO2Domain(po);
-        log.info(String.valueOf(process));
-        return process;
+        return processUtil.convertPO2Domain(po);
     }
 
     @Override

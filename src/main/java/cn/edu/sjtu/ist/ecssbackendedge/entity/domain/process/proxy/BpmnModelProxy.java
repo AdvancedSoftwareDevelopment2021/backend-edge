@@ -15,6 +15,8 @@ import java.util.*;
 @Slf4j
 public class BpmnModelProxy {
 
+    private BpmnModelInstance instance;
+
     private interface Visitor {
         void onVisit(AbstractFlowNodeProxy node);
     }
@@ -25,8 +27,6 @@ public class BpmnModelProxy {
         res.instance = instance;
         return res;
     }
-
-    private BpmnModelInstance instance;
 
     public void verifySelf() {
         Assert.isTrue(instance.getModelElementsByType(StartEvent.class).size() == 1, "BPMN模型应该只有一个起点");

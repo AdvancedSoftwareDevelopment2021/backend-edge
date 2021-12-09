@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.process;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ElementDTO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Element;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.ElementType;
 
 import org.camunda.bpm.model.bpmn.Bpmn;
@@ -35,9 +35,9 @@ public class BpmnUtils {
     /**
      * 获取不同element上的所有同类型属性
      */
-    public static List<ElementDTO> getExtensionByType(BpmnModelInstance instance, ElementType type) {
+    public static List<Element> getExtensionByType(BpmnModelInstance instance, ElementType type) {
         Collection<? extends FlowElement> elements;
-        List<ElementDTO> elementDTOS;
+        List<Element> elementDTOS;
 
         if (type == DEVICE_KEY) {
             elements = instance.getModelElementsByType(Task.class);
@@ -125,8 +125,8 @@ public class BpmnUtils {
         return extensionElements;
     }
 
-    private static List<ElementDTO> getExtension(Collection<? extends FlowElement> elements, String key){
-        List<ElementDTO> elementDTOS = new LinkedList<>();
+    private static List<Element> getExtension(Collection<? extends FlowElement> elements, String key){
+        List<Element> elementDTOS = new LinkedList<>();
         boolean isNull;
         for (FlowElement element: elements){
             isNull = true;
@@ -134,7 +134,7 @@ public class BpmnUtils {
             if (extensionElements != null) {
                 for (CamundaProperty property : extensionElements.getElementsQuery().filterByType(CamundaProperty.class).list()) {
                     if (property.getCamundaName().equals(key)){
-                        elementDTOS.add(ElementDTO.builder()
+                        elementDTOS.add(Element.builder()
                                 .elementId(element.getId())
                                 .elementName(element.getName())
                                 .value(property.getCamundaValue())
@@ -145,7 +145,7 @@ public class BpmnUtils {
                 }
             }
             if(isNull){
-                elementDTOS.add(ElementDTO.builder()
+                elementDTOS.add(Element.builder()
                         .elementId(element.getId())
                         .elementName(element.getName())
                         .value(null)

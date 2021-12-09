@@ -36,3 +36,6 @@ build/
 .mvn/
 mvnw
 mvnw.cmd
+
+### data ###
+export/
