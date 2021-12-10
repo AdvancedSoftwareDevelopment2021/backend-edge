@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.AsynDataStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;

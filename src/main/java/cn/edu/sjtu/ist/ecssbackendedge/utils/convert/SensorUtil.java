@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
@@ -34,9 +33,6 @@ public class SensorUtil {
 
     @Autowired
     private DeviceDataDao deviceDataDao;
-
-    @Autowired
-    private DeviceStatusDao deviceStatusDao;
 
     @Autowired
     private SensorDao sensorDao;
