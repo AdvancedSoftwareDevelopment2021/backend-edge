@@ -119,7 +119,7 @@ public class SensorDaoImpl implements SensorDao {
 
         Sensor sensor = sensorUtil.convertPO2Domain(po);
         // 获取最新状态
-        sensor.setStatus(Status.fromString(fetchLatestSensorStatus(sensorId)));
+        sensor.setStatus(Status.fromString(fetchLatestStatus(sensorId)));
         return sensor;
     }
 
@@ -129,7 +129,7 @@ public class SensorDaoImpl implements SensorDao {
         if (po != null) {
             Sensor sensor = sensorUtil.convertPO2Domain(po);
             // 获取最新状态
-            String status = fetchLatestSensorStatus(sensor.getId());
+            String status = fetchLatestStatus(sensor.getId());
             sensor.setStatus(Status.fromString(status));
             return sensor;
         }
@@ -142,14 +142,19 @@ public class SensorDaoImpl implements SensorDao {
         List<Sensor> res = new ArrayList<>();
         for (SensorPO sensorPO : sensors) {
             Sensor sensor = sensorUtil.convertPO2Domain(sensorPO);
-            sensor.setStatus(Status.fromString(fetchLatestSensorStatus(sensor.getId())));
+            sensor.setStatus(Status.fromString(fetchLatestStatus(sensor.getId())));
             res.add(sensor);
         }
         return res;
     }
 
+    public String fetchLatestStatus(String sensorId) {
+        SensorStatus status = fetchLatestSensorStatus(sensorId);
+        return status.getStatus();
+    }
+
     @Override
-    public String fetchLatestSensorStatus(String sensorId) {
+    public SensorStatus fetchLatestSensorStatus(String sensorId) {
         try {
             String sql = IotdbSensorStatusUtil.sqlToSelectLatestStatus(sensorId);
             session.open();
@@ -157,7 +162,9 @@ public class SensorDaoImpl implements SensorDao {
             SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
             dataIterator.next();
 
-            String status = dataIterator.getString(IotdbSensorStatusUtil.getSensorStatusTimeSeries(sensorId) + ".status");
+            SensorStatus status = new SensorStatus();
+            status.setTimestamp(dataIterator.getTimestamp("Time"));
+            status.setStatus(dataIterator.getString(IotdbSensorStatusUtil.getSensorStatusTimeSeries(sensorId) + ".status"));
 
             session.close();
             log.info(String.format("iotdb: 查询最新状态成功！传感器id=%s，最新状态: %s", sensorId, status));

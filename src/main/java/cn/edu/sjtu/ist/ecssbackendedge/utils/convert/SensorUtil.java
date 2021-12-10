@@ -49,7 +49,6 @@ public class SensorUtil {
         res.setQuartzScheduler(quartzScheduler);
         res.setSensorDao(sensorDao);
         res.setDeviceDataDao(deviceDataDao);
-        res.setDeviceStatusDao(deviceStatusDao);
         return res;
     }
 
@@ -74,7 +73,6 @@ public class SensorUtil {
         res.setQuartzScheduler(quartzScheduler);
         res.setSensorDao(sensorDao);
         res.setDeviceDataDao(deviceDataDao);
-        res.setDeviceStatusDao(deviceStatusDao);
         return res;
     }
 

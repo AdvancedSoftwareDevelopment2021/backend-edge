@@ -30,7 +30,7 @@ public interface SensorDao {
 
     List<Sensor> findSensorsByDeviceId(String deviceId);
 
-    String fetchLatestSensorStatus(String sensorId);
+    SensorStatus fetchLatestSensorStatus(String sensorId);
 
     List<SensorStatus> fetchSensorAllStatus(String sensorId);
 }

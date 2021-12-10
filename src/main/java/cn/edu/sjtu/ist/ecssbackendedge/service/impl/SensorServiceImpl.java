@@ -97,7 +97,7 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public String fetchLatestSensorStatus(String sensorId) {
+    public SensorStatus fetchLatestSensorStatus(String sensorId) {
         return sensorDao.fetchLatestSensorStatus(sensorId);
     }
 

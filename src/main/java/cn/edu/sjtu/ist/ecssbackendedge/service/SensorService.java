@@ -33,7 +33,7 @@ public interface SensorService {
 
     void stopMonitor(String id, String sensorId);
 
-    String fetchLatestSensorStatus(String sensorId);
+    SensorStatus fetchLatestSensorStatus(String sensorId);
 
     List<SensorStatus> getSensorHistoryAllStatus(String sensorId);
 }

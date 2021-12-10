@@ -42,8 +42,6 @@ public class Sensor {
 
     private DeviceDataDao deviceDataDao;
 
-    private DeviceStatusDao deviceStatusDao;
-
     private void updateStatus(Status status) {
         this.status = status;
         this.sensorDao.saveSensorStatus(this.id, this.deviceId, this.status.getType());
@@ -64,7 +62,7 @@ public class Sensor {
     }
 
     private String collectData() {
-//        Assert.isTrue(this.status != Status.FAILURE, "该sensor目前状态异常");
+        Assert.isTrue(this.status == Status.RUNNING || this.status == Status.SUCCESS, "该sensor目前状态异常");
         log.info("开始采集数据项{}", this.name);
         updateStatus(Status.COLLECTING);
 
@@ -80,6 +78,7 @@ public class Sensor {
     }
 
     public void schedule() {
+        updateStatus(Status.RUNNING);
         JobDataMap jobDataMap = new JobDataMap();
         jobDataMap.put("sensor", this);
 
@@ -98,6 +97,7 @@ public class Sensor {
 
     public void stopSchedule() throws SchedulerException {
         quartzScheduler.getScheduler().deleteJob(JobKey.jobKey(id));
+        updateStatus(Status.SLEEP);
         log.info("sensor " + name + "关闭成功！");
     }
 
