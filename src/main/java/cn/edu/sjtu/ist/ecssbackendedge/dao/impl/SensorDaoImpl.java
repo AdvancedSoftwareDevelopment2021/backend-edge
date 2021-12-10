@@ -1,18 +1,15 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DeviceStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.SensorStatus;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.device.DeviceStatusIotdbPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor.SensorPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.SensorRepository;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.CollectSchedulerUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.convert.SensorUtil;
-
-import cn.edu.sjtu.ist.ecssbackendedge.utils.storage.IotdbDeviceStatusUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.storage.IotdbSensorStatusUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.iotdb.rpc.IoTDBConnectionException;
 import org.apache.iotdb.rpc.StatementExecutionException;

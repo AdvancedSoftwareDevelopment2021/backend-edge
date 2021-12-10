@@ -1,7 +1,5 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.SensorStatus;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceStatusDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.service.SensorService;

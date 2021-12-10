@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.SensorStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
@@ -69,11 +68,6 @@ public class SensorServiceImpl implements SensorService {
     @Override
     public void deleteSensorsByDeviceId(String id) {
         sensorDao.deleteSensorByDeviceId(id);
-    }
-
-    @Override
-    public void syncStatus(Sensor sensor) {
-        sensorDao.saveSensorStatus(sensor.getId(), sensor.getDeviceId(), sensor.getStatus().getType());
     }
 
     @Override

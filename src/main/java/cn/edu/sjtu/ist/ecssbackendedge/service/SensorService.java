@@ -19,8 +19,6 @@ public interface SensorService {
 
     void deleteSensorsByDeviceId(String id);
 
-    void syncStatus(Sensor sensor);
-
     SensorResponse getSensorById(String id);
 
     List<SensorResponse> getSensorsByDeviceId(String id);
