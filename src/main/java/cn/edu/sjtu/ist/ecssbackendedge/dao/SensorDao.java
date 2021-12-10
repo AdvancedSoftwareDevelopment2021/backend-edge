@@ -2,6 +2,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.dao;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.SensorStatus;
 
 import java.util.List;
 
@@ -15,18 +16,21 @@ public interface SensorDao {
 
     Sensor createSensor(Sensor sensor);
 
-    void deleteSensorById(String id);
+    void deleteSensorById(String sensorId);
 
     void deleteSensorByDeviceId(String deviceId);
 
     void updateSensor(Sensor sensor);
 
-    void updateSensorStatus(String id, Status status);
+    void saveSensorStatus(String sensorId, String deviceId, String status);
 
-    Sensor findSensorById(String id);
+    Sensor findSensorById(String sensorId);
 
     Sensor findSensorByDeviceIDAndName(String deviceId, String name);
 
-    List<Sensor> findSensorsByDeviceId(String id);
+    List<Sensor> findSensorsByDeviceId(String deviceId);
 
+    String fetchLatestSensorStatus(String sensorId);
+
+    List<SensorStatus> fetchSensorAllStatus(String sensorId);
 }

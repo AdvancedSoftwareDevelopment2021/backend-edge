@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.SensorStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
@@ -31,4 +32,8 @@ public interface SensorService {
     void startMonitor(String id, String sensorId);
 
     void stopMonitor(String id, String sensorId);
+
+    String fetchLatestSensorStatus(String sensorId);
+
+    List<SensorStatus> getSensorHistoryAllStatus(String sensorId);
 }

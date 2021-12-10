@@ -1,5 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.SensorStatus;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceStatusDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.service.SensorService;
@@ -54,5 +56,25 @@ public class SensorController {
     @GetMapping(value = "/device/{id}")
     public Result<List<SensorResponse>> getSensorsByDeviceId(@PathVariable String id) {
         return ResultUtil.success(sensorService.getSensorsByDeviceId(id));
+    }
+
+    /**
+     * 获取传感器最新状态
+     * @param id 传感器id
+     * @return 状态
+     */
+    @GetMapping(value = "/latest/{id}")
+    public Result<?> getLatestSensorStatus(@PathVariable String id) {
+        return ResultUtil.success(sensorService.fetchLatestSensorStatus(id));
+    }
+
+    /**
+     * 获取传感器全部历史状态
+     * @param id 传感器id
+     * @return 状态
+     */
+    @GetMapping(value = "/history/{id}")
+    public Result<?> getSensorHistoryStatus(@PathVariable String id) {
+        return ResultUtil.success(sensorService.getSensorHistoryAllStatus(id));
     }
 }

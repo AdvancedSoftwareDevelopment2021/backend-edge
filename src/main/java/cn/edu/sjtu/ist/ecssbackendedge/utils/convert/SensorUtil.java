@@ -69,7 +69,6 @@ public class SensorUtil {
         res.setId(sensorPO.getId());
         res.setDeviceId(sensorPO.getDeviceId());
         res.setName(sensorPO.getName());
-        res.setStatus(sensorPO.getStatus());
         res.setCollectorScheduler(collectSchedulerUtil.convertPO2Domain(sensorPO.getCollectorScheduler()));
         res.setDataCollector(dataCollectorUtil.convertPO2Domain(sensorPO.getDataCollector()));
         res.setQuartzScheduler(quartzScheduler);
@@ -84,7 +83,6 @@ public class SensorUtil {
         res.setId(sensor.getId());
         res.setDeviceId(sensor.getDeviceId());
         res.setName(sensor.getName());
-        res.setStatus(sensor.getStatus());
         res.setCreatedTime(new Date());
         res.setCollectorScheduler(collectSchedulerUtil.convertDomain2PO(sensor.getCollectorScheduler()));
         res.setDataCollector(dataCollectorUtil.convertDomain2PO(sensor.getDataCollector()));

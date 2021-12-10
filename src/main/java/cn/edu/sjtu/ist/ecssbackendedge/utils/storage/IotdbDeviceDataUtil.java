@@ -18,7 +18,7 @@ public class IotdbDeviceDataUtil {
      *
      * @param deviceDataStoragePrefix 设备数据存储前缀
      */
-    @Value("${iotdb.storage.data.name}")
+    @Value("${iotdb.storage.device.data}")
     public void setDeviceDataStoragePrefix(String deviceDataStoragePrefix) {
         IotdbDeviceDataUtil.deviceDataStoragePrefix = deviceDataStoragePrefix;
     }
