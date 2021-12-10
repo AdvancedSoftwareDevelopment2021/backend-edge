@@ -4,10 +4,29 @@ public enum Status {
 
     NONE(""),
 
+    /**
+     * 未连接、未监听
+     */
     SLEEP("sleeping"),
 
+    /**
+     * 已连接、已监听、正常运行中
+     */
     RUNNING("running"),
 
+    /**
+     * 收集数据中
+     */
+    COLLECTING("collecting"),
+
+    /**
+     * 收集数据成功、设备运行正常
+     */
+    SUCCESS("success"),
+
+    /**
+     * 收集数据失败、设备运行故障
+     */
     FAILURE("failure");
 
     Status(String type) {

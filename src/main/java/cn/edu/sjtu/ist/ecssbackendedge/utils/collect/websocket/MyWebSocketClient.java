@@ -57,7 +57,7 @@ public class MyWebSocketClient extends WebSocketClient {
             // TODO 保存数据的方式有待商榷
             sensor.getDeviceDataDao().saveDeviceData(sensor.getDeviceId(), sensor.getName(), "\"" + sensor.getName() + "\":" + message);
         }
-        sensor.getDeviceStatusDao().saveDeviceStatus(sensor.getDeviceId(), sensor.getName(), sensor.getStatus().getType());
+        sensor.getSensorDao().saveSensorStatus(sensor.getDeviceId(), sensor.getName(), sensor.getStatus().getType());
     }
 
 }

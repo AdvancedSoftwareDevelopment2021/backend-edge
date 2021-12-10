@@ -2,6 +2,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.SensorStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DataEntry;
@@ -45,10 +46,9 @@ public class SensorServiceImpl implements SensorService {
         // 创建Sensor
         sensor = sensorUtil.convertRequestDTO2Domain(sensorRequest);
         sensor.setDeviceId(deviceId);
-        sensorDao.createSensor(sensor);
+        sensor = sensorDao.createSensor(sensor);
 
         // 把sensorId装配进device
-        sensor = sensorDao.findSensorByDeviceIDAndName(deviceId, sensorRequest.getName());
         Device device = deviceDao.findDeviceById(deviceId);
         for (DataEntry entry : device.getValues()) {
             if (entry.getName().equals(sensor.getName())) {
@@ -71,11 +71,6 @@ public class SensorServiceImpl implements SensorService {
     }
 
     @Override
-    public void syncStatus(Sensor sensor) {
-        sensorDao.updateSensorStatus(sensor.getId(), sensor.getStatus());
-    }
-
-    @Override
     public SensorResponse getSensorById(String id) {
         Sensor sensor = sensorDao.findSensorById(id);
         if (sensor != null) {
@@ -93,6 +88,17 @@ public class SensorServiceImpl implements SensorService {
             res.add(sensorUtil.convertDomain2ResponseDTO(sensor));
         }
         return res;
+    }
+
+    @Override
+    public SensorStatus fetchLatestSensorStatus(String sensorId) {
+        return sensorDao.fetchLatestSensorStatus(sensorId);
+    }
+
+    @Override
+    public
+    List<SensorStatus> getSensorHistoryAllStatus(String sensorId) {
+        return sensorDao.fetchSensorAllStatus(sensorId);
     }
 
     @Override

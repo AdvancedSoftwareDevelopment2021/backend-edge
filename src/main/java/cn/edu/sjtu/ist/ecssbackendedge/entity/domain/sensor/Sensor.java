@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.AsynDataStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
@@ -14,6 +13,7 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
+import org.springframework.util.Assert;
 
 /**
  * @author dyanjun
@@ -41,41 +41,43 @@ public class Sensor {
 
     private DeviceDataDao deviceDataDao;
 
-    private DeviceStatusDao deviceStatusDao;
+    private void updateStatus(Status status) {
+        this.status = status;
+        this.sensorDao.saveSensorStatus(this.id, this.deviceId, this.status.getType());
+    }
 
     public void monitor() {
+        Assert.isTrue(this.status == Status.SLEEP, "该sensor已经在运行中");
         log.info("开始监听{}", this.name);
-        this.status = Status.RUNNING;
-        this.sensorDao.updateSensorStatus(this.id, this.status);
         this.dataCollector.monitor(id);
+        updateStatus(Status.RUNNING);
     }
 
     public void stopMonitor() {
+        Assert.isTrue(this.status != Status.SLEEP, "该sensor已经关闭");
         log.info("停止监听{}", this.name);
-        this.status = Status.SLEEP;
-        this.sensorDao.updateSensorStatus(this.id, this.status);
         this.dataCollector.stopMonitor(id);
+        updateStatus(Status.SLEEP);
     }
 
     private String collectData() {
+        Assert.isTrue(this.status == Status.RUNNING || this.status == Status.SUCCESS, "该sensor目前状态异常");
         log.info("开始采集数据项{}", this.name);
-        this.status = Status.RUNNING;
-        this.sensorDao.updateSensorStatus(this.id, this.status);
+        updateStatus(Status.COLLECTING);
 
         String collectedData = this.dataCollector.execute(id);
         if (collectedData == null) {
-            this.status = Status.FAILURE;
             // TODO 采集失败异常处理
-            this.sensorDao.updateSensorStatus(this.id, this.status);
+            updateStatus(Status.FAILURE);
         } else {
-            this.status = Status.SLEEP;
-            this.sensorDao.updateSensorStatus(this.id, this.status);
+            updateStatus(Status.SUCCESS);
         }
         log.info("采集数据项{}结束", this.name);
         return collectedData;
     }
 
     public void schedule() {
+        updateStatus(Status.RUNNING);
         JobDataMap jobDataMap = new JobDataMap();
         jobDataMap.put("sensor", this);
 
@@ -94,6 +96,7 @@ public class Sensor {
 
     public void stopSchedule() throws SchedulerException {
         quartzScheduler.getScheduler().deleteJob(JobKey.jobKey(id));
+        updateStatus(Status.SLEEP);
         log.info("sensor " + name + "关闭成功！");
     }
 
@@ -109,7 +112,6 @@ public class Sensor {
                 // TODO 保存数据的方式有待商榷
                 sensor.deviceDataDao.saveDeviceData(sensor.deviceId, sensor.name, "\"" + sensor.name + "\":" + collectedData);
             }
-            sensor.deviceStatusDao.saveDeviceStatus(sensor.deviceId, sensor.name, sensor.status.getType());
         }
     }
 }

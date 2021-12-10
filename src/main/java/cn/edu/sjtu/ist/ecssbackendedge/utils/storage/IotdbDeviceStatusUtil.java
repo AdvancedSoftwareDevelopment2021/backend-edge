@@ -18,7 +18,7 @@ public class IotdbDeviceStatusUtil {
      *
      * @param deviceStatusStoragePrefix 设备状态存储前缀
      */
-    @Value("${iotdb.storage.status.name}")
+    @Value("${iotdb.storage.device.status}")
     public void setDeviceStatusStoragePrefix(String deviceStatusStoragePrefix) {
         IotdbDeviceStatusUtil.deviceStatusStoragePrefix = deviceStatusStoragePrefix;
     }

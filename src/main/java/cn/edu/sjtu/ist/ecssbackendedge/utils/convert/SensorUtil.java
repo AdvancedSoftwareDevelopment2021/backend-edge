@@ -2,7 +2,6 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.QuartzScheduler;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceStatusDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request.SensorRequest;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response.SensorResponse;
@@ -36,9 +35,6 @@ public class SensorUtil {
     private DeviceDataDao deviceDataDao;
 
     @Autowired
-    private DeviceStatusDao deviceStatusDao;
-
-    @Autowired
     private SensorDao sensorDao;
 
     public Sensor convertRequestDTO2Domain(SensorRequest request) {
@@ -49,7 +45,6 @@ public class SensorUtil {
         res.setQuartzScheduler(quartzScheduler);
         res.setSensorDao(sensorDao);
         res.setDeviceDataDao(deviceDataDao);
-        res.setDeviceStatusDao(deviceStatusDao);
         return res;
     }
 
@@ -69,13 +64,11 @@ public class SensorUtil {
         res.setId(sensorPO.getId());
         res.setDeviceId(sensorPO.getDeviceId());
         res.setName(sensorPO.getName());
-        res.setStatus(sensorPO.getStatus());
         res.setCollectorScheduler(collectSchedulerUtil.convertPO2Domain(sensorPO.getCollectorScheduler()));
         res.setDataCollector(dataCollectorUtil.convertPO2Domain(sensorPO.getDataCollector()));
         res.setQuartzScheduler(quartzScheduler);
         res.setSensorDao(sensorDao);
         res.setDeviceDataDao(deviceDataDao);
-        res.setDeviceStatusDao(deviceStatusDao);
         return res;
     }
 
@@ -84,7 +77,6 @@ public class SensorUtil {
         res.setId(sensor.getId());
         res.setDeviceId(sensor.getDeviceId());
         res.setName(sensor.getName());
-        res.setStatus(sensor.getStatus());
         res.setCreatedTime(new Date());
         res.setCollectorScheduler(collectSchedulerUtil.convertDomain2PO(sensor.getCollectorScheduler()));
         res.setDataCollector(dataCollectorUtil.convertDomain2PO(sensor.getDataCollector()));
