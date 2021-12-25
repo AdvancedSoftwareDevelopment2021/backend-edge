@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee;
+package cn.edu.sjtu.ist.ecssbackendedge.utils.point.zigbee;
 
 import cn.edu.sjtu.ist.ecssbackendedge.config.ZigBeeConfig;
 

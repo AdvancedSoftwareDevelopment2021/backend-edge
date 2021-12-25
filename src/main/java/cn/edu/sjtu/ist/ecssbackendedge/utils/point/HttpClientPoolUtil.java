@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.utils.collect;
+package cn.edu.sjtu.ist.ecssbackendedge.utils.point;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

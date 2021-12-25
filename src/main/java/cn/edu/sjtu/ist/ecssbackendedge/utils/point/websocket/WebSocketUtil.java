@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket;
+package cn.edu.sjtu.ist.ecssbackendedge.utils.point.websocket;
 
 import cn.edu.sjtu.ist.ecssbackendedge.config.WebSocketClientConfig;
 

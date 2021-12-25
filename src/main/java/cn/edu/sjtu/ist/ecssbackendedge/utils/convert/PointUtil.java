@@ -3,9 +3,9 @@ package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.*;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.*;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket.WebSocketUtil;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.point.ModbusUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.point.websocket.WebSocketUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.point.zigbee.ZigBeeUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ import java.util.Objects;
  * @date 2021-11-20
  */
 @Component
-public class DataCollectorUtil {
+public class PointUtil {
 
     @Autowired
     private ModbusUtil modbusUtil;

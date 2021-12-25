@@ -26,7 +26,7 @@ public class SensorUtil {
     private CollectSchedulerUtil collectSchedulerUtil;
 
     @Autowired
-    private DataCollectorUtil dataCollectorUtil;
+    private PointUtil pointUtil;
 
     @Autowired
     private QuartzScheduler quartzScheduler;
@@ -65,7 +65,7 @@ public class SensorUtil {
         res.setDeviceId(sensorPO.getDeviceId());
         res.setName(sensorPO.getName());
         res.setCollectorScheduler(collectSchedulerUtil.convertPO2Domain(sensorPO.getCollectorScheduler()));
-        res.setPoint(dataCollectorUtil.convertPO2Domain(sensorPO.getDataCollector()));
+        res.setPoint(pointUtil.convertPO2Domain(sensorPO.getDataCollector()));
         res.setQuartzScheduler(quartzScheduler);
         res.setSensorDao(sensorDao);
         res.setDeviceDataDao(deviceDataDao);
@@ -79,7 +79,7 @@ public class SensorUtil {
         res.setName(sensor.getName());
         res.setCreatedTime(new Date());
         res.setCollectorScheduler(collectSchedulerUtil.convertDomain2PO(sensor.getCollectorScheduler()));
-        res.setDataCollector(dataCollectorUtil.convertDomain2PO(sensor.getPoint()));
+        res.setDataCollector(pointUtil.convertDomain2PO(sensor.getPoint()));
         return res;
     }
 }

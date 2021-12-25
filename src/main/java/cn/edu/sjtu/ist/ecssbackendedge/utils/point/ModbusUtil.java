@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.utils.collect;
+package cn.edu.sjtu.ist.ecssbackendedge.utils.point;
 
 import cn.edu.sjtu.ist.ecssbackendedge.config.ModbusConfig;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.function.ModbusFunction;
