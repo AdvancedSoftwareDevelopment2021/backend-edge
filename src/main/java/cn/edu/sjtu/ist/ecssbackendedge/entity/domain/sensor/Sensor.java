@@ -6,8 +6,7 @@ import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.AsynDataStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.DataCollector;
-
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.Point;
 import lombok.Data;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -33,7 +32,7 @@ public class Sensor {
 
     private CollectScheduler collectorScheduler;
 
-    private DataCollector dataCollector;
+    private Point point;
 
     private QuartzScheduler quartzScheduler;
 
@@ -49,14 +48,14 @@ public class Sensor {
     public void monitor() {
         Assert.isTrue(this.status == Status.SLEEP, "该sensor已经在运行中");
         log.info("开始监听{}", this.name);
-        this.dataCollector.monitor(id);
+        this.point.monitor(id);
         updateStatus(Status.RUNNING);
     }
 
     public void stopMonitor() {
         Assert.isTrue(this.status != Status.SLEEP, "该sensor已经关闭");
         log.info("停止监听{}", this.name);
-        this.dataCollector.stopMonitor(id);
+        this.point.stopMonitor(id);
         updateStatus(Status.SLEEP);
     }
 
@@ -65,7 +64,7 @@ public class Sensor {
         log.info("开始采集数据项{}", this.name);
         updateStatus(Status.COLLECTING);
 
-        String collectedData = this.dataCollector.execute(id);
+        String collectedData = this.point.execute(id);
         if (collectedData == null) {
             // TODO 采集失败异常处理
             updateStatus(Status.FAILURE);

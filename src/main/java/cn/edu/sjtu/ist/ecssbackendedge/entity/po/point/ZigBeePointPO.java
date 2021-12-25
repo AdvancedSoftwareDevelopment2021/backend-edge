@@ -1,6 +1,6 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.po.point;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.ZigBeeCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.ZigBeePoint;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import lombok.Data;
  * @date 2021/11/21 17:35
  */
 @Data
-public class ZigBeeCollectorPO extends DataCollectorPO {
+public class ZigBeePointPO extends PointPO {
 
     private String serialNumber;
     private int baudRate;
@@ -18,9 +18,9 @@ public class ZigBeeCollectorPO extends DataCollectorPO {
     private int stopBit;
 
     @Override
-    public ZigBeeCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
-        ZigBeeCollectorPO collectorPO = (ZigBeeCollectorPO) dataCollectorPO;
-        ZigBeeCollector collector = new ZigBeeCollector();
+    public ZigBeePoint convertPO2Domain(PointPO pointPO) {
+        ZigBeePointPO collectorPO = (ZigBeePointPO) pointPO;
+        ZigBeePoint collector = new ZigBeePoint();
 
         collector.setSerialNumber(collectorPO.getSerialNumber());
         collector.setBaudRate(collectorPO.getBaudRate());

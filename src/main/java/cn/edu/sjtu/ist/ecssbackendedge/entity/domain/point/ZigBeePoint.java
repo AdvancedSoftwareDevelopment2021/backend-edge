@@ -1,6 +1,6 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ZigBeeCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.ZigBeePointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
 
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @NoArgsConstructor
-public class ZigBeeCollector extends DataCollector {
+public class ZigBeePoint extends Point {
 
     private String serialNumber;// 串口号
     private int baudRate;        // 波特率
@@ -36,8 +36,8 @@ public class ZigBeeCollector extends DataCollector {
     }
 
     @Override
-    public ZigBeeCollectorPO convertDomain2PO() {
-        ZigBeeCollectorPO collectorPO = new ZigBeeCollectorPO();
+    public ZigBeePointPO convertDomain2PO() {
+        ZigBeePointPO collectorPO = new ZigBeePointPO();
 
         collectorPO.setType(MessageProtocol.ZIGBEE.getProtocol());
         collectorPO.setSerialNumber(serialNumber);

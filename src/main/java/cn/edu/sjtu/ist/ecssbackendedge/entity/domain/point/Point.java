@@ -1,6 +1,6 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.PointPO;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -15,18 +15,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXTERNAL_PROPERTY, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = ModbusCollector.class, name = "Modbus"),
-        @JsonSubTypes.Type(value = HttpCollector.class, name = "Http"),
-        @JsonSubTypes.Type(value = WebSocketCollector.class, name = "WebSocket"),
-        @JsonSubTypes.Type(value = ZigBeeCollector.class, name = "ZigBee"),
+        @JsonSubTypes.Type(value = ModbusPoint.class, name = "Modbus"),
+        @JsonSubTypes.Type(value = HttpPoint.class, name = "Http"),
+        @JsonSubTypes.Type(value = WebSocketPoint.class, name = "WebSocket"),
+        @JsonSubTypes.Type(value = ZigBeePoint.class, name = "ZigBee"),
 })
-public abstract class DataCollector {
+public abstract class Point {
 
     public abstract String execute(String id);
 
     protected abstract void verify();
 
-    public abstract DataCollectorPO convertDomain2PO();
+    public abstract PointPO convertDomain2PO();
 
     public abstract Boolean monitor(String id);
 

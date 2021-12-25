@@ -1,10 +1,9 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.ModbusCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.ModbusPointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.function.ModbusFunction;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
-
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.function.ModbusFunction;
 import com.serotonin.modbus4j.exception.ModbusTransportException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @NoArgsConstructor
-public class ModbusCollector extends DataCollector {
+public class ModbusPoint extends Point {
 
     private String ip;
 
@@ -57,8 +56,8 @@ public class ModbusCollector extends DataCollector {
     }
 
     @Override
-    public ModbusCollectorPO convertDomain2PO() {
-        ModbusCollectorPO collectorPO = new ModbusCollectorPO();
+    public ModbusPointPO convertDomain2PO() {
+        ModbusPointPO collectorPO = new ModbusPointPO();
 
         collectorPO.setType(MessageProtocol.MODBUS.getProtocol());
         collectorPO.setIp(ip);

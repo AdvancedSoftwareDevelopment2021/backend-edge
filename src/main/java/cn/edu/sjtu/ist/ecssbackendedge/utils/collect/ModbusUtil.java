@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.collect;
 
 import cn.edu.sjtu.ist.ecssbackendedge.config.ModbusConfig;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.function.ModbusFunction;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.function.ModbusFunction;
 
 import com.serotonin.modbus4j.ModbusMaster;
 import com.serotonin.modbus4j.exception.ModbusInitException;

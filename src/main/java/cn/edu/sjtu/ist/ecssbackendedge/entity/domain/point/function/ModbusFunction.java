@@ -1,4 +1,4 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.function;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.function;
 
 /**
  * @author dyanjun

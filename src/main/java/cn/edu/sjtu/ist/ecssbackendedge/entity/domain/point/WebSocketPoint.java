@@ -1,6 +1,6 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.WebSocketCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.WebSocketPointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.AsynDataStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket.WebSocketUtil;
@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @NoArgsConstructor
-public class WebSocketCollector extends DataCollector {
+public class WebSocketPoint extends Point {
 
     private String uri;
 
@@ -37,8 +37,8 @@ public class WebSocketCollector extends DataCollector {
     }
 
     @Override
-    public WebSocketCollectorPO convertDomain2PO() {
-        WebSocketCollectorPO collectorPO = new WebSocketCollectorPO();
+    public WebSocketPointPO convertDomain2PO() {
+        WebSocketPointPO collectorPO = new WebSocketPointPO();
 
         collectorPO.setType(MessageProtocol.WEBSOCKET.getProtocol());
         collectorPO.setUri(uri);

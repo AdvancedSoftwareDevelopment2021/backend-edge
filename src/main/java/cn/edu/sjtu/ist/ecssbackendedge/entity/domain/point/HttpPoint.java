@@ -1,6 +1,6 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.HttpCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.HttpPointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.HttpClientPoolUtil;
 
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Data
 @NoArgsConstructor
-public class HttpCollector extends DataCollector {
+public class HttpPoint extends Point {
 
     private String url;
 
@@ -32,9 +32,9 @@ public class HttpCollector extends DataCollector {
     }
 
     @Override
-    public HttpCollectorPO convertDomain2PO() {
+    public HttpPointPO convertDomain2PO() {
 
-        HttpCollectorPO collectorPO = new HttpCollectorPO();
+        HttpPointPO collectorPO = new HttpPointPO();
 
         collectorPO.setType(MessageProtocol.HTTP.getProtocol());
         collectorPO.setUrl(url);

@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po.sensor;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.DataCollectorPO;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.PointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.scheduler.CollectSchedulerPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
 
@@ -29,7 +29,7 @@ public class SensorPO {
 
     private Status status;
 
-    private DataCollectorPO dataCollector;
+    private PointPO dataCollector;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdTime;

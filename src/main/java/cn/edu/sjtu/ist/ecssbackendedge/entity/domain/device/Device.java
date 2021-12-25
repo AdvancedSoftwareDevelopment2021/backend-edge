@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.Command.Command;
 import lombok.Data;
 
 import java.util.List;
@@ -37,6 +38,11 @@ public class Device {
      * 设备的数据项列表
      */
     private List<DataEntry> values;
+
+    /**
+     * 设备的指令列表
+     */
+    private List<Command> commands;
 
     /**
      * 将collector收集到的原始数据包装为key-value形式返回存储

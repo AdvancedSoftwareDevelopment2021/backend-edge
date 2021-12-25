@@ -1,8 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector.*;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.*;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.*;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.*;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket.WebSocketUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
@@ -30,35 +30,35 @@ public class DataCollectorUtil {
     @Autowired
     private ZigBeeUtil zigBeeUtil;
 
-    public DataCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
-        DataCollector dataCollector = null;
-        MessageProtocol protocol = MessageProtocol.fromString(dataCollectorPO.getType());
+    public Point convertPO2Domain(PointPO pointPO) {
+        Point point = null;
+        MessageProtocol protocol = MessageProtocol.fromString(pointPO.getType());
         switch (Objects.requireNonNull(protocol)) {
             case MODBUS:
-                ModbusCollector modbusCollector = (new ModbusCollectorPO()).convertPO2Domain(dataCollectorPO);
-                modbusCollector.setModbusUtil(modbusUtil);
-                return modbusCollector;
+                ModbusPoint modbusPoint = (new ModbusPointPO()).convertPO2Domain(pointPO);
+                modbusPoint.setModbusUtil(modbusUtil);
+                return modbusPoint;
             case ZIGBEE:
-                ZigBeeCollector zigBeeCollector = (new ZigBeeCollectorPO()).convertPO2Domain(dataCollectorPO);
-                zigBeeCollector.setZigBeeUtil(zigBeeUtil);
-                return zigBeeCollector;
+                ZigBeePoint zigBeePoint = (new ZigBeePointPO()).convertPO2Domain(pointPO);
+                zigBeePoint.setZigBeeUtil(zigBeeUtil);
+                return zigBeePoint;
             case CANBUS:
                 break;
             case HTTP:
-                HttpCollector httpCollector = (new HttpCollectorPO()).convertPO2Domain(dataCollectorPO);
-                return httpCollector;
+                HttpPoint httpPoint = (new HttpPointPO()).convertPO2Domain(pointPO);
+                return httpPoint;
             case WEBSOCKET:
-                WebSocketCollector webSocketCollector = (new WebSocketCollectorPO()).convertPO2Domain(dataCollectorPO);
-                webSocketCollector.setWebSocketUtil(webSocketUtil);
-                return webSocketCollector;
+                WebSocketPoint webSocketPoint = (new WebSocketPointPO()).convertPO2Domain(pointPO);
+                webSocketPoint.setWebSocketUtil(webSocketUtil);
+                return webSocketPoint;
             default:
                 break;
         }
-        return dataCollector;
+        return point;
     }
 
-    public DataCollectorPO convertDomain2PO(DataCollector dataCollector) {
-        return dataCollector.convertDomain2PO();
+    public PointPO convertDomain2PO(Point point) {
+        return point.convertDomain2PO();
     }
 
 }

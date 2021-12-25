@@ -1,7 +1,7 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.po.collector;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.po.point;
 
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.ModbusCollector;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.function.ModbusFunction;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.ModbusPoint;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.function.ModbusFunction;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import lombok.Data;
  * @date 2021-11-21
  */
 @Data
-public class ModbusCollectorPO extends DataCollectorPO {
+public class ModbusPointPO extends PointPO {
 
     private String ip;
 
@@ -29,9 +29,9 @@ public class ModbusCollectorPO extends DataCollectorPO {
     private String datatype; //TODO
 
     @Override
-    public ModbusCollector convertPO2Domain(DataCollectorPO dataCollectorPO) {
-        ModbusCollectorPO collectorPO = (ModbusCollectorPO) dataCollectorPO;
-        ModbusCollector collector = new ModbusCollector();
+    public ModbusPoint convertPO2Domain(PointPO pointPO) {
+        ModbusPointPO collectorPO = (ModbusPointPO) pointPO;
+        ModbusPoint collector = new ModbusPoint();
 
         collector.setIp(collectorPO.getIp());
         collector.setPort(collectorPO.getPort());
