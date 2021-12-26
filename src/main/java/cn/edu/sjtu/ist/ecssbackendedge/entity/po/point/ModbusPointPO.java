@@ -22,8 +22,6 @@ public class ModbusPointPO extends PointPO {
 
     private Integer offset;
 
-    private Integer num;
-
     private ModbusFunction modbusFunction;
 
     private String datatype; //TODO
@@ -37,7 +35,6 @@ public class ModbusPointPO extends PointPO {
         collector.setPort(collectorPO.getPort());
         collector.setModbusFunction(collectorPO.getModbusFunction());
         collector.setDatatype(collectorPO.getDatatype());
-        collector.setNum(collectorPO.getNum());
         collector.setOffset(collectorPO.getOffset());
         collector.setSlaveId(collectorPO.getSlaveId());
         return collector;

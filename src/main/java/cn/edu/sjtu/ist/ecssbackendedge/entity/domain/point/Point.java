@@ -4,8 +4,12 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.PointPO;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.serotonin.modbus4j.exception.ErrorResponseException;
+import com.serotonin.modbus4j.exception.ModbusTransportException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Map;
 
 /**
  * @author dyanjun
@@ -31,4 +35,8 @@ public abstract class Point {
     public abstract Boolean monitor(String id);
 
     public abstract Boolean stopMonitor(String id);
+
+    public abstract Boolean executeCustomCommand(String id, Map<String, Object> params);
+
+    public abstract Boolean executePropertyCommand(String id, String type, String value) throws ErrorResponseException, ModbusTransportException;
 }

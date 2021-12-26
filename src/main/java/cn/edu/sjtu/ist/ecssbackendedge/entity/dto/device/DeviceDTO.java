@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DataEntry;
 
 import lombok.Data;
@@ -39,4 +40,8 @@ public class DeviceDTO {
      */
     private List<DataEntry> values;
 
+    /**
+     * 设备的命令列表
+     */
+    private List<Command> commands;
 }

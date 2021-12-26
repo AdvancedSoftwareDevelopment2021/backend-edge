@@ -2,11 +2,13 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.ZigBeePointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.point.zigbee.ZigBeeUtil;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Map;
 
 /**
  * @author dyanjun
@@ -17,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 public class ZigBeePoint extends Point {
 
-    private String serialNumber;// 串口号
+    private String serialNumber; // 串口号
     private int baudRate;        // 波特率
     private int checkoutBit;    // 校验位
     private int dataBit;        // 数据位
@@ -60,4 +62,17 @@ public class ZigBeePoint extends Point {
         zigBeeUtil.stopMonitor(id);
         return true;
     }
+
+    @Override
+    public Boolean executeCustomCommand(String id, Map<String, Object> params) {
+        log.error("zigbee无法进行自定义指令发送");
+        return false;
+    }
+
+    @Override
+    public Boolean executePropertyCommand(String id, String type, String value) {
+        zigBeeUtil.SendMss(id + "_driver", value, serialNumber, baudRate, checkoutBit, dataBit, stopBit);
+        return true;
+    }
+
 }

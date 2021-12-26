@@ -2,12 +2,15 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.ModbusPointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.ModbusUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.point.ModbusUtil;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.function.ModbusFunction;
+import com.serotonin.modbus4j.exception.ErrorResponseException;
 import com.serotonin.modbus4j.exception.ModbusTransportException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Map;
 
 /**
  * @author dyanjun
@@ -27,8 +30,6 @@ public class ModbusPoint extends Point {
 
     private Integer offset;
 
-    private Integer num;
-
     private ModbusFunction modbusFunction;
 
     private String datatype; //TODO
@@ -38,8 +39,8 @@ public class ModbusPoint extends Point {
     @Override
     public String execute(String id) {
         try {
-            return modbusUtil.collectData(id, ip, port, slaveId, offset, num, modbusFunction, datatype);
-        } catch (ModbusTransportException e) {
+            return modbusUtil.collectData(id, ip, port, slaveId, offset, modbusFunction, datatype);
+        } catch (ModbusTransportException | ErrorResponseException e) {
             log.warn("收集数据出错，error: " + e.getMessage());
             return null;
         }
@@ -64,7 +65,6 @@ public class ModbusPoint extends Point {
         collectorPO.setPort(port);
         collectorPO.setModbusFunction(modbusFunction);
         collectorPO.setDatatype(datatype);
-        collectorPO.setNum(num);
         collectorPO.setOffset(offset);
         collectorPO.setSlaveId(slaveId);
         return collectorPO;
@@ -80,5 +80,17 @@ public class ModbusPoint extends Point {
     public Boolean stopMonitor(String id) {
         log.error("modbus无法停止监听");
         return false;
+    }
+
+    @Override
+    public Boolean executeCustomCommand(String id, Map<String, Object> params) {
+        log.error("modbus无法传递自定义参数");
+        return false;
+    }
+
+    @Override
+    public Boolean executePropertyCommand(String id, String type, String value) throws ErrorResponseException, ModbusTransportException {
+        modbusUtil.writeValue(id + "_driver", ip, port, slaveId, offset, modbusFunction, type, value);
+        return null;
     }
 }

@@ -35,6 +35,9 @@ public class ZigBeeListener implements SerialPortEventListener {
 
     private Sensor sensor;
 
+    public ZigBeeListener() {
+    }
+
     public ZigBeeListener(Sensor sensor) {
         this.sensor = sensor;
     }
@@ -198,7 +201,7 @@ public class ZigBeeListener implements SerialPortEventListener {
                 inputStream.close();
                 inputStream = null;
                 // 保存数据
-                log.info(sensor.getName() + ": " + data);
+                log.info("zigbee保存数据：" + sensor.getName() + ": " + data);
                 if (data != null && !data.equals("null")) {
                     // TODO 保存数据的方式有待商榷
                     sensor.getDeviceDataDao().saveDeviceData(sensor.getDeviceId(), sensor.getName(), "\"" + sensor.getName() + "\":" + data);
@@ -217,12 +220,13 @@ public class ZigBeeListener implements SerialPortEventListener {
     public void sendComm(String data) {
         byte[] writerBuffer = null;
         try {
-            writerBuffer = hexToByteArray(data);
+            writerBuffer = data.getBytes();
         } catch (NumberFormatException e) {
             log.info("命令格式错误");
         }
         try {
             outputStream = serialPort.getOutputStream();
+            assert writerBuffer != null;
             outputStream.write(writerBuffer);
             outputStream.flush();
         } catch (NullPointerException e) {

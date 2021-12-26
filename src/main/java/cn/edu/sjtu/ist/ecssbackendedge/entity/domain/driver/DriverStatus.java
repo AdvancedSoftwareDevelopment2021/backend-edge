@@ -1,14 +1,19 @@
-package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command;
+package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver;
 
 /**
  * @author dyanjun
  * @date 2021/12/25 21:46
  */
-public enum CommandStatus {
+public enum DriverStatus {
+    SLEEP("SLEEP"),
 
-    SENT("PROPERTY"),
+    RUNNING("RUNNING"),
 
-    DELIVERED("CUSTOM");
+    DELIVERED("DELIVERED"),
+
+    SUCCESSFUL("SUCCESSFUL"),
+
+    FAIL("FAIL");
 
     /**
      * 状态
@@ -20,7 +25,7 @@ public enum CommandStatus {
      *
      * @param status 指令状态
      */
-    CommandStatus(String status) {
+    DriverStatus(String status) {
         this.status = status;
     }
 
@@ -36,8 +41,8 @@ public enum CommandStatus {
      *
      * @param text 字符串表示
      */
-    public static CommandStatus fromString(String text) {
-        for (CommandStatus b : CommandStatus.values()) {
+    public static DriverStatus fromString(String text) {
+        for (DriverStatus b : DriverStatus.values()) {
             if (b.status.equalsIgnoreCase(text)) {
                 return b;
             }

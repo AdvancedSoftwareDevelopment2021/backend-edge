@@ -6,6 +6,12 @@ public enum DataType {
 
     INTEGER("integer"),
 
+    LONG("long"),
+
+    FLOAT("float"),
+
+    DOUBLE("double"),
+
     STRING("string"),
 
     OBJECT("object");

@@ -25,4 +25,8 @@ public class ZigBeeUtil {
         zigBeeConfig.deleteListener(id);
     }
 
+    public void SendMss(String id, String value, String serialNumber, int baudRate, int checkoutBit, int dataBit, int stopBit){
+        ZigBeeListener client = zigBeeConfig.getListener(id, serialNumber, baudRate, checkoutBit, dataBit, stopBit);
+        client.sendComm(value);
+    }
 }

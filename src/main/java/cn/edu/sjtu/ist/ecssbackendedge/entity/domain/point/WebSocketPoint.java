@@ -3,11 +3,13 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.WebSocketPointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.AsynDataStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.websocket.WebSocketUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.point.websocket.WebSocketUtil;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Map;
 
 /**
  * @author dyanjun
@@ -56,6 +58,18 @@ public class WebSocketPoint extends Point {
     public Boolean stopMonitor(String id) {
         webSocketUtil.stopMonitor(id);
         return true;
+    }
+
+    @Override
+    public Boolean executeCustomCommand(String id, Map<String, Object> params) {
+        log.error("websocket 无法发送自定义指令");
+        return false;
+    }
+
+    @Override
+    public Boolean executePropertyCommand(String id, String type, String value) {
+        log.error("websocket 无法进行属性设置");
+        return false;
     }
 
 }

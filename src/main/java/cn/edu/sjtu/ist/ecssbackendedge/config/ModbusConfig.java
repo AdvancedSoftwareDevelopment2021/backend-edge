@@ -39,14 +39,12 @@ public class ModbusConfig {
      * @return: com.serotonin.modbus4j.ModbusMaster
      */
     public ModbusMaster getMaster(String id, String ip, Integer port) {
-
         ModbusMaster modbusMaster = masterMap.get(id);
         if (modbusMaster == null) {
             setMaster(id, ip, port);
             modbusMaster = masterMap.get(id);
         }
         return modbusMaster;
-
     }
 
     /**
