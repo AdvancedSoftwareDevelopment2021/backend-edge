@@ -2,7 +2,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.response;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.Status;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.DataCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.Point;
 
 import lombok.Data;
 
@@ -25,6 +25,6 @@ public class SensorResponse {
 
     private CollectScheduler collectorScheduler;
 
-    private DataCollector dataCollector;
+    private Point point;
 
 }

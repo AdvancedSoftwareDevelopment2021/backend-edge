@@ -2,7 +2,7 @@ package cn.edu.sjtu.ist.ecssbackendedge.config;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.collect.zigbee.ZigBeeListener;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.point.zigbee.ZigBeeListener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,6 @@ public class ZigBeeConfig {
      * @return: ZigBeeListener
      */
     public ZigBeeListener getListener(String id, String serialNumber, int baudRate, int checkoutBit, int dataBit, int stopBit) {
-
         ZigBeeListener listener = listenerMap.get(id);
         if (listener == null) {
             setListener(id, serialNumber, baudRate, checkoutBit, dataBit, stopBit);
@@ -57,8 +56,14 @@ public class ZigBeeConfig {
      * @params [id, serialNumber, baudRate, checkoutBit, dataBit, stopBit]
      */
     private void setListener(String id, String serialNumber, int baudRate, int checkoutBit, int dataBit, int stopBit) {
-        Sensor sensor = sensorDao.findSensorById(id);
-        ZigBeeListener listener = new ZigBeeListener(sensor);
+        Sensor sensor = null;
+        ZigBeeListener listener = null;
+        try{
+            sensor = sensorDao.findSensorById(id);
+            listener = new ZigBeeListener(sensor);
+        }catch (Exception e){
+            listener = new ZigBeeListener();
+        }
         listener.init(serialNumber, baudRate, checkoutBit, dataBit, stopBit);
         listenerMap.put(id, listener);
     }
@@ -70,5 +75,13 @@ public class ZigBeeConfig {
         }
         listener.closeSerialPort();
         listenerMap.remove(id);
+    }
+
+    private void sendMessage(String id,String value){
+        ZigBeeListener listener = listenerMap.get(id);
+        if (listener == null) {
+            return;
+        }
+        listener.sendComm(value);
     }
 }

@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
@@ -31,6 +32,10 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public DeviceDTO insertDevice(DeviceDTO deviceDTO) {
+        List<Command> commands = deviceDTO.getCommands();
+        for(Command command: commands){
+            command.verify();
+        }
         Device device = deviceUtil.convertDTO2Domain(deviceDTO);
         Device device1 = deviceDao.createDevice(device);
         if (device1 == null) {

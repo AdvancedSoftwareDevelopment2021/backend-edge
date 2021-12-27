@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.po.device;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DataEntry;
 
 import lombok.Data;
@@ -48,4 +49,10 @@ public class DevicePO {
      */
     @Field
     private List<DataEntry> values;
+
+    /**
+     * 设备的命令项列表
+     */
+    @Field
+    private List<Command> commands;
 }

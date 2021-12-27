@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.dto.request;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.scheduler.CollectScheduler;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.collector.DataCollector;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.Point;
 
 import lombok.Data;
 
@@ -17,7 +17,7 @@ public class SensorRequest {
     /**
      * 数据采集器
      */
-    private DataCollector dataCollector;
+    private Point point;
 
     /**
      * 调度信息
