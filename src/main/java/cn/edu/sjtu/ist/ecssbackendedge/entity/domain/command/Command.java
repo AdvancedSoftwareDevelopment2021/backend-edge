@@ -1,6 +1,5 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.Data;
 import java.util.*;
 

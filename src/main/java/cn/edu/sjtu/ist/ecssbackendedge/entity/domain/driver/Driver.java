@@ -5,8 +5,7 @@ import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.CommandData;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.CommandType;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point.Point;
-import com.serotonin.modbus4j.exception.ErrorResponseException;
-import com.serotonin.modbus4j.exception.ModbusTransportException;
+
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

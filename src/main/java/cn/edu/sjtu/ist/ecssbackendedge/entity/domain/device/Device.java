@@ -1,7 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
+
 import lombok.Data;
 
 import java.util.List;

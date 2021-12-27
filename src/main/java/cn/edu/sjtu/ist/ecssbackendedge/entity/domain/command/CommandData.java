@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver.DriverStatus;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
