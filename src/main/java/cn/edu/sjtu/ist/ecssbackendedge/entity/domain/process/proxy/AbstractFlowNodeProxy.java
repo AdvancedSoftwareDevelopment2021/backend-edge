@@ -22,6 +22,12 @@ public abstract class AbstractFlowNodeProxy<T extends FlowNode> {
 
     final protected BpmnModelInstance instance;
 
+    protected boolean running = true;
+
+    public synchronized void setRunning(boolean status) {
+        this.running = status;
+    };
+
     public AbstractFlowNodeProxy(T node, BpmnModelInstance instance) {
         this.node = node;
         this.instance = instance;
@@ -29,9 +35,7 @@ public abstract class AbstractFlowNodeProxy<T extends FlowNode> {
 
     public abstract void verify();
 
-    protected abstract void startWithDataCache(Map<String, Map<String, Object>> dataCache, History history);
-
-    protected abstract void startWithKafkaMode(String processId);
+    protected abstract void startWithKafkaMode();
 
     protected void resume() {}
 

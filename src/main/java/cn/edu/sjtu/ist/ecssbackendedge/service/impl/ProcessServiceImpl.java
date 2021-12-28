@@ -1,6 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
 import cn.edu.sjtu.ist.ecssbackendedge.dao.ProcessDao;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Element;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Step;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.TaskWithDeviceDTO;
@@ -8,6 +10,7 @@ import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 import cn.edu.sjtu.ist.ecssbackendedge.service.ProcessService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.process.BpmnUtils;
 
+import cn.edu.sjtu.ist.ecssbackendedge.utils.response.JsonUtil;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,9 @@ public class ProcessServiceImpl implements ProcessService {
 
     @Autowired
     private ProcessDao processDao;
+
+    @Autowired
+    private DeviceDao deviceDao;
 
     @Override
     public Process insertProcess(Process process) {
@@ -80,8 +86,9 @@ public class ProcessServiceImpl implements ProcessService {
     @Override
     public void bindDevice(String processId, String taskId, String deviceId) {
         Process process = processDao.findProcessById(processId);
+        Device device = deviceDao.findDeviceById(deviceId);
         BpmnModelInstance instance = Bpmn.readModelFromStream(BpmnUtils.strToInStream(process.getBpmn()));
-        BpmnModelInstance newInstance = BpmnUtils.setExtension(instance, taskId, DEVICE_KEY.getKey(), deviceId);
+        BpmnModelInstance newInstance = BpmnUtils.setExtension(instance, taskId, DEVICE_KEY.getKey(), JsonUtil.writeValueAsString(device));
         updateProcessBpmn(processId, BpmnUtils.bpmnInstToStr(newInstance));
     }
 

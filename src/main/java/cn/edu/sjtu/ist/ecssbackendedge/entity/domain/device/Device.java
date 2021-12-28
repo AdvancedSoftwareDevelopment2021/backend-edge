@@ -1,7 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device;
 
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import lombok.Data;
 
 import java.util.List;
@@ -52,5 +51,9 @@ public class Device {
      */
     public String wrapData(String data) {
         return data;
+    }
+
+    public void executeCommand() {
+        System.out.printf("执行设备指令：设备id=%s\n", this.id);
     }
 }

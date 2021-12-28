@@ -52,19 +52,7 @@ public class ParallelGatewayProxy extends AbstractFlowNodeProxy<ParallelGateway>
     }
 
     @Override
-    public void startWithDataCache(Map<String, Map<String, Object>> dataCache, History history) {
-        log.info("开始处理并行网关");
-
-        AbstractFlowNodeProxy nextNode;
-
-        for (SequenceFlow sequenceFlow : node.getOutgoing()){
-            nextNode = FlowNodeProxyFactory.createFlowNodeProxy(sequenceFlow.getTarget(), instance);
-            nextNodeProxy.add(nextNode);
-        }
-    }
-
-    @Override
-    protected void startWithKafkaMode(String processId) {
+    protected void startWithKafkaMode() {
         log.info("处理并行网关节点: {}", node.getId());
     }
 

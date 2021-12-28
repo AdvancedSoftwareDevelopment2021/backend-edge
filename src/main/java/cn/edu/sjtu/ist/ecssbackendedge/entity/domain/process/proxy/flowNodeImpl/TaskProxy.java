@@ -1,8 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.flowNodeImpl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.annotation.FlowNodeProxy;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.ElementType;
-import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.History;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.AbstractFlowNodeProxy;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.FlowNodeProxyFactory;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.JsonUtil;
@@ -11,11 +11,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
-import org.camunda.bpm.model.bpmn.instance.ItemAwareElement;
 import org.camunda.bpm.model.bpmn.instance.Task;
 import org.springframework.util.Assert;
 
 import java.util.*;
+
+import static java.lang.Thread.sleep;
 
 /**
  * @Author: ssingualrity
@@ -62,9 +63,9 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
         return Arrays.asList(res);
     }
 
-    @Override
-    protected void startWithDataCache(Map<String, Map<String, Object>> dataCache, History history) {
-        log.info("startWithDataCache, 处理Task节点: {}", node.getId());
+//    @Override
+//    protected void startWithDataCache(Map<String, Map<String, Object>> dataCache, History history) {
+//        log.info("startWithDataCache, 处理Task节点: {}", node.getId());
 //        String taskId = node.getId();
 //        Service targetService = JsonUtil.readValues(getExtension(TARGET_SERVICE_KEY), Service.class);
 //        // FIXME 去掉processId,taskId,status,data等的硬编码
@@ -88,7 +89,7 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
 //                log.error("", e);
 //            }
 //        }
-    }
+//    }
 
     private Map<String, Object> getInput(Map<String, Map<String, Object>> dataCache) {
         Map<String, Object> res = new HashMap<>(0);
@@ -108,13 +109,17 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
     }
 
     @Override
-    protected void startWithKafkaMode(String processId) {
+    protected void startWithKafkaMode() {
         log.info("处理Task节点: {}", node.getId());
-        this.processId = processId;
-    }
-
-    private ItemAwareElement getItemAwareElement(Collection<ItemAwareElement> list) {
-        return list.iterator().next();
+        try {
+            sleep(2000);
+            Device targetDevice = JsonUtil.readValues(getExtension(ElementType.DEVICE_KEY.getKey()), Device.class);
+            if (targetDevice != null) {
+                targetDevice.executeCommand();
+            }
+        } catch (InterruptedException e) {
+            log.info(e.getMessage());
+        }
     }
 
     @Override
