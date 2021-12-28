@@ -30,9 +30,9 @@ public class Process {
         return step == Step.FINISHED && status != Status.RUNNING;
     }
 
-    public void start() {
+    public void start(Long number) {
         BpmnModelProxy bpmnModelProxy = BpmnModelProxy.fromStream(BpmnUtils.strToInStream(this.bpmn));
-        bpmnModelProxy.startWithKafkaMode(this.id);
+        bpmnModelProxy.startWithKafkaMode(number);
         this.bpmn = bpmnModelProxy.toString();
         this.status = Status.RUNNING;
     }

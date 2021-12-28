@@ -96,13 +96,13 @@ public class ProcessController {
      * @param id 流程id
      * @return 无
      */
-    @PostMapping(value = "/{id}/start")
-    public Result<?> startProcess(@PathVariable String id) {
+    @PostMapping(value = "/{id}/start/{number}")
+    public Result<?> startProcess(@PathVariable String id, @PathVariable Long number) {
         Process process = processService.getProcess(id);
         if (!process.canStart()) {
             throw new RuntimeException("WRONG_STATE");
         }
-        process.start();
+        process.start(number);
         processService.updateProcess(id, process);
         return ResultUtil.success();
     }
@@ -141,7 +141,7 @@ public class ProcessController {
      * @return 无
      */
     @PostMapping("/{id}/{taskId}/device/{deviceId}")
-    public Result<?> bindServiceForProcess(@PathVariable String id,
+    public Result<?> bindDeviceForProcess(@PathVariable String id,
                                            @PathVariable String taskId,
                                            @PathVariable String deviceId) {
         processService.bindDevice(id, taskId, deviceId);

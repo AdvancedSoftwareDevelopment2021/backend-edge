@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
+
 /**
  * @Author: ssingualrity
  * @Date: 2020/4/3 20:15
@@ -43,18 +45,18 @@ public class EndEventProxy extends AbstractFlowNodeProxy<EndEvent> {
     }
 
     @Override
-    protected void startWithDataCache(Map<String, Map<String, Object>> dataCache, History history) {
-        log.info("结束处理BPMN流程");
-    }
-
-    @Override
     protected void stop() {
         log.info("停止BPMN流程完成");
     }
 
     @Override
-    protected void startWithKafkaMode(String processId) {
-        log.info("结束处理基于Kafka模式的BPMN流程");
+    protected void startWithKafkaMode() {
+        log.info("结束BPMN流程");
+        try {
+            sleep(1500);
+        } catch (InterruptedException e) {
+            log.info(e.getMessage());
+        }
     }
 
 }

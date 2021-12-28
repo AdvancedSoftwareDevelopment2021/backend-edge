@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
+
 /**
  * @Author: ssingualrity
  * @Date: 2020/4/3 19:59
@@ -48,13 +50,13 @@ public class StartEventProxy extends AbstractFlowNodeProxy<StartEvent> {
     }
 
     @Override
-    protected void startWithDataCache(Map<String, Map<String, Object>> dataCache, History history) {
+    protected void startWithKafkaMode() {
         log.info("开始处理BPMN流程");
-    }
-
-    @Override
-    protected void startWithKafkaMode(String processId) {
-        log.info("开始处理基于Kafka模式的BPMN流程");
+        try {
+            sleep(1000);
+        } catch (InterruptedException e) {
+            log.info(e.getMessage());
+        }
     }
 
     @Override

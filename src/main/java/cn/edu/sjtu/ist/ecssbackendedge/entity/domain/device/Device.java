@@ -53,4 +53,8 @@ public class Device {
     public String wrapData(String data) {
         return data;
     }
+
+    public void executeCommand() {
+        System.out.printf("执行设备指令：设备id=%s\n", this.id);
+    }
 }
