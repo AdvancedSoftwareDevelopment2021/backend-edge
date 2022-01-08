@@ -1,15 +1,19 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.BpmnModelProxy;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.process.BpmnUtils;
 
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
+@Component
 public class Process {
 
     private String id;
@@ -26,6 +30,9 @@ public class Process {
 
     private List<String> DeviceList = new ArrayList<>();
 
+    @Autowired
+    private DriverDao driverDao;
+
     public boolean canStart() {
         System.out.println(step);
         System.out.println(status);
@@ -34,6 +41,7 @@ public class Process {
 
     public void start(Long number) {
         BpmnModelProxy bpmnModelProxy = BpmnModelProxy.fromStream(BpmnUtils.strToInStream(this.bpmn));
+        bpmnModelProxy.driverDao = driverDao;
         bpmnModelProxy.startWithKafkaMode(number);
         this.bpmn = bpmnModelProxy.toString();
         this.status = Status.RUNNING;

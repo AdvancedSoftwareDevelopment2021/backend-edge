@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 public class Visitor {
 
+    public DriverDao driverDao;
     /**
      * 保存节点id：节点
      */
@@ -21,6 +23,7 @@ public class Visitor {
     private Map<String, AtomicInteger> numbers = new ConcurrentHashMap<>();
 
     public void addNode(AbstractFlowNodeProxy node) {
+        node.driverDao = driverDao;
         nodes.putIfAbsent(node.getId(), node);
         log.info(String.format("加入node, id=%s, 当前node总数%d", node.getId(), nodes.size()));
     }

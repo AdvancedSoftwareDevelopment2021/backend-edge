@@ -1,7 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -12,6 +15,7 @@ import java.util.List;
  * @date 2021-11-08
  */
 @Data
+@Component
 public class Device {
 
     /**
