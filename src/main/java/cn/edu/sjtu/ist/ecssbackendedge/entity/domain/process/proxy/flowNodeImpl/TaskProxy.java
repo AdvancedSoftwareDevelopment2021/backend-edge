@@ -1,7 +1,9 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.flowNodeImpl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.annotation.FlowNodeProxy;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver.Driver;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.ElementType;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.AbstractFlowNodeProxy;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.FlowNodeProxyFactory;
@@ -12,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
 import org.camunda.bpm.model.bpmn.instance.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 
 import java.util.*;
@@ -31,6 +34,9 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
     final static private String DETECT_SERVICE_KEY = "detectDevice";
 
     final static private String INPUT_KEY = "input";
+
+    @Autowired
+    private DriverDao driverDao;
 
     /**
      * 流程Id
@@ -115,7 +121,11 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
             sleep(2000);
             Device targetDevice = JsonUtil.readValues(getExtension(ElementType.DEVICE_KEY.getKey()), Device.class);
             if (targetDevice != null) {
-                targetDevice.executeCommand();
+                List<Driver> drivers = driverDao.findDriverByDeviceId(targetDevice.getId());
+                for( Driver driver : drivers){
+                    // TODO processId
+                    driver.driverExecuteCommand();
+                }
             }
         } catch (InterruptedException e) {
             log.info(e.getMessage());

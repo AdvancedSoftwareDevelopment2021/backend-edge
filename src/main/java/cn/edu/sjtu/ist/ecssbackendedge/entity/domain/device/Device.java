@@ -40,11 +40,6 @@ public class Device {
     private List<DataEntry> values;
 
     /**
-     * 设备的指令列表
-     */
-    private List<Command> commands;
-
-    /**
      * 将collector收集到的原始数据包装为key-value形式返回存储
      *
      * @param data 收集到的数据
@@ -53,7 +48,4 @@ public class Device {
         return data;
     }
 
-    public void executeCommand() {
-        System.out.printf("执行设备指令：设备id=%s\n", this.id);
-    }
 }

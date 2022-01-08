@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.driver.DriverDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DriverService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
@@ -33,20 +34,20 @@ public class DriverController {
         return ResultUtil.success();
     }
 
+    @DeleteMapping(value = "/{id}")
+    public Result deleteDriver(@PathVariable String id){
+        driverService.deleteDriver(id);
+        return ResultUtil.success();
+    }
+
     @GetMapping(value = "/{id}")
     public Result<List<DriverDTO>> getDriverByDevice(@PathVariable String id) {
         return ResultUtil.success(driverService.getDriverByDevice(id));
     }
 
-    /**
-     * 用于测试根据driverId 执行命令
-     * @param id
-     * @return
-     */
-    @PostMapping(value = "/{id}")
-    public Result executeCommand(@PathVariable String id) {
-        driverService.executeCommandByDriverId(id);
-        return ResultUtil.success();
+    @GetMapping(value = "/{id}/one")
+    public Result<DriverDTO> getDriverById(@PathVariable String id) {
+        return ResultUtil.success(driverService.getDriverById(id));
     }
 
     @PostMapping(value = "/response/{id}")

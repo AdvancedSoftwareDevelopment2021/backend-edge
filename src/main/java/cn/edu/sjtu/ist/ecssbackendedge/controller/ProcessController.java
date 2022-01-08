@@ -31,7 +31,7 @@ public class ProcessController {
      */
     @PostMapping(value = "")
     public Result<?> insertProcess(@RequestBody ProcessDTO dto) {
-        dto.setStep(Step.DEVICE);
+        dto.setStep(Step.FINISHED);
         dto.setStatus(Status.CONSTRUCTING);
         Process process = processUtil.convertDTO2Domain(dto);
         return ResultUtil.success(processService.insertProcess(process));

@@ -27,6 +27,8 @@ public class Process {
     private List<String> DeviceList = new ArrayList<>();
 
     public boolean canStart() {
+        System.out.println(step);
+        System.out.println(status);
         return step == Step.FINISHED && status != Status.RUNNING;
     }
 

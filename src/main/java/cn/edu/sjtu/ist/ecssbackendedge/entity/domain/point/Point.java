@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Param;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.PointPO;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -9,7 +10,7 @@ import com.serotonin.modbus4j.exception.ModbusTransportException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author dyanjun
@@ -36,7 +37,7 @@ public abstract class Point {
 
     public abstract Boolean stopMonitor(String id);
 
-    public abstract Boolean executeCustomCommand(String id, Map<String, Object> params);
+    public abstract Boolean executeCustomCommand(String id, List<Param> params);
 
     public abstract Boolean executePropertyCommand(String id, String type, String value) throws ErrorResponseException, ModbusTransportException;
 }

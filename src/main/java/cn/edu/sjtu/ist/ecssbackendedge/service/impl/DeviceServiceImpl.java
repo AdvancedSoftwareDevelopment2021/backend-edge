@@ -32,10 +32,6 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public DeviceDTO insertDevice(DeviceDTO deviceDTO) {
-        List<Command> commands = deviceDTO.getCommands();
-        for(Command command: commands){
-            command.verify();
-        }
         Device device = deviceUtil.convertDTO2Domain(deviceDTO);
         Device device1 = deviceDao.createDevice(device);
         if (device1 == null) {

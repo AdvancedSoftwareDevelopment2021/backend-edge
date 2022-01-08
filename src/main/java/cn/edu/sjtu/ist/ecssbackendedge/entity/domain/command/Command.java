@@ -1,6 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.CommandTag;
 import lombok.Data;
 import java.util.*;
 
@@ -17,12 +17,6 @@ public class Command {
 
     CommandType commandType;
 
-    String driverId;
-
-    /**
-     * 是否为异步
-     */
-    Boolean asy;
     /**
      * 设置属性时,需要有数据的类型和值
      */
@@ -32,14 +26,15 @@ public class Command {
     /**
      * 自定义数据时，需要有自定义的参数
      */
-    Map<String, Object> params;
+    List<Param> params;
+
+    CommandTag tag;
+
+    String processId;
 
     // TODO 顺序？
 
     public void verify(){
-        if(asy == null){
-            throw new RuntimeException("请指定是否为异步");
-        }
         if(commandType == CommandType.CUSTOM){
             if(params == null){
                 throw new RuntimeException("自定义指令时，需要输入自定义的参数");

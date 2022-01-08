@@ -22,7 +22,6 @@ public class DeviceUtil {
         res.setModel(dto.getModel());
         res.setDescription(dto.getDescription());
         res.setValues(dto.getValues());
-        res.setCommands(dto.getCommands());
         return res;
     }
 
@@ -33,7 +32,6 @@ public class DeviceUtil {
         res.setModel(domain.getModel());
         res.setDescription(domain.getDescription());
         res.setValues(domain.getValues());
-        res.setCommands(domain.getCommands());
         return res;
     }
 
@@ -44,7 +42,6 @@ public class DeviceUtil {
         res.setModel(po.getModel());
         res.setDescription(po.getDescription());
         res.setValues(po.getValues());
-        res.setCommands(po.getCommands());
         return res;
     }
 
@@ -55,7 +52,6 @@ public class DeviceUtil {
         res.setModel(domain.getModel());
         res.setDescription(domain.getDescription());
         res.setValues(domain.getValues());
-        res.setCommands(domain.getCommands());
         return res;
     }
 }
