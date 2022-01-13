@@ -1,7 +1,9 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.flowNodeImpl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.annotation.FlowNodeProxy;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver.Driver;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.ElementType;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.AbstractFlowNodeProxy;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy.FlowNodeProxyFactory;
@@ -32,6 +34,7 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
 
     final static private String INPUT_KEY = "input";
 
+    private DriverDao driverDao;
     /**
      * 流程Id
      */
@@ -115,7 +118,11 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
             sleep(2000);
             Device targetDevice = JsonUtil.readValues(getExtension(ElementType.DEVICE_KEY.getKey()), Device.class);
             if (targetDevice != null) {
-                targetDevice.executeCommand();
+                // TODO processId
+                List<Driver> drivers = super.driverDao.findDriverByDeviceId(targetDevice.getId());
+                for( Driver driver : drivers){
+                    driver.driverExecuteCommand();
+                }
             }
         } catch (InterruptedException e) {
             log.info(e.getMessage());

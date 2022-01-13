@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Param;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.WebSocketPointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.AsynDataStatus;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,7 +63,7 @@ public class WebSocketPoint extends Point {
     }
 
     @Override
-    public Boolean executeCustomCommand(String id, Map<String, Object> params) {
+    public Boolean executeCustomCommand(String id, List<Param> params) {
         log.error("websocket 无法发送自定义指令");
         return false;
     }

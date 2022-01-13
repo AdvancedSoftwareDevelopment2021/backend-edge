@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.point;
 
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Param;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.point.HttpPointPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.MessageProtocol;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.point.HttpClientPoolUtil;
@@ -8,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,7 +59,7 @@ public class HttpPoint extends Point {
     }
 
     @Override
-    public Boolean executeCustomCommand(String id, Map<String, Object> params) {
+    public Boolean executeCustomCommand(String id, List<Param> params) {
         HttpClientPoolUtil.doPost(url, params.toString());
         return true;
     }

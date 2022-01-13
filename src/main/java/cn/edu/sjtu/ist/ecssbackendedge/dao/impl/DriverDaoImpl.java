@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver.Driver;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.driver.DriverPO;
 import cn.edu.sjtu.ist.ecssbackendedge.repository.DriverRepository;

@@ -1,7 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -12,6 +15,7 @@ import java.util.List;
  * @date 2021-11-08
  */
 @Data
+@Component
 public class Device {
 
     /**
@@ -40,11 +44,6 @@ public class Device {
     private List<DataEntry> values;
 
     /**
-     * 设备的指令列表
-     */
-    private List<Command> commands;
-
-    /**
      * 将collector收集到的原始数据包装为key-value形式返回存储
      *
      * @param data 收集到的数据
@@ -53,7 +52,4 @@ public class Device {
         return data;
     }
 
-    public void executeCommand() {
-        System.out.printf("执行设备指令：设备id=%s\n", this.id);
-    }
 }

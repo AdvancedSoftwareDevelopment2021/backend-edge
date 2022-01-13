@@ -1,9 +1,11 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.process.ProcessDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.ProcessPO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.Process;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,6 +13,9 @@ import java.util.Date;
 
 @Component
 public class ProcessUtil {
+
+    @Autowired
+    DriverDao driverDao;
 
     public Process convertDTO2Domain(ProcessDTO dto) {
         Process res = new Process();
@@ -21,6 +26,7 @@ public class ProcessUtil {
         res.setStatus(dto.getStatus());
         res.setStep(dto.getStep());
         res.setDeviceList(dto.getDeviceList() == null ? new ArrayList<>() : dto.getDeviceList());
+        res.setDriverDao(driverDao);
         return res;
     }
 
@@ -45,6 +51,7 @@ public class ProcessUtil {
         res.setStatus(po.getStatus());
         res.setStep(po.getStep());
         res.setDeviceList(po.getDeviceList() == null ? new ArrayList<>() : po.getDeviceList());
+        res.setDriverDao(driverDao);
         return res;
     }
 

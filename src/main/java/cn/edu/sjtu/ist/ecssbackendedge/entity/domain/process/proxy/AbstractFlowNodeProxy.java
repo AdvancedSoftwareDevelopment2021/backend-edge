@@ -1,8 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.History;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.process.BpmnUtils;
 
+import lombok.Data;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
 import org.camunda.bpm.model.bpmn.instance.FlowNode;
 
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
  * @version 0.1
  * @date 2021-11-26
  */
+@Data
 public abstract class AbstractFlowNodeProxy<T extends FlowNode> {
 
     final protected T node;
@@ -27,6 +30,8 @@ public abstract class AbstractFlowNodeProxy<T extends FlowNode> {
     public synchronized void setRunning(boolean status) {
         this.running = status;
     };
+
+    public DriverDao driverDao;
 
     public AbstractFlowNodeProxy(T node, BpmnModelInstance instance) {
         this.node = node;

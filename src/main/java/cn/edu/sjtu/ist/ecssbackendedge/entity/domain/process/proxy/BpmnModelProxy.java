@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import lombok.extern.slf4j.Slf4j;
 import org.camunda.bpm.model.bpmn.Bpmn;
 import org.camunda.bpm.model.bpmn.BpmnModelInstance;
@@ -17,6 +18,8 @@ public class BpmnModelProxy {
 
     private BpmnModelInstance instance;
 
+    public DriverDao driverDao;
+
     public static BpmnModelProxy fromStream(InputStream inputStream) {
         BpmnModelInstance instance = Bpmn.readModelFromStream(inputStream);
         BpmnModelProxy res = new BpmnModelProxy();
@@ -32,6 +35,7 @@ public class BpmnModelProxy {
     public void startWithKafkaMode(Long number) {
         // 遍历bpmn，将所有节点加入到Visitor中
         this.visitor = new Visitor();
+        this.visitor.driverDao = this.driverDao;
         findAllBpmnNodes();
         try {
             AbstractFlowNodeProxy startEvent = getStartEvent();
