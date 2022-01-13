@@ -26,6 +26,9 @@ public class ProcessPO {
     private String bpmn;
 
     @Field
+    private int interval;
+
+    @Field
     private Date createdTime;
 
     @Field

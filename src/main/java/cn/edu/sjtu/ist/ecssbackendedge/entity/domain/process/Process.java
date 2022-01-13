@@ -22,6 +22,8 @@ public class Process {
 
     private String bpmn;
 
+    private int interval;
+
     private Date createdTime;
 
     private Step step = Step.BPMN;
