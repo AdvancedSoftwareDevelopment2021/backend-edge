@@ -24,8 +24,6 @@ public class ModbusPointPO extends PointPO {
 
     private ModbusFunction modbusFunction;
 
-    private String datatype; //TODO
-
     @Override
     public ModbusPoint convertPO2Domain(PointPO pointPO) {
         ModbusPointPO collectorPO = (ModbusPointPO) pointPO;
@@ -34,7 +32,6 @@ public class ModbusPointPO extends PointPO {
         collector.setIp(collectorPO.getIp());
         collector.setPort(collectorPO.getPort());
         collector.setModbusFunction(collectorPO.getModbusFunction());
-        collector.setDatatype(collectorPO.getDatatype());
         collector.setOffset(collectorPO.getOffset());
         collector.setSlaveId(collectorPO.getSlaveId());
         return collector;

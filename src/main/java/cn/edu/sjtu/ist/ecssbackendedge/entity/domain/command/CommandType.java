@@ -8,7 +8,9 @@ public enum CommandType {
 
     PROPERTY("PROPERTY"),
 
-    CUSTOM("CUSTOM");
+    CUSTOM("CUSTOM"),
+
+    ML("ML");
 
     /**
      * 类型

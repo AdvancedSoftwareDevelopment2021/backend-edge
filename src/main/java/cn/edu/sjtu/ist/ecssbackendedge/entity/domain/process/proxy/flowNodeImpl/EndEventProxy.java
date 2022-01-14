@@ -50,7 +50,7 @@ public class EndEventProxy extends AbstractFlowNodeProxy<EndEvent> {
     }
 
     @Override
-    protected void startWithKafkaMode() {
+    protected void startWithKafkaMode(int interval) {
         log.info("结束BPMN流程");
         try {
             sleep(1500);

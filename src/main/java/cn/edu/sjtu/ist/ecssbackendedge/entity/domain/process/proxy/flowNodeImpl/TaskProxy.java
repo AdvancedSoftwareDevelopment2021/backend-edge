@@ -112,7 +112,7 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
     }
 
     @Override
-    protected void startWithKafkaMode() {
+    protected void startWithKafkaMode(int interval) {
         log.info("处理Task节点: {}", node.getId());
         try {
             sleep(2000);
@@ -123,6 +123,7 @@ public class TaskProxy extends AbstractFlowNodeProxy<Task> {
                 for( Driver driver : drivers){
                     driver.driverExecuteCommand();
                 }
+                sleep(interval*1000);
             }
         } catch (InterruptedException e) {
             log.info(e.getMessage());

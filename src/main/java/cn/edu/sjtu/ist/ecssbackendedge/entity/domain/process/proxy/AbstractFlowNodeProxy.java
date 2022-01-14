@@ -40,7 +40,7 @@ public abstract class AbstractFlowNodeProxy<T extends FlowNode> {
 
     public abstract void verify();
 
-    protected abstract void startWithKafkaMode();
+    protected abstract void startWithKafkaMode(int interval);
 
     protected void resume() {}
 

@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +73,11 @@ public class WebSocketPoint extends Point {
     public Boolean executePropertyCommand(String id, String type, String value) {
         log.error("websocket 无法进行属性设置");
         return false;
+    }
+
+    @Override
+    public File executeMLCommand(String id) {
+        return null;
     }
 
 }

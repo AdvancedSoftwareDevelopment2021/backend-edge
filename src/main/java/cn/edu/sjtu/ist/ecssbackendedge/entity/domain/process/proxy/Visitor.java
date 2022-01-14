@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.entity.domain.process.proxy;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
@@ -9,9 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
+@Data
 public class Visitor {
 
+    private int interval;
+
     public DriverDao driverDao;
+
     /**
      * 保存节点id：节点
      */
@@ -21,6 +26,11 @@ public class Visitor {
      * 保存节点id：节点剩余物料
      */
     private Map<String, AtomicInteger> numbers = new ConcurrentHashMap<>();
+
+
+    public Visitor(int interval){
+        this.interval = interval;
+    }
 
     public void addNode(AbstractFlowNodeProxy node) {
         node.driverDao = driverDao;
@@ -71,7 +81,7 @@ public class Visitor {
         public void run() {
             node.setRunning(false);
             while (visitor.canWork(node.getId(), 1)) {
-                node.startWithKafkaMode();
+                node.startWithKafkaMode(visitor.getInterval());
                 visitor.subNumber(node.getId());
                 List<AbstractFlowNodeProxy> followingNodes = node.getFollowingFlowNodes();
                 for (AbstractFlowNodeProxy n : followingNodes) {

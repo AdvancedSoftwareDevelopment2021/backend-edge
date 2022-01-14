@@ -85,7 +85,7 @@ public class SensorDaoImpl implements SensorDao {
         SensorPO res = sensorRepository.findSensorPOById(sensor.getId());
         res.setName(sensor.getName());
         res.setCollectorScheduler(collectSchedulerUtil.convertDomain2PO(sensor.getCollectorScheduler()));
-        res.setDataCollector(sensor.getPoint().convertDomain2PO());
+        res.setPointPO(sensor.getPoint().convertDomain2PO());
         sensorRepository.save(res);
 
         // 保存当前状态到 iotdb

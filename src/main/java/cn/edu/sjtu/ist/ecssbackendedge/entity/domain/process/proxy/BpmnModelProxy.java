@@ -32,9 +32,9 @@ public class BpmnModelProxy {
         Assert.isTrue(instance.getModelElementsByType(EndEvent.class).size() == 1, "BPMN模型应该只有一个终点");
     }
 
-    public void startWithKafkaMode(Long number) {
+    public void startWithKafkaMode(Long number, int interval) {
         // 遍历bpmn，将所有节点加入到Visitor中
-        this.visitor = new Visitor();
+        this.visitor = new Visitor(interval);
         this.visitor.driverDao = this.driverDao;
         findAllBpmnNodes();
         try {

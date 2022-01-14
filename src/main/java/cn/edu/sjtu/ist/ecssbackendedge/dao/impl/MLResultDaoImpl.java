@@ -1,9 +1,9 @@
 package cn.edu.sjtu.ist.ecssbackendedge.dao.impl;
 
-import cn.edu.sjtu.ist.ecssbackendedge.dao.CommandDataDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.MLResultDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.CommandData;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver.DriverStatus;
-import cn.edu.sjtu.ist.ecssbackendedge.utils.storage.IotdbDeviceCommandUtil;
+import cn.edu.sjtu.ist.ecssbackendedge.utils.storage.IotdbMLResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.iotdb.rpc.IoTDBConnectionException;
 import org.apache.iotdb.rpc.StatementExecutionException;
@@ -20,11 +20,12 @@ import java.util.List;
 
 /**
  * @author dyanjun
- * @date 2021/12/26 23:29
+ * @date 2022/1/14 14:23
  */
-@Component
 @Slf4j
-public class CommandDataDaoImpl implements CommandDataDao {
+@Component
+public class MLResultDaoImpl implements MLResultDao {
+
     @Autowired
     private Session session;
 
@@ -32,8 +33,8 @@ public class CommandDataDaoImpl implements CommandDataDao {
     private SessionPool sessionPool;
 
     @Override
-    public boolean saveCommandData(CommandData commandData) {
-        String tableName = IotdbDeviceCommandUtil.getDeviceCommandTimeSeries(commandData.getDriverName());
+    public boolean saveMLResult(CommandData commandData) {
+        String tableName = IotdbMLResultUtil.getDeviceCommandTimeSeries(commandData.getDeviceId());
         List<String> measurements = CommandData.getMeasurements();
         List<String> values = Arrays.asList(commandData.getDeviceId(), commandData.getDriverName(), commandData.getData(), commandData.getStatus().getStatus());
         try {
@@ -47,10 +48,37 @@ public class CommandDataDaoImpl implements CommandDataDao {
     }
 
     @Override
-    public List<CommandData> findDriverAllHistoryData(String deviceId, String driverName) {
+    public List<CommandData> findMLAllHistoryResult(String deviceId, String driverName) {
         List<CommandData> res = new ArrayList<>();
         try {
-            String sql = IotdbDeviceCommandUtil.sqlToSelectDeviceAllCommand(deviceId, driverName);
+            String sql = IotdbMLResultUtil.sqlToSelectDeviceAllCommand(deviceId, driverName);
+            session.open();
+            SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
+            SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
+
+            while (dataIterator.next()) {
+                CommandData commandData = new CommandData();
+                commandData.setDeviceId(deviceId);
+                commandData.setDriverName(driverName);
+                commandData.setTimestamp(dataIterator.getTimestamp("Time"));
+                commandData.setData(dataIterator.getString(IotdbMLResultUtil.getDeviceCommandTimeSeries(deviceId) + ".data"));
+                commandData.setStatus(DriverStatus.fromString(dataIterator.getString(IotdbMLResultUtil.getDeviceCommandTimeSeries(deviceId) + ".status")));
+                res.add(commandData);
+            }
+            session.close();
+            log.info(String.format("iotdb: 查询所有历史状态成功，设备id=%s, driver名称=%s, 返回数据数量%d", deviceId, driverName, res.size()));
+            return res;
+        } catch (IoTDBConnectionException | StatementExecutionException e) {
+            log.error(String.format("iotdb: 查询所有历史状态失败，设备id=%s, driver名称=%s", deviceId, driverName));
+            throw new RuntimeException("iotdb: 查询所有历史状态失败，报错信息：" + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<CommandData> findMLResultWithTime(String deviceId, String driverName, String startTime, String endTime) {
+        List<CommandData> res = new ArrayList<>();
+        try {
+            String sql = IotdbMLResultUtil.sqlToSelectDeviceCommandWithDriverAndTime(deviceId, driverName, startTime, endTime);
             session.open();
             SessionDataSet sessionDataSet = session.executeQueryStatement(sql);
             SessionDataSet.DataIterator dataIterator = sessionDataSet.iterator();
@@ -59,8 +87,8 @@ public class CommandDataDaoImpl implements CommandDataDao {
                 commandData.setDeviceId(deviceId);
                 commandData.setDriverName(driverName);
                 commandData.setTimestamp(dataIterator.getTimestamp("Time"));
-                commandData.setData(dataIterator.getString(IotdbDeviceCommandUtil.getDeviceCommandTimeSeries(deviceId) + ".data"));
-                commandData.setStatus(DriverStatus.fromString(dataIterator.getString(IotdbDeviceCommandUtil.getDeviceCommandTimeSeries(deviceId) + ".status")));
+                commandData.setData(dataIterator.getString(IotdbMLResultUtil.getDeviceCommandTimeSeries(deviceId) + ".data"));
+                commandData.setStatus(DriverStatus.fromString(dataIterator.getString(IotdbMLResultUtil.getDeviceCommandTimeSeries(deviceId) + ".status")));
                 res.add(commandData);
             }
             session.close();

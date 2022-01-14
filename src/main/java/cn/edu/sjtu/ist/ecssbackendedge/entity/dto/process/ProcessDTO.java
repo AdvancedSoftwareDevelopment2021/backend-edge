@@ -17,6 +17,8 @@ public class ProcessDTO {
 
     private String bpmn;
 
+    private int interval;
+
     private Date createdTime;
 
     private Step step;

@@ -1,6 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.controller;
 
+import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver.Driver;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.driver.DriverDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DriverService;
 import cn.edu.sjtu.ist.ecssbackendedge.utils.response.Result;
@@ -22,6 +24,9 @@ public class DriverController {
 
     @Autowired
     DriverService driverService;
+
+    @Autowired
+    DriverDao driverDao;
 
     @PostMapping(value = "")
     public Result<DriverDTO> addDriver(@RequestBody DriverDTO driverDTO) {
@@ -48,6 +53,13 @@ public class DriverController {
     @GetMapping(value = "/{id}/one")
     public Result<DriverDTO> getDriverById(@PathVariable String id) {
         return ResultUtil.success(driverService.getDriverById(id));
+    }
+
+    @PostMapping(value = "/command/{id}")
+    public Result testCommand(@PathVariable String id){
+        Driver driver = driverDao.findDriverById(id);
+        driver.driverExecuteCommand();
+        return ResultUtil.success();
     }
 
     @PostMapping(value = "/response/{id}")

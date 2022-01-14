@@ -32,6 +32,7 @@ public class PointUtil {
 
     public Point convertPO2Domain(PointPO pointPO) {
         Point point = null;
+        System.out.println(pointPO);
         MessageProtocol protocol = MessageProtocol.fromString(pointPO.getType());
         switch (Objects.requireNonNull(protocol)) {
             case MODBUS:

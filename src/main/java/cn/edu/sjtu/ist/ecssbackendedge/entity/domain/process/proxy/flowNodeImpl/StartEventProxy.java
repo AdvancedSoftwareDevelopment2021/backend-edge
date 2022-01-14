@@ -50,7 +50,7 @@ public class StartEventProxy extends AbstractFlowNodeProxy<StartEvent> {
     }
 
     @Override
-    protected void startWithKafkaMode() {
+    protected void startWithKafkaMode(int interval) {
         log.info("开始处理BPMN流程");
         try {
             sleep(1000);

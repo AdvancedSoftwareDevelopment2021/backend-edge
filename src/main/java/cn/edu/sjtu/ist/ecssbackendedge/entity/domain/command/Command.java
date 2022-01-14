@@ -28,6 +28,14 @@ public class Command {
      */
     List<Param> params;
 
+    /**
+     * 机器学习模型时，需要联动
+     */
+    String relatedDeviceId;
+    Double threshold;
+    String mlId;
+
+
     CommandTag tag;
 
     String processId;
@@ -43,6 +51,11 @@ public class Command {
         if(commandType == CommandType.PROPERTY){
             if(type == null || value == null){
                 throw new RuntimeException("设置属性时，需要输入属性类型与属性值");
+            }
+        }
+        if(commandType == CommandType.ML){
+            if(relatedDeviceId == null || threshold == null || mlId == null){
+                throw new RuntimeException("机器学习时，需绑定阈值、联动设备和机器学习模型");
             }
         }
     }

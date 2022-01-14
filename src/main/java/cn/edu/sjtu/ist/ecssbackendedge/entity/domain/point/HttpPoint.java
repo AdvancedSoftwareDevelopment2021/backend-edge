@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -68,5 +69,14 @@ public class HttpPoint extends Point {
     public Boolean executePropertyCommand(String id, String type, String value) {
         log.error("http无法进行属性设置");
         return false;
+    }
+
+    @Override
+    public File executeMLCommand(String id) {
+        File file = HttpClientPoolUtil.doPostPic(url);
+        if(file == null){
+            throw new RuntimeException("获取图片失败");
+        }
+        return file;
     }
 }

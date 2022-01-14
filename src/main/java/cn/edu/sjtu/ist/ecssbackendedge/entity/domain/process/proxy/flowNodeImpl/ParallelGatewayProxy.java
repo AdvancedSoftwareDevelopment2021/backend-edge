@@ -52,7 +52,7 @@ public class ParallelGatewayProxy extends AbstractFlowNodeProxy<ParallelGateway>
     }
 
     @Override
-    protected void startWithKafkaMode() {
+    protected void startWithKafkaMode(int interval) {
         log.info("处理并行网关节点: {}", node.getId());
     }
 

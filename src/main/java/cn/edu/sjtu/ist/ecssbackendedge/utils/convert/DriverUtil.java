@@ -1,8 +1,8 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.convert;
 
-import cn.edu.sjtu.ist.ecssbackendedge.dao.CommandDataDao;
-import cn.edu.sjtu.ist.ecssbackendedge.dao.DriverDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.*;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.driver.Driver;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.machineLearning.Picture;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.driver.DriverDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.po.driver.DriverPO;
 import org.springframework.beans.BeanUtils;
@@ -24,11 +24,23 @@ public class DriverUtil {
     @Autowired
     DriverDao driverDao;
 
+    @Autowired
+    DeviceDao deviceDao;
+
+    @Autowired
+    PictureDao pictureDao;
+
+    @Autowired
+    MLResultDao mlResultDao;
+
     public Driver convertDTO2Domain(DriverDTO dto) {
         Driver res = new Driver();
         BeanUtils.copyProperties(dto, res);
         res.setCommandDataDao(commandDataDao);
         res.setDriverDao(driverDao);
+        res.setDeviceDao(deviceDao);
+        res.setPictureDao(pictureDao);
+        res.setMlResultDao(mlResultDao);
         return res;
     }
 
@@ -44,6 +56,9 @@ public class DriverUtil {
         res.setPoint(pointUtil.convertPO2Domain(po.getPointPO()));
         res.setCommandDataDao(commandDataDao);
         res.setDriverDao(driverDao);
+        res.setDeviceDao(deviceDao);
+        res.setPictureDao(pictureDao);
+        res.setMlResultDao(mlResultDao);
         return res;
     }
 

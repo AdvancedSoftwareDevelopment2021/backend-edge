@@ -5,27 +5,27 @@ public enum MessageProtocol {
     /**
      * http
      */
-    HTTP("http协议"),
+    HTTP("http"),
 
     /**
      * websocket
      */
-    WEBSOCKET("websocket协议"),
+    WEBSOCKET("websocket"),
 
     /**
      * canbus
      */
-    CANBUS("canbus协议"),
+    CANBUS("canbus"),
 
     /**
      * zigbee
      */
-    ZIGBEE("zigbee协议"),
+    ZIGBEE("zigbee"),
 
     /**
      * modbus
      */
-    MODBUS("modbus协议"),
+    MODBUS("modbus"),
 
     /**
      * self-defined protocol

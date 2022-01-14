@@ -22,6 +22,8 @@ public class Process {
 
     private String bpmn;
 
+    private int interval;
+
     private Date createdTime;
 
     private Step step = Step.BPMN;
@@ -42,7 +44,7 @@ public class Process {
     public void start(Long number) {
         BpmnModelProxy bpmnModelProxy = BpmnModelProxy.fromStream(BpmnUtils.strToInStream(this.bpmn));
         bpmnModelProxy.driverDao = driverDao;
-        bpmnModelProxy.startWithKafkaMode(number);
+        bpmnModelProxy.startWithKafkaMode(number, interval);
         this.bpmn = bpmnModelProxy.toString();
         this.status = Status.RUNNING;
     }

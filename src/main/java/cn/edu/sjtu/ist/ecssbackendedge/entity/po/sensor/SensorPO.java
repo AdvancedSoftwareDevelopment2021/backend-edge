@@ -29,7 +29,7 @@ public class SensorPO {
 
     private Status status;
 
-    private PointPO dataCollector;
+    private PointPO pointPO;
 
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdTime;
