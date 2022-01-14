@@ -1,7 +1,10 @@
 package cn.edu.sjtu.ist.ecssbackendedge.service.impl;
 
 import cn.edu.sjtu.ist.ecssbackendedge.dao.DeviceDao;
+import cn.edu.sjtu.ist.ecssbackendedge.dao.SensorDao;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.command.Command;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.DataEntry;
+import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.sensor.Sensor;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.dto.device.DeviceDTO;
 import cn.edu.sjtu.ist.ecssbackendedge.entity.domain.device.Device;
 import cn.edu.sjtu.ist.ecssbackendedge.service.DeviceService;
@@ -30,6 +33,9 @@ public class DeviceServiceImpl implements DeviceService {
     @Autowired
     private DeviceDao deviceDao;
 
+    @Autowired
+    private SensorDao sensorDao;
+
     @Override
     public DeviceDTO insertDevice(DeviceDTO deviceDTO) {
         Device device = deviceUtil.convertDTO2Domain(deviceDTO);
@@ -48,9 +54,27 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public DeviceDTO updateDevice(String id, DeviceDTO deviceDTO) {
+
         deviceDTO.setId(id);
         Device device = deviceUtil.convertDTO2Domain(deviceDTO);
         deviceDao.modifyDevice(device);
+
+        /**
+         * 管理传感器
+         */
+        List<Sensor> sensors = sensorDao.findSensorsByDeviceId(device.getId());
+        for(Sensor sensor: sensors){
+            Boolean flag = false;
+            for(DataEntry dataEntry: device.getValues()){
+                if(sensor.getName().equals(dataEntry.getName())){
+                    flag = true;
+                }
+            }
+            if(!flag){
+                sensorDao.deleteSensorById(sensor.getId());
+            }
+        }
+
         Device device1 = deviceDao.findDeviceByName(device.getName()).get(0);
         if (device1 == null) {
             throw new RuntimeException("更新设备信息失败!");

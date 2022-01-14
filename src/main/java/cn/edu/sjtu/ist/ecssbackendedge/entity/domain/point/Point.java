@@ -10,6 +10,7 @@ import com.serotonin.modbus4j.exception.ModbusTransportException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -40,4 +41,6 @@ public abstract class Point {
     public abstract Boolean executeCustomCommand(String id, List<Param> params);
 
     public abstract Boolean executePropertyCommand(String id, String type, String value) throws ErrorResponseException, ModbusTransportException;
+
+    public abstract File executeMLCommand(String id);
 }

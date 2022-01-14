@@ -204,7 +204,7 @@ public class ZigBeeListener implements SerialPortEventListener {
                 log.info("zigbee保存数据：" + sensor.getName() + ": " + data);
                 if (data != null && !data.equals("null")) {
                     // TODO 保存数据的方式有待商榷
-                    sensor.getDeviceDataDao().saveDeviceData(sensor.getDeviceId(), sensor.getName(), "\"" + sensor.getName() + "\":" + data);
+                    sensor.getDeviceDataDao().saveDeviceData(sensor.getDeviceId(), sensor.getName(), data);
                 }
                 sensor.getSensorDao().saveSensorStatus(sensor.getDeviceId(), sensor.getName(), sensor.getStatus().getType());
                 return;

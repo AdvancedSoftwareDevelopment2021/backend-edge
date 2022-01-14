@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -34,14 +35,12 @@ public class ModbusPoint extends Point {
 
     private ModbusFunction modbusFunction;
 
-    private String datatype; //TODO
-
     private ModbusUtil modbusUtil;
 
     @Override
     public String execute(String id) {
         try {
-            return modbusUtil.collectData(id, ip, port, slaveId, offset, modbusFunction, datatype);
+            return modbusUtil.collectData(id, ip, port, slaveId, offset, modbusFunction);
         } catch (ModbusTransportException | ErrorResponseException e) {
             log.warn("收集数据出错，error: " + e.getMessage());
             return null;
@@ -66,7 +65,6 @@ public class ModbusPoint extends Point {
         collectorPO.setIp(ip);
         collectorPO.setPort(port);
         collectorPO.setModbusFunction(modbusFunction);
-        collectorPO.setDatatype(datatype);
         collectorPO.setOffset(offset);
         collectorPO.setSlaveId(slaveId);
         return collectorPO;
@@ -93,6 +91,11 @@ public class ModbusPoint extends Point {
     @Override
     public Boolean executePropertyCommand(String id, String type, String value) throws ErrorResponseException, ModbusTransportException {
         modbusUtil.writeValue(id + "_driver", ip, port, slaveId, offset, modbusFunction, type, value);
+        return null;
+    }
+
+    @Override
+    public File executeMLCommand(String id) {
         return null;
     }
 }

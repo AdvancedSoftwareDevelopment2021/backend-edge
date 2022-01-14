@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.ecssbackendedge.utils.point;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HeaderElement;
 import org.apache.http.HeaderElementIterator;
@@ -18,7 +19,12 @@ import org.apache.http.message.BasicHeaderElementIterator;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.Date;
 
 /**
  * @author dyanjun
@@ -131,6 +137,59 @@ public class HttpClientPoolUtil {
             }
         }
         return responseBody;
+    }
+
+    /**
+     * 执行http post请求 默认采用Content-Type：application/json，Accept：application/json
+     *
+     * @param uri  请求地址
+     * @return
+     */
+    @Value("${file.store}")
+    private static String FILE_TO;
+    public static File doPostPic(String uri) {
+        System.out.println(uri);
+        long startTime = System.currentTimeMillis();
+        HttpEntity httpEntity = null;
+        HttpEntityEnclosingRequestBase method = null;
+        try {
+            if (httpClient == null) {
+                initPools();
+            }
+            method = (HttpEntityEnclosingRequestBase) getRequest(uri, HttpPost.METHOD_NAME, DEFAULT_CONTENT_TYPE, DEFAUL_TTIME_OUT);
+            HttpContext context = HttpClientContext.create();
+            try {
+                CloseableHttpResponse httpResponse = httpClient.execute(method, context);
+                httpEntity = httpResponse.getEntity();
+                System.out.println(httpEntity);
+                if (httpEntity != null) {
+                    try (InputStream inputStream = httpEntity.getContent()) {
+                        String timestamp = (new Date()).toString();
+                        File file = new File(FILE_TO + "/" + timestamp);
+                        FileUtils.copyInputStreamToFile(inputStream, file);
+                        return file;
+                    }
+                }
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        } catch (Exception e) {
+            if (method != null) {
+                method.abort();
+            }
+            e.printStackTrace();
+            log.error("execute post request exception, url:" + uri + ", exception:" + e.toString() + ", cost time(ms):" + (System.currentTimeMillis() - startTime));
+        } finally {
+            if (httpEntity != null) {
+                try {
+                    EntityUtils.consumeQuietly(httpEntity);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    log.error("close response exception, url:" + uri + ", exception:" + e.toString() + ", cost time(ms):" + (System.currentTimeMillis() - startTime));
+                }
+            }
+        }
+        return null;
     }
 
     /**

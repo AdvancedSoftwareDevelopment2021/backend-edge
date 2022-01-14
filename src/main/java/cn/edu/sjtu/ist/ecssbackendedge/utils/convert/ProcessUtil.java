@@ -22,6 +22,7 @@ public class ProcessUtil {
         res.setId(dto.getId());
         res.setName(dto.getName());
         res.setBpmn(dto.getBpmn());
+        res.setInterval(dto.getInterval());
         res.setCreatedTime(dto.getCreatedTime() == null ? new Date() : dto.getCreatedTime());
         res.setStatus(dto.getStatus());
         res.setStep(dto.getStep());
@@ -35,6 +36,7 @@ public class ProcessUtil {
         res.setId(domain.getId());
         res.setName(domain.getName());
         res.setBpmn(domain.getBpmn());
+        res.setInterval(domain.getInterval());
         res.setCreatedTime(domain.getCreatedTime() == null ? new Date() : domain.getCreatedTime());
         res.setStatus(domain.getStatus());
         res.setStep(domain.getStep());
@@ -47,6 +49,7 @@ public class ProcessUtil {
         res.setId(po.getId());
         res.setName(po.getName());
         res.setBpmn(po.getBpmn());
+        res.setInterval(po.getInterval());
         res.setCreatedTime(po.getCreatedTime() == null ? new Date() : po.getCreatedTime());
         res.setStatus(po.getStatus());
         res.setStep(po.getStep());
@@ -60,6 +63,7 @@ public class ProcessUtil {
         res.setId(domain.getId());
         res.setName(domain.getName());
         res.setBpmn(domain.getBpmn());
+        res.setInterval(domain.getInterval());
         res.setCreatedTime(domain.getCreatedTime() == null ? new Date() : domain.getCreatedTime());
         res.setStatus(domain.getStatus());
         res.setStep(domain.getStep());

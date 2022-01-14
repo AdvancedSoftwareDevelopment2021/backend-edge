@@ -29,8 +29,9 @@ public class ModbusUtil {
     @Autowired
     private ModbusConfig modbusConfig;
 
-    public String collectData(String id, String ip, Integer port, Integer slaveId, Integer offset, ModbusFunction modbusFunction, String type) throws ModbusTransportException, ErrorResponseException {
+    public String collectData(String id, String ip, Integer port, Integer slaveId, Integer offset, ModbusFunction modbusFunction) throws ModbusTransportException, ErrorResponseException {
         if (slaveId != null) this.slaveId = slaveId;
+        String type = "integer";
         ModbusMaster modbusMaster = modbusConfig.getMaster(id, ip, port);
         switch (modbusFunction) {
             case COIL_STATUS:
@@ -57,6 +58,7 @@ public class ModbusUtil {
 
     public boolean writeValue(String id, String ip, Integer port, Integer slaveId, Integer offset, ModbusFunction modbusFunction, String type, String new_value) throws ModbusTransportException, ErrorResponseException {
         if (slaveId != null) this.slaveId = slaveId;
+        type = "integer";
         ModbusMaster modbusMaster = modbusConfig.getMaster(id, ip, port);
         switch (modbusFunction) {
             case COIL_STATUS:
@@ -85,7 +87,8 @@ public class ModbusUtil {
      * @return Modbus Data Type
      */
     public int getValueType(String type) {
-        switch (Objects.requireNonNull(cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.DataType.fromString(type))) {
+        System.out.println(type);
+        switch (Objects.requireNonNull(cn.edu.sjtu.ist.ecssbackendedge.entity.domain.enumeration.DataType.fromString(type.toLowerCase()))) {
             case LONG:
                 return DataType.FOUR_BYTE_INT_SIGNED;
             case FLOAT:
